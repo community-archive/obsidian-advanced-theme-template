@@ -21,7 +21,7 @@ Once you have the repository locally on your computer, there are a couple of pla
    ```json
    {
      "name": "Moonstone",
-     "version": "0.0.0",
+     "version": "1.0.0",
      "minAppVersion": "1.13.0",
      "author": "Your Name",
      "fundingUrl": "https://ko-fi.com/yourname",
@@ -70,8 +70,8 @@ For the initial release of your theme, you shouldn't need to make any changes to
 
 ```json
 {
-  "1.0.0": "1.13.0",
-  "1.0.1": "1.13.0"
+  "1.0.1": "1.13.0",
+  "1.0.0": "1.13.0"
 }
 ```
 
