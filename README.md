@@ -48,7 +48,7 @@ This template already includes [`stylelint-config-obsidianmd`](https://github.co
 
 ### Add a screenshot thumbnail
 
-Replace `promo_screenshot.png` with a screenshot of your theme. This image will be used for the small preview in the theme list.
+Inside the repository, include a screenshot thumbnail of your theme. We recommend storing it in a `screenshots` folder at the root of your repository, for example `screenshots/screenshot.png`. This image will be used for the small preview in the theme list.
 
 Your screenshot file should be `16:9` aspect ratio. The recommended size is 512x288.
 
@@ -89,7 +89,7 @@ You'll also need a `LICENSE` file in the root of your repository, which isn't in
 4. Fill out the submission form:
    - **GitHub repository URL** is your repository's URL, for example `https://github.com/your-username/your-repo-name`.
    - **Owner** is who will own and maintain this entry, and doesn't have to match the repository's GitHub owner.
-   - **Screenshot path** is the path to your screenshot, relative to the repository root, for example `promo_screenshot.png`.
+   - **Screenshot path** is the path to your screenshot, relative to the repository root, for example `screenshots/screenshot.png`.
    - For **Supported modes**, select Dark and/or Light depending on which your theme supports.
 5. Read and agree to the [Developer Policies](https://docs.obsidian.md/Developer+policies), and confirm that you'll continue to support your theme (or remove/transfer it if you can no longer provide support).
 6. Select **Submit**.
