@@ -1,6 +1,6 @@
-# Obsidian Community Theme Development Template
+# Obsidian Advanced Theme Template
 
-Press **Use this template** to use this template for your Obsidian theme!
+Press **Use this template** to use this template for your Obsidian theme! This template will always be up-to-date with the latest Obsidian public release. 
 
 > [!note]
 > Are you interested in something more basic? Check out the [Obsidian Sample Theme](https://github.com/obsidianmd/obsidian-sample-theme).
