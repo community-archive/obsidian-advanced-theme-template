@@ -91,12 +91,15 @@ body.is-popout-modal.is-frameless .titlebar {
   display: flex;
   position: absolute;
   top: 0;
+  &.mod-left {
+    left: 0;
+  }
+  &.mod-right {
+    right: 0;
+  }
 }
 .mod-macos .titlebar-button-container {
   top: 8px;
-}
-.titlebar-button-container.mod-left {
-  left: 0;
 }
 .mod-macos .titlebar-button-container.mod-left {
   left: calc(80px / var(--zoom-factor));
@@ -116,9 +119,6 @@ body.is-popout-modal.is-frameless .titlebar {
   .titlebar-button-container .mod-forward:hover {
     color: var(--icon-color-hover);
   }
-}
-.titlebar-button-container.mod-right {
-  right: 0;
 }
 .titlebar-button {
   -webkit-app-region: no-drag;

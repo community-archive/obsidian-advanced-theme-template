@@ -53,20 +53,431 @@
 .markdown-source-view {
   font-size: var(--font-text-size);
   font-family: var(--font-text);
+  &:not(.is-live-preview) {
+    --p-spacing: 0rem;
+  }
+  &.mod-cm6 {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    ::selection {
+      background-color: var(--text-selection);
+    }
+    &.is-readable-line-width .cm-sizer {
+      max-width: var(--file-line-width);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    &.is-readable-line-width .cm-content {
+      max-width: var(--file-line-width);
+    }
+    &.is-readable-line-width .cm-line {
+      max-width: var(--file-line-width);
+      &.HyperMD-table-row {
+        max-width: 100%;
+      }
+    }
+    .cm-editor {
+      flex: 1 1;
+      min-height: 0;
+      &.cm-focused {
+        outline: none;
+      }
+    }
+    &.mod-image-selected .cm-cursorLayer {
+      display: none;
+    }
+    &.mod-image-selected .cm-content {
+      caret-color: transparent;
+    }
+    .cm-scroller {
+      font-family: var(--font-text);
+      line-height: var(--line-height-normal);
+      scrollbar-gutter: stable;
+    }
+    .cm-sizer {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+      min-height: 100%;
+    }
+    .cm-contentContainer {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: stretch;
+      overflow-x: visible;
+    }
+    .cm-content {
+      flex-basis: unset !important;
+      /* kept !important because Obsidian app.css uses !important here */
+      width: 0;
+      caret-color: var(--caret-color);
+      min-height: unset;
+      padding: 0;
+      > * {
+        margin: 0 !important;
+        /* kept !important because Obsidian app.css uses !important here */
+        display: block;
+      }
+      > .image-embed {
+        display: flex;
+      }
+      > [contenteditable=false] {
+        contain: paint !important;
+        /* kept !important because Obsidian app.css uses !important here */
+      }
+    }
+    .cm-gutters {
+      flex: 0 0 auto;
+      background-color: transparent;
+      color: var(--text-faint) !important;
+      /* kept !important because Obsidian app.css uses !important here */
+      border-right: none !important;
+      /* kept !important because Obsidian app.css uses !important here */
+      margin-inline-end: var(--file-folding-offset);
+      font-size: var(--font-ui-smaller);
+      z-index: 1;
+      font-variant: tabular-nums;
+    }
+    .cm-line > * {
+      text-indent: 0;
+    }
+    .cm-transparent {
+      color: transparent;
+    }
+    .cm-table-widget {
+      --table-drag-handle-size: var(--size-4-4);
+      padding: var(--table-drag-handle-size);
+      margin: 0 calc(-1 * var(--size-4-4)) !important;
+      /* kept !important because Obsidian app.css uses !important here */
+      overflow-x: auto;
+      overflow-y: hidden;
+      &.is-loading {
+        padding: 0;
+        margin: 0 !important;
+        /* kept !important because Obsidian app.css uses !important here */
+      }
+      .table-wrapper {
+        position: relative;
+        width: fit-content;
+      }
+      tr {
+        height: 1px;
+      }
+      &.has-selection {
+        --text-selection: transparent;
+        .cm-content {
+          caret-color: transparent;
+        }
+      }
+      &.is-selected {
+        --text-selection: transparent;
+        table {
+          position: relative;
+          &::after {
+            pointer-events: none;
+            content: "";
+            display: block;
+            position: absolute;
+            top: calc(-1 * var(--table-border-width));
+            inset-inline-end: calc(-1 * var(--table-border-width));
+            bottom: calc(-1 * var(--table-border-width));
+            inset-inline-start: calc(-1 * var(--table-border-width));
+            background-color: var(--table-selection);
+          }
+        }
+      }
+      .table-cell-wrapper {
+        height: 100%;
+        padding: var(--size-2-2) var(--size-4-2);
+      }
+      .table-row-drag-handle {
+        top: 0;
+        inset-inline-end: 100%;
+        width: calc(var(--table-drag-handle-size) - var(--table-selection-border-width));
+        height: 100%;
+        border-start-start-radius: var(--radius-s);
+        border-end-start-radius: var(--radius-s);
+      }
+      .table-col-drag-handle {
+        inset-block-end: 100%;
+        width: 100%;
+        height: calc(var(--table-drag-handle-size) - var(--table-selection-border-width));
+        border-start-start-radius: var(--radius-s);
+        border-start-end-radius: var(--radius-s);
+      }
+      .table-row-btn {
+        top: 100%;
+        inset-inline-start: 0;
+        width: 100%;
+        border-top: none;
+        cursor: s-resize;
+      }
+      .table-col-btn {
+        top: 0;
+        height: 100%;
+      }
+      .cm-content {
+        width: auto;
+        &.cm-lineWrapping {
+          overflow-wrap: normal;
+          white-space: var(--table-white-space);
+          word-break: normal;
+        }
+      }
+      .cm-scroller {
+        overflow-y: hidden;
+        scrollbar-gutter: auto;
+        line-height: var(--table-line-height);
+      }
+      .table-col-btn {
+        inset-inline-start: 100%;
+        border-inline-start: none;
+        cursor: e-resize;
+      }
+    }
+    .cm-line {
+      position: relative;
+      padding: 0;
+    }
+    .embed-actions {
+      position: absolute;
+      top: var(--size-2-2);
+      inset-inline-end: var(--size-2-2);
+      display: flex;
+      gap: var(--size-2-1);
+      opacity: 0;
+      transition: opacity 0.07s ease-out;
+    }
+    .embed-action {
+      padding: var(--size-2-2) var(--size-2-3);
+      display: flex;
+      color: var(--embed-action-color);
+      border-radius: var(--embed-action-radius);
+      corner-shape: var(--embed-actions-corner-shape);
+      cursor: var(--cursor);
+    }
+    .cm-panels {
+      background-color: inherit;
+      color: inherit;
+      &.cm-panels-bottom {
+        margin-bottom: var(--safe-area-inset-bottom);
+        border-top: 1px solid var(--background-modifier-border);
+        z-index: 1;
+        input[type="text"]:focus {
+          background-color: transparent;
+          box-shadow: none;
+        }
+      }
+    }
+    img.cm-widgetBuffer {
+      display: inline !important;
+      /* kept !important because Obsidian app.css uses !important here */
+      width: 0 !important;
+      /* kept !important because Obsidian app.css uses !important here */
+      border: 0 !important;
+      /* kept !important because Obsidian app.css uses !important here */
+      margin: 0 !important;
+      /* kept !important because Obsidian app.css uses !important here */
+      padding: 0 !important;
+      /* kept !important because Obsidian app.css uses !important here */
+    }
+    .document-search-container {
+      flex: 0 0 auto;
+    }
+    .cm-fold-indicator .collapse-indicator {
+      opacity: 0;
+    }
+    .cm-fold-indicator.is-collapsed .collapse-indicator {
+      opacity: 1;
+    }
+    .cm-foldPlaceholder {
+      color: var(--text-faint);
+      background-color: transparent;
+      border: none;
+      margin-inline-start: 8px;
+      user-select: none;
+    }
+    .cm-fold-indicator {
+      display: inline-block;
+      position: relative;
+      z-index: 1;
+      &:before {
+        content: '\200B';
+      }
+      .collapse-indicator {
+        position: absolute;
+        top: 0;
+        inset-inline-end: 0;
+        height: 100%;
+        cursor: var(--cursor);
+        padding-inline-end: 5px;
+      }
+    }
+    .cm-indent {
+      min-width: var(--list-indent);
+      display: inline-block;
+      &::before {
+        content: "\200B";
+        display: block;
+        width: 1px;
+        border-inline-end: var(--indentation-guide-width) solid var(--indentation-guide-color);
+        color: transparent;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-inline-start: var(--indentation-guide-source-indent);
+      }
+    }
+    &.is-live-preview .cm-indent::before {
+      margin-inline-start: var(--indentation-guide-editing-indent);
+    }
+    .cm-active-indent::before {
+      border-inline-end: var(--indentation-guide-width-active) solid var(--indentation-guide-color-active);
+    }
+    &.is-live-preview .HyperMD-quote {
+      font-style: var(--blockquote-style);
+      background-color: var(--blockquote-background-color);
+      &:before {
+        inset-inline-start: 0;
+      }
+    }
+    .cm-blockquote-border {
+      display: inline-block;
+    }
+    .cm-hmd-codeblock {
+      --indentation-guide-editing-indent: 0;
+    }
+    .cm-preview-code-block pre {
+      margin: 0;
+    }
+    .code-block-flair {
+      position: absolute;
+      right: 6px;
+      top: 6px;
+      z-index: 1;
+      display: inline-block;
+      padding: var(--size-4-1) var(--size-4-2);
+      border-radius: var(--code-radius);
+      font-family: var(--font-interface);
+      font-size: var(--font-ui-smaller);
+      color: var(--text-muted);
+      cursor: var(--cursor);
+    }
+    .cm-line.HyperMD-codeblock {
+      color: var(--code-normal);
+      &:not(.HyperMD-list-line) {
+        padding-inline-start: var(--size-4-4);
+      }
+      .cm-formatting.cm-formatting-list {
+        font-family: var(--font-text);
+        font-size: var(--font-text-size);
+      }
+    }
+    .internal-embed {
+      white-space: normal;
+    }
+    .cm-embed-block {
+      position: relative;
+      white-space: normal;
+      overflow-wrap: normal;
+      word-break: normal;
+      > .mermaid {
+        overflow-x: auto;
+      }
+    }
+  }
+  &.mod-inside-iframe > .cm-editor > .cm-scroller {
+    flex-direction: column;
+    padding: 0 var(--size-4-4);
+    > .cm-sizer {
+      min-height: unset;
+      flex: 1 0 0;
+    }
+  }
+  &.is-live-preview.show-properties .metadata-container:not(.mod-error) {
+    display: var(--metadata-display-editing);
+  }
+  &.mod-cm6 .hr {
+    display: flex;
+    align-items: center;
+  }
+  &.mod-cm6 hr {
+    margin: 0;
+    flex: 1 0 0;
+  }
+  &.mod-cm6 img {
+    max-width: 100%;
+  }
+  & {
+    --list-padding-inline-start: var(--list-indent-source);
+    --list-marker-space: 0;
+    &.is-live-preview {
+      --list-padding-inline-start: var(--list-indent-editing);
+      --list-marker-space: 0.25em;
+    }
+    &.mod-cm6 .HyperMD-list-line-nobullet .cm-indent {
+      min-width: var(--list-indent);
+    }
+    &.mod-cm6.is-live-preview {
+      /* only allow this if line is not active, so that it's still editable */
+      .cm-line.HyperMD-list-line .cm-fold-indicator .collapse-indicator {
+        padding-inline-end: 0;
+      }
+      .cm-line.HyperMD-list-line:not(.cm-active):not(.HyperMD-task-line) .cm-fold-indicator .collapse-indicator {
+        padding-inline-end: var(--list-bullet-end-padding);
+        inset-inline-end: calc(var(--list-bullet-end-padding) * -1);
+      }
+    }
+    &.mod-cm6 .cm-hmd-list-indent {
+      display: inline-block;
+      white-space: pre;
+    }
+    &.mod-cm6 .is-unresolved {
+      color: var(--link-unresolved-color);
+      opacity: var(--link-unresolved-opacity);
+      filter: var(--link-unresolved-filter);
+      .cm-underline {
+        text-decoration-line: var(--link-decoration);
+        text-decoration-style: var(--link-unresolved-decoration-style);
+        text-decoration-color: var(--link-unresolved-decoration-color);
+        color: var(--link-unresolved-color);
+      }
+    }
+    &.mod-cm6 .cm-underline {
+      text-decoration-line: var(--link-decoration);
+      text-decoration-thickness: var(--link-decoration-thickness);
+    }
+    &.mod-cm6 .math-block > mjx-container {
+      margin: 0;
+      padding: 1em 0;
+      overflow-x: auto;
+    }
+    &.mod-cm6 .cm-line.HyperMD-table-row {
+      min-width: max-content;
+    }
+    &.mod-cm6 .cm-table-widget table {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    &.mod-cm6 .task-list-label {
+      padding: 0;
+      margin-inline-start: -0.25em;
+      .task-list-item-checkbox {
+        top: -0.1em;
+        vertical-align: middle;
+        margin-inline-start: var(--checkbox-margin-inline-start);
+        margin-inline-end: 0.25em;
+      }
+    }
+    &.mod-cm6 .cm-formatting-list-ol > .task-list-label .task-list-item-checkbox {
+      margin-inline-start: 2px;
+    }
+  }
 }
 .workspace-leaf-content.is-read-mode .markdown-source-view {
   z-index: 0;
-}
-.markdown-source-view:not(.is-live-preview) {
-  --p-spacing: 0rem;
-}
-.markdown-source-view.mod-cm6 {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.markdown-source-view.mod-cm6 ::selection {
-  background-color: var(--text-selection);
 }
 .markdown-source-view.mod-cm6 .cm-line .cm-selection,
 .markdown-source-view.mod-cm6 .cm-line .cm-inline-code .cm-selection {
@@ -76,91 +487,8 @@
 .markdown-source-view.mod-cm6 .cm-editor > .cm-scroller > .cm-selectionLayer > .cm-selectionBackground {
   background-color: var(--text-selection);
 }
-.markdown-source-view.mod-cm6.is-readable-line-width .cm-sizer {
-  max-width: var(--file-line-width);
-  margin-left: auto;
-  margin-right: auto;
-}
-.markdown-source-view.mod-cm6.is-readable-line-width .cm-content {
-  max-width: var(--file-line-width);
-}
-.markdown-source-view.mod-cm6.is-readable-line-width .cm-line {
-  max-width: var(--file-line-width);
-}
-.markdown-source-view.mod-cm6.is-readable-line-width .cm-line.HyperMD-table-row {
-  max-width: 100%;
-}
-.markdown-source-view.mod-cm6 .cm-editor {
-  flex: 1 1;
-  min-height: 0;
-}
-.markdown-source-view.mod-cm6 .cm-editor.cm-focused {
-  outline: none;
-}
-.markdown-source-view.mod-cm6.mod-image-selected .cm-cursorLayer {
-  display: none;
-}
-.markdown-source-view.mod-cm6.mod-image-selected .cm-content {
-  caret-color: transparent;
-}
-.markdown-source-view.mod-cm6 .cm-scroller {
-  font-family: var(--font-text);
-  line-height: var(--line-height-normal);
-  scrollbar-gutter: stable;
-}
-.markdown-source-view.mod-cm6 .cm-sizer {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: 100%;
-  min-height: 100%;
-}
-.markdown-source-view.mod-cm6 .cm-contentContainer {
-  flex: 1 1 auto;
-  display: flex;
-  align-items: stretch;
-  overflow-x: visible;
-}
-.markdown-source-view.mod-cm6 .cm-content {
-  flex-basis: unset !important;
-  /* kept !important because Obsidian app.css uses !important here */
-  width: 0;
-  caret-color: var(--caret-color);
-  min-height: unset;
-  padding: 0;
-}
 .is-mobile.is-ios .markdown-source-view.mod-cm6 .cm-content {
   -webkit-user-modify: read-write;
-}
-.markdown-source-view.mod-cm6 .cm-content > * {
-  margin: 0 !important;
-  /* kept !important because Obsidian app.css uses !important here */
-  display: block;
-}
-.markdown-source-view.mod-cm6 .cm-content > .image-embed {
-  display: flex;
-}
-.markdown-source-view.mod-cm6 .cm-content > [contenteditable=false] {
-  contain: paint !important;
-  /* kept !important because Obsidian app.css uses !important here */
-}
-.markdown-source-view.mod-cm6 .cm-gutters {
-  flex: 0 0 auto;
-  background-color: transparent;
-  color: var(--text-faint) !important;
-  /* kept !important because Obsidian app.css uses !important here */
-  border-right: none !important;
-  /* kept !important because Obsidian app.css uses !important here */
-  margin-inline-end: var(--file-folding-offset);
-  font-size: var(--font-ui-smaller);
-  z-index: 1;
-  font-variant: tabular-nums;
-}
-.markdown-source-view.mod-cm6 .cm-line > * {
-  text-indent: 0;
-}
-.markdown-source-view.mod-cm6 .cm-transparent {
-  color: transparent;
 }
 .markdown-source-view.mod-cm6 .cm-html-embed,
 .markdown-source-view.mod-cm6 .cm-callout,
@@ -169,28 +497,8 @@
   overflow-wrap: normal;
   word-break: normal;
 }
-.markdown-source-view.mod-cm6 .cm-table-widget {
-  --table-drag-handle-size: var(--size-4-4);
-  padding: var(--table-drag-handle-size);
-  margin: 0 calc(-1 * var(--size-4-4)) !important;
-  /* kept !important because Obsidian app.css uses !important here */
-  overflow-x: auto;
-  overflow-y: hidden;
-}
 .is-mobile .markdown-source-view.mod-cm6 .cm-table-widget {
   --table-drag-handle-size: var(--size-4-6);
-}
-.markdown-source-view.mod-cm6 .cm-table-widget.is-loading {
-  padding: 0;
-  margin: 0 !important;
-  /* kept !important because Obsidian app.css uses !important here */
-}
-.markdown-source-view.mod-cm6 .cm-table-widget .table-wrapper {
-  position: relative;
-  width: fit-content;
-}
-.markdown-source-view.mod-cm6 .cm-table-widget tr {
-  height: 1px;
 }
 .markdown-source-view.mod-cm6 .cm-table-widget th,
 .markdown-source-view.mod-cm6 .cm-table-widget td {
@@ -231,36 +539,9 @@
   border-bottom-width: var(--table-selection-border-width);
   bottom: calc(-1 * var(--table-selection-border-width));
 }
-.markdown-source-view.mod-cm6 .cm-table-widget.has-selection {
-  --text-selection: transparent;
-}
-.markdown-source-view.mod-cm6 .cm-table-widget.has-selection .cm-content {
-  caret-color: transparent;
-}
 .markdown-source-view.mod-cm6 .cm-table-widget.has-selection .cm-selectionLayer,
 .markdown-source-view.mod-cm6 .cm-table-widget.has-selection .cm-cursorLayer {
   display: none;
-}
-.markdown-source-view.mod-cm6 .cm-table-widget.is-selected {
-  --text-selection: transparent;
-}
-.markdown-source-view.mod-cm6 .cm-table-widget.is-selected table {
-  position: relative;
-}
-.markdown-source-view.mod-cm6 .cm-table-widget.is-selected table::after {
-  pointer-events: none;
-  content: "";
-  display: block;
-  position: absolute;
-  top: calc(-1 * var(--table-border-width));
-  inset-inline-end: calc(-1 * var(--table-border-width));
-  bottom: calc(-1 * var(--table-border-width));
-  inset-inline-start: calc(-1 * var(--table-border-width));
-  background-color: var(--table-selection);
-}
-.markdown-source-view.mod-cm6 .cm-table-widget .table-cell-wrapper {
-  height: 100%;
-  padding: var(--size-2-2) var(--size-4-2);
 }
 .markdown-source-view.mod-cm6 .cm-table-widget .table-row-drag-handle,
 .markdown-source-view.mod-cm6 .cm-table-widget .table-col-drag-handle {
@@ -296,21 +577,6 @@
 .markdown-source-view.mod-cm6 .cm-table-widget .table-row-drag-handle *,
 .markdown-source-view.mod-cm6 .cm-table-widget .table-col-drag-handle * {
   pointer-events: none;
-}
-.markdown-source-view.mod-cm6 .cm-table-widget .table-row-drag-handle {
-  top: 0;
-  inset-inline-end: 100%;
-  width: calc(var(--table-drag-handle-size) - var(--table-selection-border-width));
-  height: 100%;
-  border-start-start-radius: var(--radius-s);
-  border-end-start-radius: var(--radius-s);
-}
-.markdown-source-view.mod-cm6 .cm-table-widget .table-col-drag-handle {
-  inset-block-end: 100%;
-  width: 100%;
-  height: calc(var(--table-drag-handle-size) - var(--table-selection-border-width));
-  border-start-start-radius: var(--radius-s);
-  border-start-end-radius: var(--radius-s);
 }
 .markdown-source-view.mod-cm6 .cm-table-widget.is-dragging .table-row-drag-handle,
 .markdown-source-view.mod-cm6 .cm-table-widget.is-dragging .table-col-drag-handle {
@@ -361,38 +627,9 @@
 .is-mobile .markdown-source-view.mod-cm6 .cm-table-widget.has-focus .table-col-btn {
   opacity: 1;
 }
-.markdown-source-view.mod-cm6 .cm-table-widget .table-row-btn {
-  top: 100%;
-  inset-inline-start: 0;
-  width: 100%;
-  border-top: none;
-  cursor: s-resize;
-}
-.markdown-source-view.mod-cm6 .cm-table-widget .table-col-btn {
-  top: 0;
-  height: 100%;
-}
 .markdown-source-view.mod-cm6 .cm-table-widget .cm-content,
 .markdown-source-view.mod-cm6 .cm-table-widget .cm-line {
   max-width: none;
-}
-.markdown-source-view.mod-cm6 .cm-table-widget .cm-content {
-  width: auto;
-}
-.markdown-source-view.mod-cm6 .cm-table-widget .cm-content.cm-lineWrapping {
-  overflow-wrap: normal;
-  white-space: var(--table-white-space);
-  word-break: normal;
-}
-.markdown-source-view.mod-cm6 .cm-table-widget .cm-scroller {
-  overflow-y: hidden;
-  scrollbar-gutter: auto;
-  line-height: var(--table-line-height);
-}
-.markdown-source-view.mod-cm6 .cm-table-widget .table-col-btn {
-  inset-inline-start: 100%;
-  border-inline-start: none;
-  cursor: e-resize;
 }
 .markdown-source-view.mod-cm6 .cm-table-widget th.is-selected.start::after,
 .markdown-source-view.mod-cm6 .cm-table-widget td.is-selected.start::after {
@@ -424,56 +661,10 @@
 .markdown-source-view.mod-cm6 .cm-table-widget:dir(rtl) .table-col-btn {
   cursor: w-resize;
 }
-.markdown-source-view.mod-cm6 .cm-line {
-  position: relative;
-  padding: 0;
-}
-.markdown-source-view.mod-cm6 .embed-actions {
-  position: absolute;
-  top: var(--size-2-2);
-  inset-inline-end: var(--size-2-2);
-  display: flex;
-  gap: var(--size-2-1);
-  opacity: 0;
-  transition: opacity 0.07s ease-out;
-}
-.markdown-source-view.mod-cm6 .embed-action {
-  padding: var(--size-2-2) var(--size-2-3);
-  display: flex;
-  color: var(--embed-action-color);
-  border-radius: var(--embed-action-radius);
-  corner-shape: var(--embed-actions-corner-shape);
-  cursor: var(--cursor);
-}
 @media (hover: hover) {
   .markdown-source-view.mod-cm6 .embed-action:hover {
     background-color: var(--background-modifier-hover);
   }
-}
-.markdown-source-view.mod-cm6 .cm-panels {
-  background-color: inherit;
-  color: inherit;
-}
-.markdown-source-view.mod-cm6 .cm-panels.cm-panels-bottom {
-  margin-bottom: var(--safe-area-inset-bottom);
-  border-top: 1px solid var(--background-modifier-border);
-  z-index: 1;
-}
-.markdown-source-view.mod-cm6 .cm-panels.cm-panels-bottom input[type="text"]:focus {
-  background-color: transparent;
-  box-shadow: none;
-}
-.markdown-source-view.mod-cm6 img.cm-widgetBuffer {
-  display: inline !important;
-  /* kept !important because Obsidian app.css uses !important here */
-  width: 0 !important;
-  /* kept !important because Obsidian app.css uses !important here */
-  border: 0 !important;
-  /* kept !important because Obsidian app.css uses !important here */
-  margin: 0 !important;
-  /* kept !important because Obsidian app.css uses !important here */
-  padding: 0 !important;
-  /* kept !important because Obsidian app.css uses !important here */
 }
 .view-content > .markdown-source-view.mod-cm6 > .cm-editor > .cm-scroller {
   padding: var(--file-margins);
@@ -482,15 +673,15 @@
   color: var(--inline-title-color);
   white-space: pre-wrap;
   margin-block-end: var(--inline-title-margin-bottom);
-}
-.inline-title:not([data-level]) {
-  font-size: var(--inline-title-size);
-  font-weight: var(--inline-title-weight);
-  line-height: var(--inline-title-line-height);
-  font-style: var(--inline-title-style);
-  font-variant: var(--inline-title-variant);
-  font-family: var(--inline-title-font);
-  letter-spacing: -0.015em;
+  &:not([data-level]) {
+    font-size: var(--inline-title-size);
+    font-weight: var(--inline-title-weight);
+    line-height: var(--inline-title-line-height);
+    font-style: var(--inline-title-style);
+    font-variant: var(--inline-title-variant);
+    font-family: var(--inline-title-font);
+    letter-spacing: -0.015em;
+  }
 }
 .inline-title h1,
 .inline-title h2,
@@ -545,18 +736,18 @@ body:not(.show-inline-title) .inline-title:not([data-level]) {
   padding: 0 var(--size-4-2);
   white-space: pre-wrap;
   word-break: break-word;
-}
-.diff-line.mod-left {
-  background-color: color-mix(in oklch, var(--background-modifier-error) 20%, transparent);
-}
-.diff-line.mod-left .diff-changed {
-  background-color: color-mix(in oklch, var(--background-modifier-error) 40%, transparent);
-}
-.diff-line.mod-right {
-  background-color: color-mix(in oklch, var(--background-modifier-success) 20%, transparent);
-}
-.diff-line.mod-right .diff-changed {
-  background-color: color-mix(in oklch, var(--background-modifier-success) 40%, transparent);
+  &.mod-left {
+    background-color: color-mix(in oklch, var(--background-modifier-error) 20%, transparent);
+    .diff-changed {
+      background-color: color-mix(in oklch, var(--background-modifier-error) 40%, transparent);
+    }
+  }
+  &.mod-right {
+    background-color: color-mix(in oklch, var(--background-modifier-success) 20%, transparent);
+    .diff-changed {
+      background-color: color-mix(in oklch, var(--background-modifier-success) 40%, transparent);
+    }
+  }
 }
 .diff-collapsed {
   text-align: center;
@@ -585,9 +776,6 @@ Moves search to the top
   border-radius: 2px;
 }
 /* Edit */
-.markdown-source-view.mod-cm6 .document-search-container {
-  flex: 0 0 auto;
-}
 .cm-s-obsidian span.cm-highlight.obsidian-search-match-highlight {
   background-color: var(--text-selection);
 }
@@ -623,39 +811,10 @@ Moves search to the top
     opacity: 1;
   }
 }
-.markdown-source-view.mod-cm6 .cm-fold-indicator .collapse-indicator {
-  opacity: 0;
-}
-.markdown-source-view.mod-cm6 .cm-fold-indicator.is-collapsed .collapse-indicator {
-  opacity: 1;
-}
 @media (hover: hover) {
   .markdown-source-view.mod-cm6 .cm-line:hover .cm-fold-indicator .collapse-indicator {
     opacity: 1;
   }
-}
-.markdown-source-view.mod-cm6 .cm-foldPlaceholder {
-  color: var(--text-faint);
-  background-color: transparent;
-  border: none;
-  margin-inline-start: 8px;
-  user-select: none;
-}
-.markdown-source-view.mod-cm6 .cm-fold-indicator {
-  display: inline-block;
-  position: relative;
-  z-index: 1;
-}
-.markdown-source-view.mod-cm6 .cm-fold-indicator:before {
-  content: '\200B';
-}
-.markdown-source-view.mod-cm6 .cm-fold-indicator .collapse-indicator {
-  position: absolute;
-  top: 0;
-  inset-inline-end: 0;
-  height: 100%;
-  cursor: var(--cursor);
-  padding-inline-end: 5px;
 }
 .markdown-rendered.show-indentation-guide li > ul,
 .markdown-rendered.show-indentation-guide li > ol {
@@ -671,27 +830,6 @@ Moves search to the top
   bottom: 0;
   border-inline-end: var(--indentation-guide-width) solid var(--indentation-guide-color);
 }
-.markdown-source-view.mod-cm6 .cm-indent {
-  min-width: var(--list-indent);
-  display: inline-block;
-}
-.markdown-source-view.mod-cm6 .cm-indent::before {
-  content: "\200B";
-  display: block;
-  width: 1px;
-  border-inline-end: var(--indentation-guide-width) solid var(--indentation-guide-color);
-  color: transparent;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin-inline-start: var(--indentation-guide-source-indent);
-}
-.markdown-source-view.mod-cm6.is-live-preview .cm-indent::before {
-  margin-inline-start: var(--indentation-guide-editing-indent);
-}
-.markdown-source-view.mod-cm6 .cm-active-indent::before {
-  border-inline-end: var(--indentation-guide-width-active) solid var(--indentation-guide-color-active);
-}
 .formula-editor-container {
   width: 100%;
 }
@@ -704,6 +842,35 @@ Moves search to the top
   align-items: center;
   min-height: var(--input-height);
   width: 100%;
+  &::placeholder {
+    color: var(--input-placeholder-color);
+  }
+  .cm-editor {
+    flex: 1 1 auto;
+  }
+  .cm-content {
+    caret-color: var(--caret-color);
+  }
+  .cm-placeholder {
+    font-family: var(--font-interface);
+    font-size: var(--font-ui-small);
+    color: var(--text-faint);
+  }
+  .cm-line {
+    padding-inline-start: var(--size-4-2);
+    padding-inline-end: var(--size-4-2);
+  }
+  .cm-scroller {
+    color: var(--code-normal);
+    font-family: var(--font-monospace);
+    font-size: var(--font-small);
+  }
+  .cm-focused {
+    outline: none;
+  }
+  .cm-tooltip {
+    font-family: var(--font-interface);
+  }
 }
 @media (hover: hover) {
   .formula-editor:hover {
@@ -723,35 +890,6 @@ Moves search to the top
 .formula-editor:focus-within {
   box-shadow: 0 0 0 var(--input-border-width-focus) var(--background-modifier-border-focus);
 }
-.formula-editor::placeholder {
-  color: var(--input-placeholder-color);
-}
-.formula-editor .cm-editor {
-  flex: 1 1 auto;
-}
-.formula-editor .cm-content {
-  caret-color: var(--caret-color);
-}
-.formula-editor .cm-placeholder {
-  font-family: var(--font-interface);
-  font-size: var(--font-ui-small);
-  color: var(--text-faint);
-}
-.formula-editor .cm-line {
-  padding-inline-start: var(--size-4-2);
-  padding-inline-end: var(--size-4-2);
-}
-.formula-editor .cm-scroller {
-  color: var(--code-normal);
-  font-family: var(--font-monospace);
-  font-size: var(--font-small);
-}
-.formula-editor .cm-focused {
-  outline: none;
-}
-.formula-editor .cm-tooltip {
-  font-family: var(--font-interface);
-}
 .cm-tooltip.cm-tooltip-docstring {
   border-radius: var(--radius-s);
   padding: var(--size-4-1) var(--size-4-2);
@@ -763,9 +901,9 @@ Moves search to the top
   color: #FAFAFA;
   font-family: var(--font-monospace);
   border: none;
-}
-.cm-tooltip.cm-tooltip-docstring .active {
-  font-weight: var(--font-semibold);
+  .active {
+    font-weight: var(--font-semibold);
+  }
 }
 .cm-tooltip.cm-tooltip-docstring .cm-tooltip-arrow:before,
 .cm-tooltip.cm-tooltip-docstring .cm-tooltip-arrow:after {
@@ -851,53 +989,53 @@ Moves search to the top
   z-index: var(--layer-notice);
   --no-tooltip: true;
   overflow: unset;
+  .cm-completionLabel {
+    flex-grow: 1;
+    .cm-completionMatchedText {
+      font-weight: bold;
+      text-decoration: none;
+    }
+  }
+  .cm-completionDetail {
+    display: none;
+  }
+  > ul[role="listbox"] {
+    padding: var(--size-2-3);
+  }
+  > ul > li[role="option"] {
+    font-size: var(--font-ui-medium);
+    margin-bottom: 1px;
+    cursor: var(--cursor);
+    padding: var(--size-2-3) var(--size-4-3);
+    white-space: pre-wrap;
+    border-radius: var(--radius-s);
+    corner-shape: var(--corner-shape);
+    color: var(--text-normal);
+    font-family: var(--font-interface);
+    font-size: var(--font-ui-small);
+    padding-inline-start: var(--size-4-2);
+    &.is-being-dragged {
+      pointer-events: auto;
+      background-color: var(--background-modifier-hover);
+    }
+    &.mod-downranked {
+      color: var(--text-muted);
+    }
+    &.mod-complex .suggestion-icon .suggestion-flair {
+      margin: 0;
+      margin-inline-end: var(--size-4-2);
+    }
+    &[aria-selected] {
+      background-color: var(--background-modifier-hover);
+    }
+  }
 }
 .is-mobile .cm-tooltip.cm-tooltip-autocomplete {
   max-width: calc(100vw - 20px - var(--safe-area-inset-left) - var(--safe-area-inset-right));
   max-height: 240px;
 }
-.cm-tooltip.cm-tooltip-autocomplete .cm-completionLabel {
-  flex-grow: 1;
-}
-.cm-tooltip.cm-tooltip-autocomplete .cm-completionLabel .cm-completionMatchedText {
-  font-weight: bold;
-  text-decoration: none;
-}
-.cm-tooltip.cm-tooltip-autocomplete .cm-completionDetail {
-  display: none;
-}
-.cm-tooltip.cm-tooltip-autocomplete > ul[role="listbox"] {
-  padding: var(--size-2-3);
-}
-.cm-tooltip.cm-tooltip-autocomplete > ul > li[role="option"] {
-  font-size: var(--font-ui-medium);
-  margin-bottom: 1px;
-  cursor: var(--cursor);
-  padding: var(--size-2-3) var(--size-4-3);
-  white-space: pre-wrap;
-  border-radius: var(--radius-s);
-  corner-shape: var(--corner-shape);
-  color: var(--text-normal);
-  font-family: var(--font-interface);
-  font-size: var(--font-ui-small);
-  padding-inline-start: var(--size-4-2);
-}
 .cm-tooltip.cm-tooltip-autocomplete > ul > li[role="option"].is-selected,
 .cm-tooltip.cm-tooltip-autocomplete > ul > li[role="option"].mobile-tap {
-  background-color: var(--background-modifier-hover);
-}
-.cm-tooltip.cm-tooltip-autocomplete > ul > li[role="option"].is-being-dragged {
-  pointer-events: auto;
-  background-color: var(--background-modifier-hover);
-}
-.cm-tooltip.cm-tooltip-autocomplete > ul > li[role="option"].mod-downranked {
-  color: var(--text-muted);
-}
-.cm-tooltip.cm-tooltip-autocomplete > ul > li[role="option"].mod-complex .suggestion-icon .suggestion-flair {
-  margin: 0;
-  margin-inline-end: var(--size-4-2);
-}
-.cm-tooltip.cm-tooltip-autocomplete > ul > li[role="option"][aria-selected] {
   background-color: var(--background-modifier-hover);
 }
 .cm-s-obsidian span.cm-quote {
@@ -921,117 +1059,78 @@ Moves search to the top
   bottom: 0;
   pointer-events: none;
 }
-.markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote {
-  font-style: var(--blockquote-style);
-  background-color: var(--blockquote-background-color);
-}
-.markdown-source-view.mod-cm6.is-live-preview .HyperMD-quote:before {
-  inset-inline-start: 0;
-}
-.markdown-source-view.mod-cm6 .cm-blockquote-border {
-  display: inline-block;
-}
 .cm-s-obsidian span.cm-inline-code {
   color: var(--code-normal);
   font-size: var(--code-size);
   background-color: var(--code-background);
   vertical-align: baseline;
   -webkit-box-decoration-break: clone;
-}
-.cm-s-obsidian span.cm-inline-code span.cm-inline-code.cm-hmd-indented-code {
-  background-color: transparent;
-}
-.cm-s-obsidian span.cm-inline-code span.cm-inline-code:not(.cm-formatting):not(.cm-hmd-indented-code):not(.obsidian-search-match-highlight) {
-  background-color: var(--code-background);
-  vertical-align: baseline;
-}
-.cm-s-obsidian span.cm-inline-code span.cm-inline-code.hmd-hidden-token {
-  font-size: 0;
+  span.cm-inline-code.cm-hmd-indented-code {
+    background-color: transparent;
+  }
+  span.cm-inline-code:not(.cm-formatting):not(.cm-hmd-indented-code):not(.obsidian-search-match-highlight) {
+    background-color: var(--code-background);
+    vertical-align: baseline;
+  }
+  span.cm-inline-code.hmd-hidden-token {
+    font-size: 0;
+  }
 }
 .cm-s-obsidian .cm-inline-code {
   border-color: var(--code-border-color);
   border-style: solid;
-}
-.cm-s-obsidian .cm-inline-code:not(.cm-formatting) {
-  border-radius: var(--code-radius);
-  padding: 0.15em 0.3em;
-  border-width: var(--code-border-width);
-}
-.cm-s-obsidian .cm-inline-code.cm-formatting {
-  border-start-start-radius: var(--code-radius);
-  border-start-end-radius: 0;
-  border-end-start-radius: var(--code-radius);
-  border-end-end-radius: 0;
-  padding: 0.15em 0;
-  border-width: var(--code-border-width) 0 var(--code-border-width) var(--code-border-width);
-}
-.cm-s-obsidian .cm-inline-code:not(.cm-formatting) + .cm-formatting.cm-inline-code {
-  border-start-start-radius: 0;
-  border-start-end-radius: var(--code-radius);
-  border-end-start-radius: 0;
-  border-end-end-radius: var(--code-radius);
-  padding-inline-end: 0;
-  border-width: var(--code-border-width) var(--code-border-width) var(--code-border-width) 0;
-}
-.cm-s-obsidian .cm-inline-code.cm-formatting ~ .cm-inline-code:not(.cm-formatting) {
-  border-radius: 0;
-  padding: 0.15em 0;
-  border-left: none;
-  border-right: none;
+  &:not(.cm-formatting) {
+    border-radius: var(--code-radius);
+    padding: 0.15em 0.3em;
+    border-width: var(--code-border-width);
+  }
+  &.cm-formatting {
+    border-start-start-radius: var(--code-radius);
+    border-start-end-radius: 0;
+    border-end-start-radius: var(--code-radius);
+    border-end-end-radius: 0;
+    padding: 0.15em 0;
+    border-width: var(--code-border-width) 0 var(--code-border-width) var(--code-border-width);
+  }
+  &:not(.cm-formatting) + .cm-formatting.cm-inline-code {
+    border-start-start-radius: 0;
+    border-start-end-radius: var(--code-radius);
+    border-end-start-radius: 0;
+    border-end-end-radius: var(--code-radius);
+    padding-inline-end: 0;
+    border-width: var(--code-border-width) var(--code-border-width) var(--code-border-width) 0;
+  }
+  &.cm-formatting ~ .cm-inline-code:not(.cm-formatting) {
+    border-radius: 0;
+    padding: 0.15em 0;
+    border-left: none;
+    border-right: none;
+  }
 }
 @supports not (anchor-name: --x) {
   .cm-embed-block .mermaid-guard-header {
     padding-inline-end: var(--size-4-9);
   }
 }
-.markdown-source-view.mod-cm6 .cm-hmd-codeblock {
-  --indentation-guide-editing-indent: 0;
-}
-.markdown-source-view.mod-cm6 .cm-preview-code-block pre {
-  margin: 0;
-}
-.markdown-source-view.mod-cm6 .code-block-flair {
-  position: absolute;
-  right: 6px;
-  top: 6px;
-  z-index: 1;
-  display: inline-block;
-  padding: var(--size-4-1) var(--size-4-2);
-  border-radius: var(--code-radius);
-  font-family: var(--font-interface);
-  font-size: var(--font-ui-smaller);
-  color: var(--text-muted);
-  cursor: var(--cursor);
-}
 @media (hover: hover) {
   .markdown-source-view.mod-cm6 .code-block-flair:hover {
     background-color: var(--background-modifier-hover);
   }
 }
-.markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock {
-  color: var(--code-normal);
-}
-.markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock:not(.HyperMD-list-line) {
-  padding-inline-start: var(--size-4-4);
-}
-.markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock .cm-formatting.cm-formatting-list {
-  font-family: var(--font-text);
-  font-size: var(--font-text-size);
-}
 .cm-s-obsidian .HyperMD-codeblock {
   font-family: var(--font-monospace);
   font-size: var(--code-size);
   direction: ltr;
+  span.cm-inline-code {
+    background-color: inherit;
+    border: inherit;
+    padding: inherit;
+    font-size: inherit;
+  }
 }
 .cm-s-obsidian .HyperMD-codeblock-begin,
 .cm-s-obsidian .HyperMD-codeblock-end {
   color: var(--code-normal);
-}
-.cm-s-obsidian .HyperMD-codeblock span.cm-inline-code {
-  background-color: inherit;
-  border: inherit;
-  padding: inherit;
-  font-size: inherit;
 }
 .cm-s-obsidian div.HyperMD-codeblock-bg {
   left: 0;
@@ -1169,9 +1268,9 @@ Moves search to the top
 .cm-editor.cm-focused .cm-matchingBracket {
   background-color: var(--code-bracket-background);
   box-shadow: inset 0 0 0 1px var(--background-modifier-hover);
-}
-.cm-editor.cm-focused .cm-matchingBracket .punctuation {
-  color: var(--text-normal);
+  .punctuation {
+    color: var(--text-normal);
+  }
 }
 .inline-embed > .markdown-embed-content > .markdown-source-view,
 .inline-embed > .markdown-embed-content > .markdown-preview-view {
@@ -1300,38 +1399,38 @@ Moves search to the top
 }
 .cm-editor.cm-focused .image-embed.is-selected {
   --image-radius: 8px;
-}
-.cm-editor.cm-focused .image-embed.is-selected .image-wrapper {
-  border-radius: var(--image-radius);
-  cursor: zoom-in;
-}
-.cm-editor.cm-focused .image-embed.is-selected .image-wrapper::after {
-  pointer-events: none;
-  content: '';
-  position: absolute;
-  top: 0;
-  inset-inline-start: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: var(--image-radius);
-  box-shadow: inset 0 0 0 2px var(--text-muted), inset 0 0 0 4px var(--background-primary);
+  .image-wrapper {
+    border-radius: var(--image-radius);
+    cursor: zoom-in;
+    &::after {
+      pointer-events: none;
+      content: '';
+      position: absolute;
+      top: 0;
+      inset-inline-start: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--image-radius);
+      box-shadow: inset 0 0 0 2px var(--text-muted), inset 0 0 0 4px var(--background-primary);
+    }
+  }
 }
 .cm-line > .image-embed {
   position: relative;
   display: inline-flex;
-}
-.cm-line > .image-embed .image-wrapper {
-  display: inline-flex;
+  .image-wrapper {
+    display: inline-flex;
+  }
 }
 .cm-tooltip.cm-image-reveal-tooltip {
   border: none;
   background: transparent;
   padding: 0;
   pointer-events: none;
-}
-.cm-tooltip.cm-image-reveal-tooltip .image-embed {
-  position: relative;
-  display: inline-flex;
+  .image-embed {
+    position: relative;
+    display: inline-flex;
+  }
 }
 .cm-image-reveal-spacer {
   display: inline-block;
@@ -1347,32 +1446,16 @@ Moves search to the top
 .cm-editor.cm-focused .cm-vimMode .image-embed.is-selected .image-wrapper::after {
   background-color: var(--text-selection);
 }
-.markdown-source-view.mod-cm6 .internal-embed {
-  white-space: normal;
-}
-.markdown-source-view.mod-cm6 .cm-embed-block {
-  position: relative;
-  white-space: normal;
-  overflow-wrap: normal;
-  word-break: normal;
-}
 @media (hover: hover) {
   .markdown-source-view.mod-cm6 .cm-embed-block:not(.cm-table-widget, .cm-lang-base):hover {
     box-shadow: var(--embed-block-shadow-hover);
     border-radius: var(--radius-s);
     overflow: hidden;
     cursor: text;
+    .embed-actions {
+      opacity: 1;
+    }
   }
-  .markdown-source-view.mod-cm6 .cm-embed-block:not(.cm-table-widget, .cm-lang-base):hover .embed-actions {
-    opacity: 1;
-  }
-}
-.markdown-source-view.mod-cm6 .cm-embed-block > .mermaid {
-  overflow-x: auto;
-}
-.markdown-source-view.mod-inside-iframe > .cm-editor > .cm-scroller {
-  flex-direction: column;
-  padding: 0 var(--size-4-4);
 }
 .markdown-source-view.mod-inside-iframe > .cm-editor > .cm-scroller::before,
 .markdown-source-view.mod-inside-iframe > .cm-editor > .cm-scroller::after {
@@ -1382,32 +1465,31 @@ Moves search to the top
   max-height: var(--size-4-4);
   flex: 1 1 0;
 }
-.markdown-source-view.mod-inside-iframe > .cm-editor > .cm-scroller > .cm-sizer {
-  min-height: unset;
-  flex: 1 0 0;
-}
 .cm-s-obsidian .cm-line.HyperMD-footnote {
   font-size: var(--footnote-size);
-}
-.cm-s-obsidian .cm-line.HyperMD-footnote span.cm-hmd-footnote {
-  cursor: text;
-  display: inline-block;
-  font-size: var(--font-smallest);
-  position: relative;
-  top: -0.3em;
-  color: var(--text-muted);
-}
-.cm-s-obsidian .cm-line.HyperMD-footnote span.cm-hmd-footnote.cm-formatting {
-  color: var(--text-faint);
+  span.cm-hmd-footnote {
+    cursor: text;
+    display: inline-block;
+    font-size: var(--font-smallest);
+    position: relative;
+    top: -0.3em;
+    color: var(--text-muted);
+    &.cm-formatting {
+      color: var(--text-faint);
+    }
+    .cm-underline {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+  }
+  .cm-hmd-footnote-url-title {
+    color: var(--text-muted);
+  }
 }
 @media (hover: hover) {
   .cm-s-obsidian .cm-line.HyperMD-footnote span.cm-hmd-footnote:hover {
     text-decoration: none;
   }
-}
-.cm-s-obsidian .cm-line.HyperMD-footnote span.cm-hmd-footnote .cm-underline {
-  color: var(--text-muted);
-  text-decoration: none;
 }
 @media (hover: hover) {
   .cm-s-obsidian .cm-line.HyperMD-footnote span.cm-hmd-footnote .cm-underline:hover {
@@ -1415,9 +1497,6 @@ Moves search to the top
     color: var(--text-muted);
     text-decoration: none;
   }
-}
-.cm-s-obsidian .cm-line.HyperMD-footnote .cm-hmd-footnote-url-title {
-  color: var(--text-muted);
 }
 .markdown-source-view .metadata-container,
 .markdown-preview-view .metadata-container {
@@ -1427,23 +1506,20 @@ Moves search to the top
 .cm-hmd-frontmatter {
   font-size: var(--font-smaller);
   color: var(--text-muted);
-}
-.cm-hmd-frontmatter.cm-hmd-frontmatter.cm-def {
-  color: var(--text-muted);
-}
-.cm-hmd-frontmatter .is-invalid {
-  color: var(--text-error);
-}
-.cm-hmd-frontmatter .error-marker {
-  background-color: var(--text-error);
-  color: var(--text-on-accent);
+  &.cm-hmd-frontmatter.cm-def {
+    color: var(--text-muted);
+  }
+  .is-invalid {
+    color: var(--text-error);
+  }
+  .error-marker {
+    background-color: var(--text-error);
+    color: var(--text-on-accent);
+  }
 }
 .markdown-source-view .metadata-container,
 .markdown-preview-view .metadata-container:not(.mod-error) {
   display: none;
-}
-.markdown-source-view.is-live-preview.show-properties .metadata-container:not(.mod-error) {
-  display: var(--metadata-display-editing);
 }
 .markdown-source-view.is-live-preview.show-properties .metadata-container[data-property-count="0"]:not(.mod-error),
 .markdown-preview-view.show-properties .metadata-container[data-property-count="0"]:not(.mod-error) {
@@ -1458,12 +1534,12 @@ Moves search to the top
 }
 .cm-s-obsidian .cm-line.HyperMD-header {
   padding-top: var(--p-spacing);
-}
-.cm-s-obsidian .cm-line.HyperMD-header + .cm-line:not(.HyperMD-header):not(:has(>br:only-child)) {
-  padding-top: var(--p-spacing-empty);
-}
-.cm-s-obsidian .cm-line.HyperMD-header + .cm-line:not(.HyperMD-header):has(>br:only-child) + .cm-line.HyperMD-header {
-  padding-top: 0;
+  + .cm-line:not(.HyperMD-header):not(:has(>br:only-child)) {
+    padding-top: var(--p-spacing-empty);
+  }
+  + .cm-line:not(.HyperMD-header):has(>br:only-child) + .cm-line.HyperMD-header {
+    padding-top: 0;
+  }
 }
 .HyperMD-header-1,
 .inline-title h1,
@@ -1604,14 +1680,6 @@ Moves search to the top
   color: transparent;
   background-color: transparent;
 }
-.markdown-source-view.mod-cm6 .hr {
-  display: flex;
-  align-items: center;
-}
-.markdown-source-view.mod-cm6 hr {
-  margin: 0;
-  flex: 1 0 0;
-}
 .cm-s-obsidian .hmd-fold-html-stub,
 .cm-s-obsidian .hmd-fold-code-stub {
   display: inline-block;
@@ -1640,6 +1708,9 @@ Moves search to the top
 .cm-s-obsidian .hmd-fold-html {
   position: relative;
   border: 1px solid #FFF;
+  a > img {
+    border: 0;
+  }
 }
 @media (hover: hover) {
   .cm-s-obsidian .hmd-fold-html:hover {
@@ -1655,9 +1726,6 @@ Moves search to the top
   position: absolute;
   z-index: 100;
 }
-.cm-s-obsidian .hmd-fold-html a > img {
-  border: 0;
-}
 .cm-s-obsidian img.hmd-image {
   vertical-align: middle;
   width: auto;
@@ -1669,24 +1737,10 @@ Moves search to the top
   min-width: 24px;
   min-height: 24px;
 }
-.markdown-source-view.mod-cm6 img {
-  max-width: 100%;
-}
-.markdown-source-view {
-  --list-padding-inline-start: var(--list-indent-source);
-  --list-marker-space: 0;
-}
-.markdown-source-view.is-live-preview {
-  --list-padding-inline-start: var(--list-indent-editing);
-  --list-marker-space: 0.25em;
-}
 .cm-formatting-list-ul,
 .cm-formatting-list-ol {
   font-variant-numeric: tabular-nums;
   padding-inline-start: var(--list-padding-inline-start);
-}
-.markdown-source-view.mod-cm6 .HyperMD-list-line-nobullet .cm-indent {
-  min-width: var(--list-indent);
 }
 .cm-s-obsidian .cm-formatting-list {
   color: var(--list-marker-color);
@@ -1716,16 +1770,6 @@ li.is-collapsed .list-bullet:after,
 }
 /* Allow clicking on the bullet to collapse */
 /* #todo move this into folding.less */
-.markdown-source-view.mod-cm6.is-live-preview {
-  /* only allow this if line is not active, so that it's still editable */
-}
-.markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-list-line .cm-fold-indicator .collapse-indicator {
-  padding-inline-end: 0;
-}
-.markdown-source-view.mod-cm6.is-live-preview .cm-line.HyperMD-list-line:not(.cm-active):not(.HyperMD-task-line) .cm-fold-indicator .collapse-indicator {
-  padding-inline-end: var(--list-bullet-end-padding);
-  inset-inline-end: calc(var(--list-bullet-end-padding) * -1);
-}
 @media (hover: hover) {
   .list-collapse-indicator:hover ~ .list-bullet:after,
   .cm-fold-indicator:hover ~ .list-bullet:after,
@@ -1748,13 +1792,9 @@ li.is-collapsed .list-bullet:after,
 }
 .cm-s-obsidian .HyperMD-list-line.HyperMD-list-line-nobullet {
   padding-top: initial;
-}
-.cm-s-obsidian .HyperMD-list-line.HyperMD-list-line-nobullet > .cm-hmd-list-indent > .cm-indent-spacing:last-child {
-  padding-inline-start: calc(var(--list-indent-editing) + var(--list-marker-space));
-}
-.markdown-source-view.mod-cm6 .cm-hmd-list-indent {
-  display: inline-block;
-  white-space: pre;
+  > .cm-hmd-list-indent > .cm-indent-spacing:last-child {
+    padding-inline-start: calc(var(--list-indent-editing) + var(--list-marker-space));
+  }
 }
 .markdown-source-view.mod-cm6 .cm-formatting-list-ul,
 .markdown-source-view.mod-cm6 .cm-formatting-list-ol {
@@ -1773,9 +1813,9 @@ li.is-collapsed .list-bullet:after,
 .cm-s-obsidian span.cm-link {
   color: var(--link-external-color);
   word-break: break-word;
-}
-.cm-s-obsidian span.cm-link a {
-  color: var(--link-external-color);
+  a {
+    color: var(--link-external-color);
+  }
 }
 @media (hover: hover) {
   .cm-s-obsidian span.cm-link:hover {
@@ -1811,19 +1851,14 @@ li.is-collapsed .list-bullet:after,
   display: inline-block;
   vertical-align: middle;
   opacity: 0.4;
+  &:after {
+    content: "";
+  }
 }
 @media (hover: hover) {
   .cm-s-obsidian span.hmd-link-icon:hover {
     opacity: 1;
   }
-}
-.cm-s-obsidian span.hmd-link-icon:after {
-  content: "";
-}
-.markdown-source-view.mod-cm6 .is-unresolved {
-  color: var(--link-unresolved-color);
-  opacity: var(--link-unresolved-opacity);
-  filter: var(--link-unresolved-filter);
 }
 @media (hover: hover) {
   .markdown-source-view.mod-cm6 .is-unresolved:hover {
@@ -1831,16 +1866,6 @@ li.is-collapsed .list-bullet:after,
     color: var(--link-color-hover);
     text-decoration-color: var(--link-color-hover);
   }
-}
-.markdown-source-view.mod-cm6 .is-unresolved .cm-underline {
-  text-decoration-line: var(--link-decoration);
-  text-decoration-style: var(--link-unresolved-decoration-style);
-  text-decoration-color: var(--link-unresolved-decoration-color);
-  color: var(--link-unresolved-color);
-}
-.markdown-source-view.mod-cm6 .cm-underline {
-  text-decoration-line: var(--link-decoration);
-  text-decoration-thickness: var(--link-decoration-thickness);
 }
 body.is-ios .markdown-source-view.mod-cm6 .cm-editor:not(.cm-focused) .cm-underline {
   user-select: none;
@@ -1891,6 +1916,94 @@ body.is-ios .markdown-source-view.mod-cm6 .cm-editor:not(.cm-focused) .cm-underl
   /* gutter for addon/click */
   /* addon/fold */
   /* addon/fold-emoji */
+  div.HyperMD-hover > .HyperMD-hover-content {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+    padding: 0.5em;
+    p {
+      margin: 0.2em 0;
+    }
+  }
+  .HyperMD-goback {
+    width: 1px;
+  }
+  div.HyperMD-goback-button {
+    background-color: #ddd;
+    color: #333;
+    text-align: center;
+    cursor: var(--cursor);
+  }
+  .hmd-link-icon:after {
+    content: "ðŸ”—Â»";
+    color: #009;
+    text-shadow: 0 0 2px #69F;
+  }
+  img.hmd-emoji {
+    height: 1.2em;
+    vertical-align: middle;
+  }
+  & {
+    line-height: var(--line-height-normal);
+    span.cm-hmd-toc {
+      font-size: 24pt;
+      color: #999;
+    }
+    .HyperMD-header-line {
+      color: var(--text-muted);
+    }
+    span.cm-hmd-escape-backslash {
+      color: var(--text-faint);
+    }
+    .hmd-file-uploading {
+      outline: 2px dashed #CCC;
+      outline-offset: -2px;
+      animation: hmd-file-uploading-ani 1.5s linear infinite;
+    }
+    .hmd-file-uploaded {
+      outline: 2px solid #6C3;
+      outline-offset: -2px;
+    }
+    .HyperMD-goback {
+      width: 1px;
+    }
+    div.HyperMD-goback-button {
+      padding-right: 15px;
+      border-radius: 0 10px 10px 0;
+      display: inline-block;
+      text-align: center;
+      background-color: #8daed9;
+      color: #f7f7f7;
+      cursor: var(--cursor);
+    }
+    .hmd-fold-code-image {
+      text-align: center;
+    }
+    .cm-s-obsidian span.hmd-hidden-token.cm-formatting-task {
+      color: transparent !important;
+      /* kept !important because Obsidian app.css uses !important here */
+    }
+    .hmd-inactive-line span.cm-hmd-list-indent {
+      border-right: 0;
+    }
+    & {
+      /* addon/fold-math */
+      .hmd-fold-math {
+        display: inline-block;
+        vertical-align: middle;
+        &.hmd-fold-math.math-2 {
+          width: 100%;
+        }
+      }
+      span.cm-formatting-math {
+        color: var(--text-accent);
+        font-weight: inherit;
+      }
+      span.cm-math-2 {
+        font-size: 13.2pt;
+      }
+    }
+  }
 }
 .cm-s-obsidian span.hmd-hidden-token.cm-formatting-em,
 .cm-s-obsidian span.hmd-hidden-token.cm-formatting-strong,
@@ -1903,36 +2016,6 @@ body.is-ios .markdown-source-view.mod-cm6 .cm-editor:not(.cm-focused) .cm-underl
   letter-spacing: -1ch;
   font-family: monospace;
   color: transparent;
-}
-.cm-s-obsidian div.HyperMD-hover > .HyperMD-hover-content {
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #000;
-  padding: 0.5em;
-}
-.cm-s-obsidian div.HyperMD-hover > .HyperMD-hover-content p {
-  margin: 0.2em 0;
-}
-.cm-s-obsidian .HyperMD-goback {
-  width: 1px;
-}
-.cm-s-obsidian div.HyperMD-goback-button {
-  background-color: #ddd;
-  color: #333;
-  text-align: center;
-  cursor: var(--cursor);
-}
-.cm-s-obsidian .hmd-link-icon:after {
-  content: "ðŸ”—Â»";
-  color: #009;
-  text-shadow: 0 0 2px #69F;
-}
-.cm-s-obsidian img.hmd-emoji {
-  height: 1.2em;
-  vertical-align: middle;
-}
-.cm-s-obsidian {
-  line-height: var(--line-height-normal);
 }
 .cm-s-obsidian .hmd-fold-html-stub,
 .cm-s-obsidian .hmd-fold-code-stub,
@@ -1947,16 +2030,6 @@ body.is-ios .markdown-source-view.mod-cm6 .cm-editor:not(.cm-focused) .cm-underl
 .cm-s-obsidian .hmd-fold-html kbd {
   font-family: var(--font-monospace);
 }
-.cm-s-obsidian span.cm-hmd-toc {
-  font-size: 24pt;
-  color: #999;
-}
-.cm-s-obsidian .HyperMD-header-line {
-  color: var(--text-muted);
-}
-.cm-s-obsidian span.cm-hmd-escape-backslash {
-  color: var(--text-faint);
-}
 .cm-s-obsidian span.cm-footref,
 .cm-s-obsidian span.cm-blockid {
   position: relative;
@@ -1968,39 +2041,11 @@ body.is-ios .markdown-source-view.mod-cm6 .cm-editor:not(.cm-focused) .cm-underl
 .cm-s-obsidian span.cm-blockid {
   color: var(--text-muted);
 }
-.cm-s-obsidian .hmd-file-uploading {
-  outline: 2px dashed #CCC;
-  outline-offset: -2px;
-  animation: hmd-file-uploading-ani 1.5s linear infinite;
-}
-.cm-s-obsidian .hmd-file-uploaded {
-  outline: 2px solid #6C3;
-  outline-offset: -2px;
-}
-.cm-s-obsidian .HyperMD-goback {
-  width: 1px;
-}
-.cm-s-obsidian div.HyperMD-goback-button {
-  padding-right: 15px;
-  border-radius: 0 10px 10px 0;
-  display: inline-block;
-  text-align: center;
-  background-color: #8daed9;
-  color: #f7f7f7;
-  cursor: var(--cursor);
-}
-.cm-s-obsidian .hmd-fold-code-image {
-  text-align: center;
-}
 .cm-s-obsidian .HyperMD-header,
 .cm-s-obsidian .HyperMD-footnote,
 .cm-s-obsidian .HyperMD-codeblock,
 .cm-s-obsidian .HyperMD-hr {
   clear: left;
-}
-.cm-s-obsidian .cm-s-obsidian span.hmd-hidden-token.cm-formatting-task {
-  color: transparent !important;
-  /* kept !important because Obsidian app.css uses !important here */
 }
 .cm-s-obsidian .hmd-inactive-line span.cm-hmd-escape-backslash,
 .cm-s-obsidian .hmd-inactive-line span.cm-formatting-header {
@@ -2008,47 +2053,22 @@ body.is-ios .markdown-source-view.mod-cm6 .cm-editor:not(.cm-focused) .cm-underl
   /* kept !important because Obsidian app.css uses !important here */
   display: inline;
 }
-.cm-s-obsidian .hmd-inactive-line span.cm-hmd-list-indent {
-  border-right: 0;
-}
 @media (hover: hover) {
   .cm-s-obsidian div.HyperMD-goback-button:hover {
     color: transparent;
     text-align: left;
+    &:before {
+      position: absolute;
+      padding-left: 5px;
+      content: "Back";
+      color: #f7f7f7;
+    }
   }
-  .cm-s-obsidian div.HyperMD-goback-button:hover:before {
-    position: absolute;
-    padding-left: 5px;
-    content: "Back";
-    color: #f7f7f7;
-  }
-}
-.cm-s-obsidian {
-  /* addon/fold-math */
-}
-.cm-s-obsidian .hmd-fold-math {
-  display: inline-block;
-  vertical-align: middle;
-}
-.cm-s-obsidian .hmd-fold-math.hmd-fold-math.math-2 {
-  width: 100%;
 }
 .cm-s-obsidian span.cm-math,
 .cm-s-obsidian span.hmd-fold-math-placeholder {
   font-size: var(--code-size);
   font-style: italic;
-}
-.cm-s-obsidian span.cm-formatting-math {
-  color: var(--text-accent);
-  font-weight: inherit;
-}
-.cm-s-obsidian span.cm-math-2 {
-  font-size: 13.2pt;
-}
-.markdown-source-view.mod-cm6 .math-block > mjx-container {
-  margin: 0;
-  padding: 1em 0;
-  overflow-x: auto;
 }
 .cm-html-embed table,
 .markdown-rendered table {
@@ -2185,9 +2205,9 @@ body.is-ios .markdown-source-view.mod-cm6 .cm-editor:not(.cm-focused) .cm-underl
   overflow-wrap: normal;
   font-size: var(--code-size);
   font-family: var(--font-monospace);
-}
-.cm-s-obsidian .HyperMD-table-row span.cm-inline-code {
-  --code-size: 1em;
+  span.cm-inline-code {
+    --code-size: 1em;
+  }
 }
 .cm-s-obsidian .HyperMD-table-rtl {
   direction: rtl;
@@ -2223,19 +2243,12 @@ body.is-ios .markdown-source-view.mod-cm6 .cm-editor:not(.cm-focused) .cm-underl
 .cm-s-obsidian .hmd-inactive-line.HyperMD-table-row-1 {
   color: transparent;
   text-shadow: none;
-}
-.cm-s-obsidian .hmd-inactive-line.HyperMD-table-row-1 > span {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAQAAAAziH6sAAAADklEQVR42mOc+Z9x5n8ACTkDM4ikM1IAAAAASUVORK5CYII=) repeat-x 0px center;
+  > span {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAQAAAAziH6sAAAADklEQVR42mOc+Z9x5n8ACTkDM4ikM1IAAAAASUVORK5CYII=) repeat-x 0px center;
+  }
 }
 .cm-s-obsidian .hmd-inactive-line.HyperMD-table-row span.cm-hmd-table-sep {
   color: transparent;
-}
-.markdown-source-view.mod-cm6 .cm-line.HyperMD-table-row {
-  min-width: max-content;
-}
-.markdown-source-view.mod-cm6 .cm-table-widget table {
-  margin-top: 0;
-  margin-bottom: 0;
 }
 .cm-hashtag {
   color: var(--tag-color);
@@ -2248,24 +2261,24 @@ body.is-ios .markdown-source-view.mod-cm6 .cm-editor:not(.cm-focused) .cm-underl
   border-inline-end: none;
   padding-top: var(--tag-padding-y);
   padding-bottom: var(--tag-padding-y);
-}
-.cm-hashtag.cm-hashtag-begin {
-  border-start-start-radius: var(--tag-radius);
-  border-end-start-radius: var(--tag-radius);
-  corner-start-start-shape: var(--tag-corner-shape);
-  corner-end-start-shape: var(--tag-corner-shape);
-  border-inline-end: none;
-  border-inline-start: var(--tag-border-width) solid var(--tag-border-color);
-  padding-inline-start: var(--tag-padding-x);
-}
-.cm-hashtag.cm-hashtag-end {
-  border-start-end-radius: var(--tag-radius);
-  border-end-end-radius: var(--tag-radius);
-  corner-start-end-shape: var(--tag-corner-shape);
-  corner-end-end-shape: var(--tag-corner-shape);
-  border-inline-start: none;
-  border-inline-end: var(--tag-border-width) solid var(--tag-border-color);
-  padding-inline-end: var(--tag-padding-x);
+  &.cm-hashtag-begin {
+    border-start-start-radius: var(--tag-radius);
+    border-end-start-radius: var(--tag-radius);
+    corner-start-start-shape: var(--tag-corner-shape);
+    corner-end-start-shape: var(--tag-corner-shape);
+    border-inline-end: none;
+    border-inline-start: var(--tag-border-width) solid var(--tag-border-color);
+    padding-inline-start: var(--tag-padding-x);
+  }
+  &.cm-hashtag-end {
+    border-start-end-radius: var(--tag-radius);
+    border-end-end-radius: var(--tag-radius);
+    corner-start-end-shape: var(--tag-corner-shape);
+    corner-end-end-shape: var(--tag-corner-shape);
+    border-inline-start: none;
+    border-inline-end: var(--tag-border-width) solid var(--tag-border-color);
+    padding-inline-end: var(--tag-padding-x);
+  }
 }
 .cm-s-obsidian span.cm-hashtag.cm-hmd-escape-backslash {
   color: #FCC;
@@ -2284,19 +2297,6 @@ body.is-ios .markdown-source-view.mod-cm6 .cm-editor:not(.cm-focused) .cm-underl
   color: transparent !important;
   /* kept !important because Obsidian app.css uses !important here */
 }
-.markdown-source-view.mod-cm6 .task-list-label {
-  padding: 0;
-  margin-inline-start: -0.25em;
-}
-.markdown-source-view.mod-cm6 .task-list-label .task-list-item-checkbox {
-  top: -0.1em;
-  vertical-align: middle;
-  margin-inline-start: var(--checkbox-margin-inline-start);
-  margin-inline-end: 0.25em;
-}
-.markdown-source-view.mod-cm6 .cm-formatting-list-ol > .task-list-label .task-list-item-checkbox {
-  margin-inline-start: 2px;
-}
 .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="x"],
 .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="X"] {
   text-decoration: var(--checklist-done-decoration);
@@ -2311,14 +2311,14 @@ body.is-ios .markdown-source-view.mod-cm6 .cm-editor:not(.cm-focused) .cm-underl
   font-weight: calc(var(--font-weight) + var(--bold-modifier));
   --link-weight: calc(var(--font-weight) + var(--bold-modifier));
   color: var(--bold-color);
+  &.cm-em {
+    font-weight: calc(var(--font-weight) + var(--bold-modifier));
+  }
 }
 .cm-em {
   font-style: italic;
   color: var(--italic-color);
   font-weight: var(--italic-weight);
-}
-.cm-strong.cm-em {
-  font-weight: calc(var(--font-weight) + var(--bold-modifier));
 }
 .cm-s-obsidian span.cm-error {
   color: var(--text-error);

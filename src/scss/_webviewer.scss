@@ -1,10 +1,10 @@
 .webviewer-favicon-container {
   display: flex;
   align-items: center;
-}
-.webviewer-favicon-container > * {
-  height: var(--icon-size);
-  max-width: var(--icon-size);
+  > * {
+    height: var(--icon-size);
+    max-width: var(--icon-size);
+  }
 }
 .webviewer-container {
   height: 100%;
@@ -15,18 +15,18 @@
   width: 100%;
   display: flex;
   margin: 0 2px;
-}
-.webviewer-address input {
-  flex-grow: 1;
-  min-width: 50px;
+  input {
+    flex-grow: 1;
+    min-width: 50px;
+  }
 }
 .webviewer-address-container {
   padding: 0 var(--size-4-2);
-}
-.webviewer-address-container::after {
-  /* Remove the gradient normally at the end of the titleContainerEl */
-  background: transparent !important;
-  /* kept !important because Obsidian app.css uses !important here */
+  &::after {
+    /* Remove the gradient normally at the end of the titleContainerEl */
+    background: transparent !important;
+    /* kept !important because Obsidian app.css uses !important here */
+  }
 }
 .view-content.webviewer-content {
   padding: 0;
@@ -36,23 +36,23 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-.webviewer-content webview {
-  flex-grow: 1;
-  width: 100%;
-}
-.webviewer-content .reader-mode-content {
-  overflow-y: auto;
-}
-.webviewer-content .reader-mode-content.is-readable-line-width .markdown-preview-sizer {
-  max-width: var(--file-line-width);
-  margin-left: auto;
-  margin-right: auto;
-}
-.webviewer-content .error-notice {
-  max-width: var(--file-line-width);
-  margin: 25% auto 0;
-  padding: var(--file-margins);
+  webview {
+    flex-grow: 1;
+    width: 100%;
+  }
+  .reader-mode-content {
+    overflow-y: auto;
+    &.is-readable-line-width .markdown-preview-sizer {
+      max-width: var(--file-line-width);
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  .error-notice {
+    max-width: var(--file-line-width);
+    margin: 25% auto 0;
+    padding: var(--file-margins);
+  }
 }
 /* History View */
 .webviewer-history-view-item {

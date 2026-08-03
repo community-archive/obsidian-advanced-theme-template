@@ -28,13 +28,24 @@
   --toggle-s-thumb-height: 12px;
   --toggle-s-thumb-width: 20px;
   --vault-profile-radius: var(--radius-m);
-}
-.mod-macos {
-  --frame-left-space: calc(80px - var(--ribbon-width));
-  --frame-right-space: 0px;
-}
-.mod-macos.is-popout-window {
-  --frame-left-space: 80px;
+  & {
+    --frame-left-space: calc(80px - var(--ribbon-width));
+    --frame-right-space: 0px;
+    &.is-popout-window {
+      --frame-left-space: 80px;
+    }
+    &.is-hidden-frameless:not(.is-popout-window) .sidebar-toggle-button.mod-right {
+      background-color: var(--tab-container-background);
+      position: fixed;
+      top: 0;
+      right: 0;
+      padding-right: var(--size-4-2);
+      z-index: var(--layer-cover);
+    }
+    &.is-hidden-frameless:not(.is-popout-window) .workspace .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
+      padding-right: 38px;
+    }
+  }
 }
 .mod-windows,
 .mod-linux {
@@ -106,20 +117,19 @@
   /* Stacked tabs */
   /* Mirror directional UI components, e.g. toggles */
   /* Mirror icons */
-}
-.mod-rtl .sidebar-toggle-button {
-  order: 2;
-}
-.mod-rtl .sidebar-toggle-button.mod-right {
-  order: -1;
-}
-.mod-rtl .workspace .mod-root .workspace-tabs.mod-stacked .workspace-tab-container {
-  flex-direction: row-reverse;
-}
-.mod-rtl .workspace .mod-root .workspace-tabs.mod-stacked .workspace-tab-container .workspace-tab-header-inner {
-  flex-direction: row-reverse;
-}
-.mod-rtl svg.svg-icon:not(
+  .sidebar-toggle-button {
+    order: 2;
+    &.mod-right {
+      order: -1;
+    }
+  }
+  .workspace .mod-root .workspace-tabs.mod-stacked .workspace-tab-container {
+    flex-direction: row-reverse;
+    .workspace-tab-header-inner {
+      flex-direction: row-reverse;
+    }
+  }
+  svg.svg-icon:not(
 		.check-small,
 		.lucide-binary,
 		.lucide-check,
@@ -130,20 +140,10 @@
 		.lucide-timer,
 		.sidebar-toggle-button-icon
 	) {
-  transform: scale(-1, 1);
+    transform: scale(-1, 1);
+  }
 }
 /* Smoother animation for right sidebar button positioning during close */
-.mod-macos.is-hidden-frameless:not(.is-popout-window) .sidebar-toggle-button.mod-right {
-  background-color: var(--tab-container-background);
-  position: fixed;
-  top: 0;
-  right: 0;
-  padding-right: var(--size-4-2);
-  z-index: var(--layer-cover);
-}
-.mod-macos.is-hidden-frameless:not(.is-popout-window) .workspace .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
-  padding-right: 38px;
-}
 [dir='rtl'],
 .mod-rtl {
   --bases-table-header-sort-mask: linear-gradient(to right, transparent var(--size-4-6), black var(--size-4-6));

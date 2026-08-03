@@ -29,9 +29,12 @@ body:not(.is-fullscreen) .status-bar {
   align-items: center;
   padding: 3px var(--size-2-2);
   line-height: 1;
-}
-.status-bar-item.mod-clickable {
-  cursor: var(--cursor);
+  &.mod-clickable {
+    cursor: var(--cursor);
+  }
+  &:empty {
+    display: none;
+  }
 }
 @media (hover: hover) {
   .status-bar-item.mod-clickable:hover {
@@ -49,9 +52,6 @@ body:not(.is-fullscreen) .status-bar {
     background-color: var(--background-modifier-hover);
   }
 }
-.status-bar-item:empty {
-  display: none;
-}
 .status-bar-item-icon {
   vertical-align: middle;
   display: flex;
@@ -62,9 +62,9 @@ body:not(.is-fullscreen) .status-bar {
   display: flex;
   align-items: center;
   gap: var(--size-2-2);
-}
-.status-bar-item-segment:last-child {
-  margin-inline-end: 0;
+  &:last-child {
+    margin-inline-end: 0;
+  }
 }
 .is-screenshotting .status-bar {
   display: none;

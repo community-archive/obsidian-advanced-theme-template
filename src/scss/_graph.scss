@@ -62,24 +62,68 @@
   width: var(--graph-controls-width);
   overflow: auto;
   --scrollbar-native-width: none;
-}
-.graph-controls::-webkit-scrollbar {
-  display: none;
-}
-.graph-controls:not(.is-close) {
-  max-height: calc(100% - var(--size-4-4));
-  border: var(--menu-border-width) solid var(--menu-border-color);
-  box-shadow: var(--shadow-s);
-}
-.graph-controls.is-close {
-  min-width: inherit;
-  width: auto;
-  background-color: var(--background-primary);
-  border: var(--menu-border-width) solid transparent;
-  padding: var(--size-2-3);
-}
-.graph-controls.is-close > .graph-control-section {
-  display: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  &:not(.is-close) {
+    max-height: calc(100% - var(--size-4-4));
+    border: var(--menu-border-width) solid var(--menu-border-color);
+    box-shadow: var(--shadow-s);
+  }
+  &.is-close {
+    min-width: inherit;
+    width: auto;
+    background-color: var(--background-primary);
+    border: var(--menu-border-width) solid transparent;
+    padding: var(--size-2-3);
+    > .graph-control-section {
+      display: none;
+    }
+  }
+  .mod-cta {
+    margin-top: var(--size-2-3);
+    width: 100%;
+  }
+  .setting-item {
+    background-color: transparent;
+    padding: var(--size-2-3) 0;
+    margin-bottom: var(--size-4-1);
+    border: none;
+    .setting-item-info {
+      display: flex;
+      align-items: center;
+    }
+    &:first-of-type {
+      border-top: none;
+    }
+    &.mod-slider {
+      flex-direction: column;
+      > * {
+        width: 100%;
+      }
+      .setting-item-info {
+        margin-inline-end: 0;
+      }
+      .setting-item-control {
+        padding-top: var(--size-4-3);
+      }
+    }
+    &.mod-toggle .setting-item-control {
+      padding-top: 0;
+    }
+    &.mod-search-setting .setting-item-info {
+      margin-inline-end: 0;
+    }
+  }
+  .setting-item-name {
+    font-size: var(--font-ui-small);
+  }
+  &.is-close .graph-controls-button.mod-open {
+    display: flex;
+  }
+  &.is-close .graph-controls-button.mod-animate {
+    display: flex;
+  }
 }
 .workspace-split:not(.mod-root) .graph-controls.is-close {
   background-color: var(--background-secondary);
@@ -87,44 +131,6 @@
 .graph-controls input[type='text'],
 .graph-controls input[type='range'] {
   width: 100%;
-  font-size: var(--font-ui-small);
-}
-.graph-controls .mod-cta {
-  margin-top: var(--size-2-3);
-  width: 100%;
-}
-.graph-controls .setting-item {
-  background-color: transparent;
-  padding: var(--size-2-3) 0;
-  margin-bottom: var(--size-4-1);
-  border: none;
-}
-.graph-controls .setting-item .setting-item-info {
-  display: flex;
-  align-items: center;
-}
-.graph-controls .setting-item:first-of-type {
-  border-top: none;
-}
-.graph-controls .setting-item.mod-slider {
-  flex-direction: column;
-}
-.graph-controls .setting-item.mod-slider > * {
-  width: 100%;
-}
-.graph-controls .setting-item.mod-slider .setting-item-info {
-  margin-inline-end: 0;
-}
-.graph-controls .setting-item.mod-slider .setting-item-control {
-  padding-top: var(--size-4-3);
-}
-.graph-controls .setting-item.mod-toggle .setting-item-control {
-  padding-top: 0;
-}
-.graph-controls .setting-item.mod-search-setting .setting-item-info {
-  margin-inline-end: 0;
-}
-.graph-controls .setting-item-name {
   font-size: var(--font-ui-small);
 }
 .graph-color-group {
@@ -135,37 +141,37 @@
   align-items: center;
   padding: 0 0 6px 0;
   transition: top 200ms ease-in-out;
-}
-.graph-color-group input[type="color"] {
-  margin: 0 2px 0 6px;
-}
-.graph-color-group .clickable-icon {
-  padding: var(--size-2-2);
+  input[type="color"] {
+    margin: 0 2px 0 6px;
+  }
+  .clickable-icon {
+    padding: var(--size-2-2);
+  }
+  &.drag-ghost {
+    position: fixed;
+    display: flex;
+    max-width: unset;
+    border: none;
+    box-shadow: none;
+    background-color: var(--background-primary-alt);
+    padding: 0;
+    transition: none;
+    pointer-events: none;
+    input[type='text'] {
+      width: 100%;
+    }
+    input[type='color'] {
+      margin-inline-start: 6px;
+    }
+  }
 }
 .graph-color-button-container {
   text-align: center;
   margin-bottom: 10px;
-}
-.graph-color-button-container button {
-  margin: 0;
-  width: 100%;
-}
-.graph-color-group.drag-ghost {
-  position: fixed;
-  display: flex;
-  max-width: unset;
-  border: none;
-  box-shadow: none;
-  background-color: var(--background-primary-alt);
-  padding: 0;
-  transition: none;
-  pointer-events: none;
-}
-.graph-color-group.drag-ghost input[type='text'] {
-  width: 100%;
-}
-.graph-color-group.drag-ghost input[type='color'] {
-  margin-inline-start: 6px;
+  button {
+    margin: 0;
+    width: 100%;
+  }
 }
 .graph-control-section.mod-color-groups .tree-item-children.is-grabbing .graph-color-groups-container {
   padding-bottom: 40px;
@@ -173,6 +179,9 @@
 .graph-controls-button {
   display: none;
   z-index: 1;
+  &.mod-reset {
+    inset-inline-end: 36px;
+  }
 }
 .graph-controls-button.mod-close,
 .graph-controls-button.mod-reset {
@@ -185,17 +194,8 @@
 .graph-controls:not(.is-close) .graph-controls-button.mod-reset {
   display: flex;
 }
-.graph-controls-button.mod-reset {
-  inset-inline-end: 36px;
-}
-.graph-controls.is-close .graph-controls-button.mod-open {
-  display: flex;
-}
 .graph-controls-button.mod-animate {
   margin-top: var(--size-4-2);
-}
-.graph-controls.is-close .graph-controls-button.mod-animate {
-  display: flex;
 }
 .graph-control-section-header {
   font-weight: var(--font-medium);
@@ -205,23 +205,23 @@
 .graph-control-section {
   padding: var(--size-2-3) var(--size-4-3);
   border-bottom: 1px solid var(--background-modifier-border);
-}
-.graph-control-section:last-child {
-  border-bottom: none;
-}
-.graph-control-section:last-child .tree-item-children {
-  padding-bottom: var(--size-4-4);
-}
-.graph-control-section > .tree-item-self {
-  padding-inline-start: var(--size-4-4);
-}
-.graph-control-section .tree-item-children {
-  margin: 0;
-  padding: var(--size-4-1) 0;
-  border-inline-start: none;
-}
-.graph-control-section.mod-display .setting-item:not(.mod-slider):last-child .setting-item-info {
-  display: none;
+  &:last-child {
+    border-bottom: none;
+    .tree-item-children {
+      padding-bottom: var(--size-4-4);
+    }
+  }
+  > .tree-item-self {
+    padding-inline-start: var(--size-4-4);
+  }
+  .tree-item-children {
+    margin: 0;
+    padding: var(--size-4-1) 0;
+    border-inline-start: none;
+  }
+  &.mod-display .setting-item:not(.mod-slider):last-child .setting-item-info {
+    display: none;
+  }
 }
 .workspace-drawer-active-tab-content .graph-controls {
   display: none;

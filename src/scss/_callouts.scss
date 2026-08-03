@@ -25,24 +25,46 @@
   --bases-embed-border-color: color-mix(in oklch, var(--callout-color) 25%, var(--background-primary) 50%);
   --bases-table-border-color: color-mix(in oklch, var(--callout-color) 25%, var(--background-primary) 50%);
   --table-border-color: color-mix(in oklch, var(--callout-color) 25%, var(--background-primary) 50%);
+  &[data-callout="info"] {
+    --callout-color: var(--callout-info);
+    --callout-icon: lucide-info;
+  }
+  &[data-callout="todo"] {
+    --callout-color: var(--callout-todo);
+    --callout-icon: lucide-check-circle-2;
+  }
+  &[data-callout="important"] {
+    --callout-color: var(--callout-important);
+    --callout-icon: lucide-flame;
+  }
+  &[data-callout="bug"] {
+    --callout-color: var(--callout-bug);
+    --callout-icon: lucide-bug;
+  }
+  &[data-callout="example"] {
+    --callout-color: var(--callout-example);
+    --callout-icon: lucide-list;
+  }
+  & {
+    overflow: hidden;
+    border-style: solid;
+    border-color: color-mix(in oklch, var(--callout-color) calc(var(--callout-border-opacity) * 100%), transparent);
+    border-width: var(--callout-border-width);
+    border-radius: var(--callout-radius);
+    margin: 1em 0;
+    mix-blend-mode: var(--callout-blend-mode);
+    background-color: color-mix(in oklch, var(--callout-color) 10%, transparent);
+    padding: var(--callout-padding);
+    &.is-collapsible .callout-title {
+      cursor: var(--cursor);
+    }
+  }
 }
 .callout[data-callout="abstract"],
 .callout[data-callout="summary"],
 .callout[data-callout="tldr"] {
   --callout-color: var(--callout-summary);
   --callout-icon: lucide-clipboard-list;
-}
-.callout[data-callout="info"] {
-  --callout-color: var(--callout-info);
-  --callout-icon: lucide-info;
-}
-.callout[data-callout="todo"] {
-  --callout-color: var(--callout-todo);
-  --callout-icon: lucide-check-circle-2;
-}
-.callout[data-callout="important"] {
-  --callout-color: var(--callout-important);
-  --callout-icon: lucide-flame;
 }
 .callout[data-callout="tip"],
 .callout[data-callout="hint"] {
@@ -78,32 +100,10 @@
   --callout-color: var(--callout-error);
   --callout-icon: lucide-zap;
 }
-.callout[data-callout="bug"] {
-  --callout-color: var(--callout-bug);
-  --callout-icon: lucide-bug;
-}
-.callout[data-callout="example"] {
-  --callout-color: var(--callout-example);
-  --callout-icon: lucide-list;
-}
 .callout[data-callout="quote"],
 .callout[data-callout="cite"] {
   --callout-color: var(--callout-quote);
   --callout-icon: quote-glyph;
-}
-.callout {
-  overflow: hidden;
-  border-style: solid;
-  border-color: color-mix(in oklch, var(--callout-color) calc(var(--callout-border-opacity) * 100%), transparent);
-  border-width: var(--callout-border-width);
-  border-radius: var(--callout-radius);
-  margin: 1em 0;
-  mix-blend-mode: var(--callout-blend-mode);
-  background-color: color-mix(in oklch, var(--callout-color) 10%, transparent);
-  padding: var(--callout-padding);
-}
-.callout.is-collapsible .callout-title {
-  cursor: var(--cursor);
 }
 .callout-title {
   padding: var(--callout-title-padding);
@@ -118,20 +118,20 @@
   overflow-x: auto;
   padding: var(--callout-content-padding);
   background-color: var(--callout-content-background);
-}
-.callout-content .callout {
-  margin-top: 20px;
+  .callout {
+    margin-top: 20px;
+  }
 }
 .callout-icon {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
-}
-.callout-icon .svg-icon {
-  color: var(--callout-color);
-}
-.callout-icon::after {
-  content: "\200B";
+  .svg-icon {
+    color: var(--callout-color);
+  }
+  &::after {
+    content: "\200B";
+  }
 }
 .callout-title-inner {
   --font-weight: var(--callout-title-weight);
@@ -142,15 +142,15 @@
   display: flex;
   align-items: center;
   padding-inline-end: var(--size-4-2);
-}
-.callout-fold::after {
-  content: "\200B";
-}
-.callout-fold .svg-icon {
-  transition: transform 100ms ease-in-out;
-}
-.callout-fold.is-collapsed .svg-icon {
-  transform: rotate(calc(var(--direction) * -1 * 90deg));
+  &::after {
+    content: "\200B";
+  }
+  .svg-icon {
+    transition: transform 100ms ease-in-out;
+  }
+  &.is-collapsed .svg-icon {
+    transform: rotate(calc(var(--direction) * -1 * 90deg));
+  }
 }
 .markdown-source-view.mod-cm6 .callout {
   margin: 0;

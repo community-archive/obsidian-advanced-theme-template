@@ -65,12 +65,12 @@ body.is-phone .feedback-banner-container {
   word-break: break-word;
   cursor: var(--cursor);
   pointer-events: auto;
-}
-.notice.is-loading {
-  overflow: hidden;
-}
-.notice progress {
-  width: 100%;
+  &.is-loading {
+    overflow: hidden;
+  }
+  progress {
+    width: 100%;
+  }
 }
 .theme-light .notice progress[value]::-webkit-progress-bar {
   background-color: #262626;
@@ -88,9 +88,9 @@ body.is-phone .feedback-banner-container {
   align-items: center;
   color: var(--text-accent);
   white-space: nowrap;
-}
-.notice-cta.mobile-tap {
-  color: var(--text-accent-hover);
+  &.mobile-tap {
+    color: var(--text-accent-hover);
+  }
 }
 @media (hover: hover) {
   .notice-cta:hover {
