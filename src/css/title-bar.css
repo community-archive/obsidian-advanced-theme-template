@@ -1,0 +1,210 @@
+body.is-frameless.in-progress .titlebar,
+body.is-frameless.is-hidden-frameless.starter .titlebar,
+body.is-frameless.is-hidden-frameless.is-popout-modal:not(.is-fullscreen) .titlebar,
+body.is-frameless:not(.is-hidden-frameless, .is-fullscreen) .titlebar {
+  height: var(--titlebar-height);
+  zoom: calc(1 / var(--zoom-factor));
+}
+body.is-frameless.in-progress:not(.is-maximized) .titlebar,
+body.is-frameless.is-hidden-frameless.starter:not(.is-maximized) .titlebar,
+body.is-frameless.is-hidden-frameless.is-popout-modal:not(.is-fullscreen):not(.is-maximized) .titlebar,
+body.is-frameless:not(.is-hidden-frameless, .is-fullscreen):not(.is-maximized) .titlebar {
+  padding-top: 2px;
+}
+body.is-frameless.is-hidden-frameless .titlebar {
+  height: calc(var(--header-height) - 1px);
+}
+.is-fullscreen .titlebar {
+  display: none;
+}
+body.is-focused .titlebar,
+body.is-focused .workspace-ribbon.mod-left {
+  --titlebar-background: var(--titlebar-background-focused);
+}
+.titlebar-button.mod-logo {
+  width: var(--ribbon-width);
+  justify-content: center;
+}
+.is-hidden-frameless:not(.starter, .is-popout-modal) .titlebar {
+  -webkit-app-region: no-drag;
+}
+.is-hidden-frameless .titlebar-button.mod-logo {
+  display: none;
+}
+body.is-frameless.in-progress .titlebar {
+  display: block;
+  -webkit-app-region: drag;
+  z-index: 10001;
+}
+.is-hidden-frameless:not(.is-fullscreen) .titlebar-button-container.mod-right {
+  background-color: var(--titlebar-background);
+}
+.is-hidden-frameless:not(.is-fullscreen).is-focused .titlebar-button-container.mod-right {
+  background-color: var(--titlebar-background-focused);
+}
+.titlebar-button.mod-logo:hover .logo-wireframe,
+.titlebar-button.mod-logo:not(:hover) .logo-full {
+  display: none;
+}
+body.is-popout-modal.is-frameless .titlebar {
+  border-bottom: var(--border-width) solid var(--divider-color);
+}
+.titlebar {
+  -webkit-app-region: drag;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background-color: var(--titlebar-background);
+  border-bottom: var(--titlebar-border-width) solid var(--titlebar-border-color);
+}
+.titlebar-inner {
+  color: var(--titlebar-text-color);
+  font-weight: var(--titlebar-text-weight);
+  width: 100%;
+  display: flex;
+}
+.is-focused .titlebar-inner {
+  color: var(--titlebar-text-color-focused);
+}
+.titlebar-text {
+  opacity: 0.85;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  inset-inline-start: 0;
+  flex-grow: 1;
+  gap: 0.15em;
+  font-size: var(--font-ui-small);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 125px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.titlebar-button-container {
+  display: flex;
+  position: absolute;
+  top: 0;
+}
+.mod-macos .titlebar-button-container {
+  top: 8px;
+}
+.titlebar-button-container.mod-left {
+  left: 0;
+}
+.mod-macos .titlebar-button-container.mod-left {
+  left: calc(80px / var(--zoom-factor));
+}
+.titlebar-button-container .mod-back,
+.titlebar-button-container .mod-forward {
+  color: var(--icon-color);
+}
+.titlebar-button-container .mod-back .svg-icon,
+.titlebar-button-container .mod-forward .svg-icon {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.25px;
+}
+@media (hover: hover) {
+  .titlebar-button-container .mod-back:hover,
+  .titlebar-button-container .mod-forward:hover {
+    color: var(--icon-color-hover);
+  }
+}
+.titlebar-button-container.mod-right {
+  right: 0;
+}
+.titlebar-button {
+  -webkit-app-region: no-drag;
+  padding: var(--size-2-2) var(--size-2-3);
+  cursor: var(--cursor);
+  display: inline-flex;
+  align-items: center;
+}
+@media (hover: hover) {
+  .titlebar-button:hover {
+    opacity: 1;
+    background-color: var(--background-modifier-hover);
+  }
+  .titlebar-button.mod-close:hover {
+    background-color: var(--background-modifier-error);
+  }
+}
+.mod-macos .titlebar-button {
+  border-radius: var(--radius-s);
+}
+.is-hidden-frameless:not(.starter, .is-popout-modal).mod-macos .titlebar {
+  display: none;
+}
+.is-hidden-frameless:not(.starter, .is-popout-modal).mod-windows .titlebar,
+.is-hidden-frameless:not(.starter, .is-popout-modal).mod-linux .titlebar {
+  background: transparent;
+  border: none;
+  z-index: var(--layer-popover);
+  pointer-events: none;
+}
+.is-hidden-frameless:not(.starter, .is-popout-modal).mod-windows .titlebar-button.mod-back,
+.is-hidden-frameless:not(.starter, .is-popout-modal).mod-linux .titlebar-button.mod-back,
+.is-hidden-frameless:not(.starter, .is-popout-modal).mod-windows .titlebar-button.mod-forward,
+.is-hidden-frameless:not(.starter, .is-popout-modal).mod-linux .titlebar-button.mod-forward,
+.is-hidden-frameless:not(.starter, .is-popout-modal).mod-windows .titlebar-text,
+.is-hidden-frameless:not(.starter, .is-popout-modal).mod-linux .titlebar-text {
+  display: none;
+}
+.is-hidden-frameless:not(.starter, .is-popout-modal).mod-windows .titlebar-button-container,
+.is-hidden-frameless:not(.starter, .is-popout-modal).mod-linux .titlebar-button-container {
+  pointer-events: auto;
+}
+.mod-linux .titlebar-button-container,
+.mod-windows .titlebar-button-container {
+  height: 100%;
+}
+.mod-linux .titlebar-button,
+.mod-windows .titlebar-button {
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+}
+.mod-linux .titlebar-button.mod-logo,
+.mod-windows .titlebar-button.mod-logo {
+  padding: 4px 8px;
+}
+@media (hover: hover) {
+  .mod-linux .titlebar-button.mod-close:hover,
+  .mod-windows .titlebar-button.mod-close:hover {
+    background-color: var(--background-modifier-error);
+  }
+  .mod-linux .titlebar-button.mod-close:hover .svg-icon,
+  .mod-windows .titlebar-button.mod-close:hover .svg-icon {
+    fill: white;
+    stroke: white;
+  }
+}
+@media screen and (max-width: 300px) {
+  .titlebar-text {
+    display: none;
+  }
+}
+.is-translucent:not(.is-fullscreen) .titlebar,
+.is-translucent:not(.is-fullscreen) .app-container {
+  background-color: var(--workspace-background-translucent);
+}
+.titlebar .workspace-tab-header-tab-list,
+.titlebar .workspace-tab-header-new-tab,
+.mod-root .workspace-tab-header-tab-list,
+.mod-root .workspace-tab-header-new-tab {
+  display: flex;
+}
+.starter .titlebar {
+  background-color: transparent;
+  border: none;
+}
+.starter .titlebar-inner .titlebar-text {
+  display: none;
+}

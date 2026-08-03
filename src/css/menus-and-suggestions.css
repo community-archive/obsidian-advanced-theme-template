@@ -1,0 +1,689 @@
+body.is-frameless .modal-container,
+body.is-frameless .suggestion-bg {
+  -webkit-app-region: initial;
+}
+.modal.mod-secret .suggestion-filter-toolbar {
+  display: flex;
+  padding: var(--size-4-4) var(--size-4-4) 0 var(--size-4-4);
+  gap: var(--size-4-2);
+}
+.suggestion-item.mod-complex.suggestion-secret-key {
+  --checkbox-size: 18px;
+  align-items: center;
+  gap: var(--size-4-1);
+}
+.suggestion-item.mod-complex.suggestion-secret-key.is-selected {
+  background-color: color-mix(in oklch, var(--color-accent) 15%, transparent);
+}
+.suggestion-item.mod-complex.suggestion-secret-key .suggestion-content {
+  align-items: center;
+  flex-direction: row;
+}
+.suggestion-item.mod-complex.suggestion-secret-key .suggestion-secret-text {
+  margin: 0 var(--size-4-1);
+}
+.community-item .suggestion-highlight {
+  background-color: var(--text-highlight-bg);
+}
+/* class applies to select element itself, not a wrapper element */
+select,
+.combobox-button,
+.dropdown {
+  -webkit-app-region: no-drag;
+  height: var(--input-height);
+  font-size: var(--font-ui-small);
+  font-family: inherit;
+  font-weight: var(--input-font-weight);
+  color: var(--text-normal);
+  line-height: var(--line-height-tight);
+  max-width: 100%;
+  /* useful when width is set to anything other than 100% */
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  box-shadow: var(--input-shadow);
+  border-radius: var(--input-radius);
+  corner-shape: var(--input-corner-shape);
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: var(--dropdown-background);
+  padding: var(--dropdown-padding);
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-position: var(--dropdown-background-position);
+  background-size: var(--dropdown-background-size);
+  background-blend-mode: var(--dropdown-background-blend-mode);
+  text-align: var(--dropdown-text-align);
+  corner-shape: var(--corner-shape);
+}
+@media (hover: hover) {
+  select:hover,
+  .combobox-button:hover,
+  .dropdown:hover {
+    box-shadow: var(--input-shadow-hover);
+    background-color: var(--dropdown-background-hover);
+  }
+}
+select.mobile-tap,
+.combobox-button.mobile-tap,
+.dropdown.mobile-tap {
+  box-shadow: var(--input-shadow-hover);
+  background-color: var(--dropdown-background-hover);
+}
+select:focus-visible,
+.combobox-button:focus-visible,
+.dropdown:focus-visible {
+  box-shadow: 0 0 0px 3px var(--background-modifier-border-focus);
+  outline: none;
+}
+select.mouse-focus:focus-visible,
+.combobox-button.mouse-focus:focus-visible,
+.dropdown.mouse-focus:focus-visible {
+  outline: none;
+  box-shadow: var(--input-shadow-hover);
+}
+.combobox:not(.has-input-focus) .suggestion-item.is-selected {
+  background-color: transparent;
+}
+.combobox .suggestion-item {
+  font-size: var(--font-ui-small);
+  padding: var(--size-2-3) var(--size-4-2) var(--size-2-3) var(--size-4-2);
+}
+.combobox-button {
+  --dropdown-padding: 0 var(--size-2-3) 0 var(--size-4-2);
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  min-height: var(--input-height);
+  overflow: hidden;
+  white-space: nowrap;
+  border-style: solid;
+  border-color: var(--background-modifier-border);
+}
+.combobox-button .combobox-button-icon {
+  --icon-size: var(--icon-s);
+  --icon-stroke: var(--icon-s-stroke-width);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+}
+.combobox-button .combobox-button-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-inline-end: auto;
+}
+.combobox-button .combobox-button-label:empty:before {
+  content: attr(placeholder);
+  color: var(--input-placeholder-color);
+  pointer-events: none;
+}
+.combobox-button.mod-file .combobox-button-label {
+  display: flex;
+  min-width: 0;
+}
+.combobox-button.mod-file .combobox-button-label .file-combobox-dir {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 2ch;
+}
+.combobox-button.mod-file .combobox-button-label .file-combobox-dir.mod-first,
+.combobox-button.mod-file .combobox-button-label .file-combobox-sep,
+.combobox-button.mod-file .combobox-button-label .file-combobox-name {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.combobox-button.mod-file .combobox-button-label:empty:before {
+  color: var(--text-faint);
+}
+.combobox-button .combobox-clear-button {
+  --icon-size: var(--icon-xs);
+  --icon-stroke: var(--icon-xs-stroke-width);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+}
+.combobox-button:not(.mod-clearable) .combobox-clear-button {
+  display: none;
+}
+.combobox-button .combobox-button-chevron {
+  --icon-size: var(--icon-xs);
+  --icon-stroke: var(--icon-xs-stroke-width);
+  align-items: center;
+  display: flex;
+}
+.combobox-button:last-child {
+  border-inline-end-width: 0;
+}
+.combobox-button.has-focus,
+.combobox-button:focus-visible {
+  background-color: var(--metadata-label-background-active);
+  box-shadow: 0 0 0px 3px var(--background-modifier-border-focus);
+}
+.combobox-button.mod-error {
+  box-shadow: inset 0 0 0 var(--border-width) var(--background-modifier-error);
+}
+.is-mobile .combobox-button {
+  --dropdown-padding: 0 var(--size-4-4) 0 var(--size-4-4);
+  gap: var(--size-4-2);
+}
+.is-mobile .combobox-clear-button {
+  --icon-size: var(--icon-s);
+  --icon-stroke: var(--icon-s-stroke-width);
+}
+.is-phone .combobox.suggestion-container {
+  max-height: calc(100vh - var(--view-header-height) - var(--safe-area-inset-top));
+}
+.is-phone .combobox.suggestion-container.has-input-focus {
+  max-height: unset;
+  height: calc(100vh - var(--view-header-height) - var(--safe-area-inset-top));
+}
+.nav-file-icon .svg-icon,
+.suggestion-flair .svg-icon,
+.menu-item-icon .svg-icon,
+.status-bar-item .svg-icon {
+  --icon-size: var(--icon-s);
+  --icon-stroke: var(--icon-s-stroke-width);
+}
+.menu {
+  -webkit-app-region: no-drag;
+  display: flex;
+  flex-direction: column;
+  border: var(--menu-border-width) solid var(--menu-border-color);
+  background-color: var(--menu-background);
+  backdrop-filter: var(--menu-backdrop-filter);
+  overflow: hidden;
+  padding: 0;
+  border-radius: var(--menu-radius);
+  corner-shape: var(--menu-corner-shape);
+  box-shadow: var(--menu-shadow);
+  max-height: 100%;
+  position: fixed;
+  z-index: var(--layer-menu);
+  user-select: none;
+}
+.menu.mod-no-icon .menu-item-icon:first-child {
+  display: none;
+}
+.menu-scroll {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: var(--menu-padding);
+}
+.menu-grabber {
+  display: none;
+}
+.menu-separator {
+  height: 0;
+  margin: var(--size-2-3) calc(var(--size-2-3) * -1);
+  border-bottom: var(--border-width) solid var(--background-modifier-border);
+}
+.menu-separator:last-child,
+.menu-separator:first-child {
+  display: none;
+}
+.menu-separator + .menu-separator {
+  display: none;
+}
+.menu-separator + .menu-item.is-label {
+  padding-bottom: var(--size-4-1);
+}
+.menu-item-desc {
+  padding-top: var(--size-4-1);
+  color: var(--text-faint);
+  font-size: 0.8em;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--size-4-2);
+  padding: var(--size-4-1) var(--size-4-2);
+  cursor: var(--cursor);
+  font-size: var(--font-ui-small);
+  border-radius: var(--radius-s);
+  corner-shape: var(--corner-shape);
+  white-space: nowrap;
+}
+.menu-item.is-warning:not(.is-disabled) {
+  color: var(--text-error);
+}
+.menu-item.is-warning:not(.is-disabled).selected {
+  color: var(--text-error);
+}
+.menu-item.is-label {
+  cursor: default;
+  font-size: var(--font-ui-medium);
+  color: var(--text-muted);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.menu-item.is-disabled {
+  cursor: default;
+  color: var(--text-faint);
+}
+.menu-item:not(.is-label):not(.is-disabled).mobile-tap,
+.menu-item:not(.is-label):not(.is-disabled).selected {
+  background-color: var(--background-modifier-hover);
+}
+.menu-item-icon {
+  flex: 0 1 auto;
+  display: flex;
+  color: var(--text-muted);
+}
+.menu-item.is-warning .menu-item-icon {
+  color: var(--text-error);
+}
+.menu-item.is-disabled .menu-item-icon {
+  color: var(--text-faint);
+}
+.menu-item-icon .mod-submenu {
+  color: var(--text-faint);
+}
+.menu-item-title {
+  flex: 1 0 0;
+}
+.menu.mod-tab-list .menu-item-title {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+/* Scroll indicator for sidebar containers
+body:not(.is-translucent):not(.is-mobile) .workspace-tabs {
+	.item-list,
+	.nav-files-container,
+	.search-result-container,
+	.tag-container,
+	.outgoing-link-pane,
+	.backlink-pane {
+		background:
+			linear-gradient(
+				var(--background-secondary) 10%,
+				rgba(0, 0, 0, 0)
+			)
+			center top,
+			linear-gradient(
+				var(--background-modifier-border) 100%,
+				rgba(0, 0, 0, 0)
+			)
+			center top;
+		background-repeat: no-repeat;
+		background-size: 100% 40px, 91% 1px;
+		background-attachment: local, scroll;
+	}
+}
+ */
+.suggestion-bg {
+  display: none;
+}
+.suggestion-container {
+  background-color: var(--suggestion-background);
+  backdrop-filter: var(--suggestion-backdrop-filter);
+  align-self: stretch;
+  overflow: hidden;
+  flex-direction: column;
+  max-width: 500px;
+  max-height: 300px;
+  z-index: var(--layer-notice);
+}
+.is-mobile .suggestion-container {
+  max-width: calc(100vw - 20px - var(--safe-area-inset-left) - var(--safe-area-inset-right));
+  max-height: 240px;
+}
+.suggestion-container.mod-property-value .suggestion-item {
+  font-size: var(--font-ui-small);
+  padding: var(--size-2-3) var(--size-4-2);
+}
+.suggestion-container.mod-property-key .suggestion-item {
+  font-size: var(--font-ui-small);
+  padding: var(--size-2-3) var(--size-4-2) var(--size-2-3) var(--size-4-1);
+}
+.suggestion {
+  overflow-y: auto;
+  padding: var(--size-2-3);
+}
+.suggestion-item,
+.suggestion-empty {
+  font-size: var(--font-ui-medium);
+  margin-bottom: 1px;
+}
+.suggestion-empty-suggestion {
+  color: var(--text-faint);
+}
+.suggestion-empty {
+  color: var(--text-muted);
+  padding: var(--size-4-2);
+  padding-top: var(--size-4-3);
+  text-align: center;
+}
+.suggestion-item {
+  cursor: var(--cursor);
+  padding: var(--size-2-3) var(--size-4-3);
+  white-space: pre-wrap;
+  border-radius: var(--radius-s);
+  corner-shape: var(--corner-shape);
+}
+.suggestion-item.is-selected,
+.suggestion-item.mobile-tap {
+  background-color: var(--background-modifier-hover);
+}
+.suggestion-item.is-being-dragged {
+  pointer-events: auto;
+  background-color: var(--background-modifier-hover);
+}
+.suggestion-item.mod-downranked {
+  color: var(--text-muted);
+}
+.suggestion-item.mod-nowrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.is-phone .suggestion-item.mod-toggle {
+  --icon-size: var(--icon-l);
+  --icon-stroke: var(--icon-l-stroke-width);
+}
+.suggestion-item.mod-toggle .mod-checked {
+  --icon-size: var(--icon-xs);
+  --icon-stroke: var(--icon-xs-stroke-width);
+  order: 2;
+}
+.suggestion-item.mod-complex {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+}
+.suggestion-item.mod-complex .suggestion-title {
+  overflow-wrap: break-word;
+}
+.suggestion-item.mod-complex .suggestion-content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-inline-end: auto;
+}
+.suggestion-item.mod-complex .suggestion-prefix:after {
+  content: ': ';
+}
+.suggestion-item.mod-complex .suggestion-highlight {
+  font-weight: bold;
+}
+.suggestion-item.mod-complex .suggestion-note {
+  font-size: 0.8em;
+  color: var(--text-muted);
+  width: 100%;
+  flex-basis: 100%;
+  overflow-wrap: break-word;
+}
+.suggestion-item.mod-complex .suggestion-icon,
+.suggestion-item.mod-complex .suggestion-aux {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  flex-shrink: 0;
+}
+.suggestion-item.mod-complex .suggestion-hotkey {
+  font-size: var(--font-ui-smaller);
+  font-family: var(--font-interface);
+  padding: 2px 6px;
+}
+.suggestion-item.mod-complex .suggestion-hotkey:not(:last-child) {
+  margin-inline-start: 10px;
+}
+.suggestion-item.mod-complex .suggestion-action {
+  font-size: var(--font-ui-smaller);
+  font-family: var(--font-interface);
+  color: var(--interactive-accent);
+}
+.suggestion-item.mod-complex .suggestion-flair {
+  color: var(--text-muted);
+  opacity: var(--icon-opacity);
+  display: flex;
+  align-items: center;
+}
+.suggestion-item.mod-complex .suggestion-flair:not(:last-child) {
+  margin-inline-start: 6px;
+}
+.suggestion-item.mod-complex .suggestion-icon .suggestion-flair {
+  margin-top: 0;
+  margin-inline-start: var(--size-4-1);
+  margin-bottom: 0;
+  margin-inline-end: var(--size-4-3);
+}
+.suggestion-item.mod-complex .suggestion-aux .suggestion-flair {
+  margin-top: 0;
+  margin-inline-start: var(--size-4-3);
+  margin-bottom: 0;
+  margin-inline-end: var(--size-4-1);
+}
+.suggestion-highlight {
+  font-weight: bold;
+}
+.suggestion-bg {
+  position: fixed;
+  top: 0;
+  inset-inline-start: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-modifier-cover);
+  z-index: var(--layer-popover);
+}
+.suggestion-container.mod-search-suggestion {
+  max-width: unset;
+  background-color: var(--background-secondary);
+  border-color: var(--prompt-border-color);
+  max-height: 600px;
+}
+.suggestion-container.mod-search-suggestion .suggestion {
+  padding: var(--size-2-3);
+  background-color: var(--background-secondary);
+  border-radius: var(--radius-m);
+}
+.webviewer-addressbar-suggestion.suggestion-item {
+  gap: var(--size-4-2);
+  align-items: center;
+}
+.webviewer-addressbar-suggestion.suggestion-item .suggestion-flair-left,
+.webviewer-addressbar-suggestion.suggestion-item .suggestion-icon:first-child {
+  color: var(--text-muted);
+  --icon-size: var(--icon-s);
+  --icon-stroke: var(--icon-s-stroke-width);
+  display: flex;
+  min-width: var(--icon-s);
+}
+.webviewer-addressbar-suggestion.suggestion-item .suggestion-flair-left img,
+.webviewer-addressbar-suggestion.suggestion-item .suggestion-icon:first-child img {
+  height: var(--icon-size);
+  max-width: var(--icon-size);
+}
+.webviewer-addressbar-suggestion.suggestion-item .suggestion-icon:last-child:empty {
+  display: none;
+}
+.webviewer-addressbar-suggestion.suggestion-item > .suggestion-content {
+  align-items: baseline;
+  flex-direction: row;
+  flex-grow: 1;
+}
+.webviewer-addressbar-suggestion.suggestion-item > .suggestion-content > .suggestion-title {
+  max-width: 75%;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  font-size: var(--font-ui-medium);
+}
+.webviewer-addressbar-suggestion.suggestion-item > .suggestion-content > .suggestion-url {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  font-size: var(--font-ui-small);
+  color: var(--text-muted);
+}
+.webviewer-addressbar-suggestion.suggestion-item > .suggestion-content .suggestion-title + .suggestion-url {
+  margin-left: var(--size-4-2);
+}
+.webviewer-addressbar-suggestion.suggestion-item > .suggestion-content .suggestion-title:empty + .suggestion-url {
+  margin-left: 0;
+}
+body.emulate-mobile button,
+body.emulate-mobile input,
+body.emulate-mobile .tappable,
+body.emulate-mobile .suggestion-bg,
+body.emulate-mobile .text-icon-button,
+body.emulate-mobile .tappable,
+body.emulate-mobile .is-clickable,
+body.emulate-mobile .clickable-icon {
+  touch-action: manipulation;
+}
+.is-mobile.theme-light .menu {
+  --interactive-normal: var(--background-primary);
+}
+.is-mobile .menu {
+  --background-modifier-form-field: var(--interactive-normal);
+  --dropdown-background: var(--interactive-normal);
+  --input-height: 40px;
+  border: none;
+  max-width: 100%;
+  background-color: color-mix(in srgb, var(--menu-background) var(--blur-opacity-m), transparent);
+}
+.is-mobile .menu-scroll {
+  overflow-y: auto;
+  padding: var(--menu-padding);
+}
+.is-mobile .menu-item {
+  font-size: var(--font-ui-medium);
+}
+.is-phone .menu-grabber {
+  transition: width 0.15s var(--anim-motion-swing), background-color 0.3s var(--anim-motion-swing);
+  height: var(--size-4-1);
+  background: var(--text-faint);
+  display: flex;
+  width: 15%;
+  border-radius: var(--radius-xl);
+  margin: var(--size-4-2) auto var(--size-4-1);
+  position: relative;
+}
+.is-phone.hide-cursor .menu-grabber {
+  background: var(--text-muted);
+  width: 14%;
+}
+.is-phone .menu {
+  min-width: unset;
+  position: absolute;
+  border-radius: var(--touch-radius-s) var(--touch-radius-s) 0 0;
+  bottom: 0;
+  left: var(--safe-area-inset-left);
+  right: var(--safe-area-inset-right);
+  margin: 0 auto;
+  top: unset !important;
+  /* kept !important because Obsidian app.css uses !important here */
+}
+.is-phone .menu-scroll {
+  max-height: 60vh;
+  --scrollbar-native-width: none;
+}
+.is-phone .menu-scroll.is-scrolled {
+  mask-image: var(--menu-scroll-mask);
+}
+.is-phone .menu-scroll::-webkit-scrollbar {
+  display: none !important;
+  /* kept !important because Obsidian app.css uses !important here */
+}
+.is-phone .menu-group .menu-item.is-label + .menu-item:not(.is-label) {
+  border-top-left-radius: var(--touch-radius-xxs);
+  border-top-right-radius: var(--touch-radius-xxs);
+}
+.is-phone .menu-group .menu-item {
+  position: relative;
+}
+.is-phone .menu-group .menu-item:not(.is-label):after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: var(--size-4-4);
+  width: calc(100% - var(--size-4-8));
+  height: var(--menu-divider-width);
+  background-color: var(--menu-divider-color);
+}
+.is-phone .menu-group .menu-item:first-child {
+  border-top-left-radius: var(--touch-radius-xxs);
+  border-top-right-radius: var(--touch-radius-xxs);
+}
+.is-phone .menu-group .menu-item:last-child {
+  border-bottom-left-radius: var(--touch-radius-xxs);
+  border-bottom-right-radius: var(--touch-radius-xxs);
+}
+.is-phone .menu-group .menu-item:last-child:after {
+  display: none;
+}
+.is-phone .menu-group .menu-item:only-child {
+  border-radius: var(--touch-radius-xl);
+}
+.is-phone .menu .suggestion-group .suggestion-item:first-child {
+  border-top-left-radius: var(--touch-radius-xxs);
+  border-top-right-radius: var(--touch-radius-xxs);
+}
+.is-phone .menu .suggestion-group .suggestion-item:last-child {
+  border-bottom-left-radius: var(--touch-radius-xxs);
+  border-bottom-right-radius: var(--touch-radius-xxs);
+}
+.is-phone .menu .suggestion-group .suggestion-item,
+.is-phone .menu-item {
+  transition: background-color 0.1s ease-in-out;
+  padding: var(--size-4-3) var(--size-4-4);
+  height: unset;
+  line-height: unset;
+  border-radius: 0;
+}
+.is-phone .menu .suggestion-group .suggestion-item:not(.is-label),
+.is-phone .menu-item:not(.is-label) {
+  background-color: var(--interactive-normal);
+}
+.is-phone .menu .suggestion-group .suggestion-item.mobile-tap:not(.is-disabled),
+.is-phone .menu-item.mobile-tap:not(.is-disabled) {
+  background-color: var(--interactive-hover);
+}
+.is-phone .menu-separator {
+  margin: var(--size-4-2) 0;
+  border: 0;
+}
+.is-phone .menu-item.is-label .menu-item-title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.is-phone .menu-item-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.is-phone .prompt .suggestion-hotkey {
+  display: none;
+}
+.is-mobile .suggestion-container {
+  border-radius: calc(var(--touch-radius-xs) - var(--size-2-3));
+  background-color: color-mix(in srgb, var(--suggestion-background) var(--blur-opacity-m), transparent);
+}
+.is-mobile .suggestion-item {
+  padding: var(--size-4-2) var(--size-4-3);
+  border-radius: var(--touch-radius-xxs);
+}
+.is-mobile .suggestion-flair {
+  position: relative;
+  margin-inline-end: 6px;
+  inset-inline-start: 0;
+  top: 0;
+}
+.is-phone .suggestion-bg {
+  display: block;
+  z-index: var(--layer-modal);
+}
+.is-phone .suggestion-item.mod-group {
+  border-radius: 0;
+}

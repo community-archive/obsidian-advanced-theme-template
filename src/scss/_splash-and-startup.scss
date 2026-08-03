@@ -1,0 +1,374 @@
+body.is-frameless.in-progress,
+body.is-frameless.is-hidden-frameless.starter,
+body.is-frameless.is-hidden-frameless.is-popout-modal:not(.is-fullscreen),
+body.is-frameless:not(.is-hidden-frameless, .is-fullscreen) {
+  padding-top: calc(var(--titlebar-height) / var(--zoom-factor));
+}
+.release-notes-view {
+  padding: var(--file-margins);
+}
+.release-notes-view .is-readable-line-width {
+  max-width: var(--file-line-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+body.is-frameless.is-hidden-frameless:not(.in-progress, .starter, .is-popout-modal) {
+  padding-top: 0 !important;
+  /* kept !important because Obsidian app.css uses !important here */
+}
+/* Only used in Format Converter so far */
+.changelog-item {
+  margin: var(--size-4-2) 0;
+  font-size: var(--font-ui-medium);
+  line-height: var(--line-height);
+}
+.changelog-item:before {
+  content: attr(data-label);
+  width: 50px;
+  border-radius: var(--radius-m);
+  font-size: var(--font-ui-small);
+  display: inline-block;
+  text-align: center;
+  margin-right: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 22px;
+}
+.changelog-item.mod-success:before {
+  background-color: var(--background-modifier-success);
+  color: var(--text-on-accent);
+}
+.changelog-item.mod-failed:before {
+  background-color: var(--background-modifier-error);
+  color: var(--text-on-accent);
+}
+.changelog-item.mod-highlighted:before {
+  background-color: var(--interactive-accent);
+}
+.progress-bar-container {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  inset-inline-start: 0;
+  background-color: var(--background-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: var(--safe-area-inset-left);
+  padding-right: var(--safe-area-inset-right);
+  z-index: 10000;
+}
+.progress-bar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--size-4-2);
+  width: 100%;
+}
+.progress-bar-context {
+  position: absolute;
+  top: 100%;
+  font-size: var(--font-ui-small);
+  border-radius: 50px;
+  padding: var(--size-4-2) var(--size-4-6);
+}
+.progress-bar-button-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-4-2);
+}
+.progress-bar-message {
+  margin-bottom: var(--size-4-8);
+  opacity: 1;
+  color: var(--text-muted);
+}
+.progress-bar-indicator {
+  position: relative;
+  height: 8px;
+  margin: 0 10vw;
+  width: 90vw;
+  overflow-x: hidden;
+  border-radius: 3px;
+}
+.progress-bar-line {
+  position: absolute;
+  opacity: 0.4;
+  background-color: var(--interactive-accent);
+  width: 150%;
+  height: 8px;
+}
+.progress-bar-subline {
+  position: absolute;
+  background-color: var(--interactive-accent);
+  height: 8px;
+  width: 100%;
+  transform-origin: left center;
+}
+.progress-bar-subline.mod-increase {
+  animation: increase 2s infinite;
+}
+.progress-bar-subline.mod-decrease {
+  animation: decrease 2s 0.5s infinite;
+}
+.progress-bar .progress-bar-subline {
+  transition: transform 150ms ease-in-out;
+}
+.progress-bar-context-button {
+  margin-top: var(--size-4-3);
+  text-align: center;
+}
+.passwords-container {
+  margin-bottom: var(--size-4-4);
+}
+.password-item {
+  border-radius: var(--radius-s);
+  padding: var(--size-4-2) var(--size-4-4);
+  margin: var(--size-4-1) 0;
+}
+@media (hover: hover) {
+  .password-item:hover {
+    background-color: var(--background-primary);
+  }
+}
+.slides-container {
+  position: fixed;
+  top: 0;
+  inset-inline-start: 0;
+  height: 100vh;
+  width: 100vw;
+  transition: -webkit-transform 0.8s ease 0s;
+  background-color: #191919;
+  z-index: var(--layer-slides);
+  border: none;
+}
+.slides-container li .collapse-indicator {
+  display: none;
+}
+.slides-container .controls button {
+  box-shadow: none;
+}
+.slides-close-btn {
+  display: inline-block;
+  position: absolute;
+  top: calc(var(--safe-area-inset-top) + var(--size-4-2));
+  inset-inline-end: var(--size-4-2);
+  color: var(--text-faint);
+  cursor: var(--cursor);
+  z-index: 1;
+}
+@media (hover: hover) {
+  .slides-close-btn:hover {
+    color: var(--text-muted);
+  }
+}
+.vault-list-item-desc {
+  color: var(--text-faint);
+}
+.vault-list-item-icon {
+  color: var(--text-muted);
+  display: flex;
+}
+.vault-list-item-title {
+  align-items: center;
+  display: flex;
+  gap: var(--size-4-2);
+  color: var(--text-muted);
+  user-select: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-bottom: var(--size-4-1);
+  min-width: 0;
+  overflow: hidden;
+}
+.vault-list-item-title.is-connected {
+  color: var(--text-normal);
+}
+.starter {
+  -webkit-user-select: none;
+  padding-top: 0! important;
+}
+.starter-screen {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-primary);
+  width: 100%;
+  height: 100%;
+}
+.starter-screen-inner {
+  flex-grow: 1;
+  display: flex;
+  height: calc(100% - 24px);
+}
+.splash {
+  align-items: center;
+  background-color: var(--background-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 auto;
+  text-align: center;
+  padding: 36px 0 0;
+}
+.splash-brand {
+  flex: 0 0 content;
+  padding: 20px 0;
+}
+.splash-brand-logo-text {
+  margin-top: 20px;
+  color: white;
+}
+.splash-brand-version {
+  color: var(--text-muted);
+  margin-top: 8px;
+  font-size: var(--font-ui-small);
+}
+.help-options-container {
+  flex: 1 0 0;
+  overflow: auto;
+  width: 100%;
+  max-width: 82%;
+  text-align: start;
+  padding: var(--size-4-6) 0 0;
+  --scrollbar-native-width: none;
+}
+.help-options-container::-webkit-scrollbar {
+  display: none;
+}
+.open-vault-options-container {
+  flex: 1 0 0;
+  overflow: auto;
+  width: 100%;
+  position: relative;
+  max-width: 540px;
+  --scrollbar-native-width: none;
+}
+.open-vault-options-container::-webkit-scrollbar {
+  display: none;
+}
+.open-vault-options {
+  background-color: var(--background-primary);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 12px 36px;
+  text-align: start;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.open-vault-options input[type='text'] {
+  width: 150px;
+}
+.open-vault-options .back-button {
+  display: flex;
+  align-items: center;
+  -webkit-app-region: no-drag;
+  color: var(--text-muted);
+  user-select: none;
+  cursor: var(--cursor);
+  border-radius: var(--radius-s);
+  corner-shape: var(--corner-shape);
+  padding: 0 var(--size-4-3) var(--size-4-2);
+  font-size: var(--font-ui-small);
+}
+@media (hover: hover) {
+  .open-vault-options .back-button:hover {
+    color: var(--text-normal);
+  }
+}
+.open-vault-options.mod-login {
+  justify-content: flex-start;
+}
+.open-vault-options.mod-login input[type='text'] {
+  width: 250px;
+}
+.open-vault-options .button-container {
+  margin-top: var(--size-4-3);
+  text-align: center;
+}
+.quick-start-container {
+  margin-bottom: 10px;
+}
+.quick-start-container button {
+  font-size: var(--font-ui-medium);
+  padding: 8px 60px;
+}
+.recent-vaults {
+  background-color: var(--background-secondary);
+  border-right: 1px solid var(--background-modifier-border);
+  padding: var(--size-4-8) 0 0 0;
+  flex-shrink: 0;
+  width: 280px;
+  overflow-y: hidden;
+  height: 100%;
+}
+.recent-vaults-list {
+  overflow-y: auto;
+  height: 100%;
+  padding: var(--size-4-2);
+  display: flex;
+  flex-direction: column;
+}
+.recent-vaults-list:after {
+  -webkit-app-region: drag;
+  display: block;
+  content: ' ';
+  width: 100%;
+  height: 100px;
+  flex-grow: 1;
+}
+.recent-vaults-list-item {
+  -webkit-app-region: no-drag;
+  border-radius: var(--radius-s);
+  corner-shape: var(--corner-shape);
+  margin-bottom: var(--size-4-1);
+  padding: var(--size-4-2) var(--size-4-6) var(--size-4-2) var(--size-4-3);
+  cursor: var(--cursor);
+  position: relative;
+}
+@media (hover: hover) {
+  .recent-vaults-list-item:hover {
+    background-color: var(--background-modifier-hover);
+    color: var(--text-on-accent);
+  }
+}
+.recent-vaults-list-item-name,
+.recent-vaults-list-item-path {
+  word-break: break-all;
+}
+.recent-vaults-list-item-name {
+  border-radius: 2px;
+  border: 1px solid transparent;
+}
+.recent-vaults-list-item-name[contenteditable] {
+  cursor: text;
+  border-color: var(--interactive-accent);
+  background-color: var(--background-modifier-hover);
+  font-size: 0.9em;
+  padding: 0 var(--size-4-1);
+}
+.recent-vaults-list-item-path {
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  line-height: 16px;
+}
+.recent-vaults-list-item-option-button {
+  position: absolute;
+  top: var(--size-4-3);
+  right: var(--size-4-1);
+  color: var(--text-faint);
+  width: 30px;
+  height: 30px;
+  line-height: 36px;
+  text-align: center;
+  transition: background-color 200ms ease-in-out;
+}
+.recent-vaults-list-item-option-button:hover {
+  color: var(--text-normal);
+}
