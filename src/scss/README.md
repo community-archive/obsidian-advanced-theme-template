@@ -6,7 +6,7 @@ This is the current release app.css, split into SCSS partials. This folder can b
 
 Gentle nesting. These partials started as a straight split of app.css, with a few selectors manually nested on top. We want to make sure any nesting we do here doesn't end up compiling into a CSS file that fails to match the source app.css. As such, it is currently limited to `@media` and `rtl` selectors. You are encouraged to add more nesting yourself, if you prefer so.
 
-An [_examples.scss](_examples.scss) to introduce you to some of the common things you can do with SASS and building your theme. It's left out of `theme.scss`'s `@forward` list on purpose, so it never ends up in your compiled output.
+An [_examples.scss](_examples.scss) to introduce you to some of the common things you can do with SASS and building your theme. It's left out of `theme.scss`'s `@forward` list on purpose. :) 
 
 `@use` and `@forward` built in to the partials and compiled file.
 
@@ -17,9 +17,10 @@ An [_examples.scss](_examples.scss) to introduce you to some of the common thing
 
 Install [SASS](https://sass-lang.com) through the package manager of your choice, or compile direct from GitHub.
 
-None of this is wired into `lint.yml` or `release.yml`. Compiling here is entirely up to you, only `theme.css` matters for release.
+None of this is checked by `lint.yml` or `release.yml`. Compiling here is entirely up to you. Only `theme.css` matters for release.
 
-In the terminal, point SASS at `src/scss/theme.scss`. SASS follows the whole `@forward` chain from there, so editing any partial still triggers a recompile. Run it from the repo root so `theme.css` lands at the top level. Use the command:
+In the terminal, point SASS at `src/scss/theme.scss`. SASS will the handle the `@forward` from there, so editing any partial still triggers a recompile. If you run it from the repo root the `theme.css` lands at the top level. Use the command:
+
 ```bash
 sass --watch src/scss/theme.scss:theme.css
 ```
