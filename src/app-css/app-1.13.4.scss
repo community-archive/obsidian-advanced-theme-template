@@ -1,0 +1,36 @@
+/*
+ * This is an illustrative example of how you might combine the reference
+ * partials in this folder using Sass's @use rule. It is NOT part of any
+ * build in this template — nothing here is compiled automatically, and
+ * this file is not consumed by theme.css, lint.yml, or release.yml.
+ *
+ * If you want to actually compile Sass partials into a real stylesheet,
+ * you'll need to add your own Sass toolchain (e.g. the `sass` CLI) and
+ * wire it into your own build process.
+ */
+
+@use "variables";
+@use "workspace";
+@use "editor";
+@use "markdown-rendering";
+@use "file-explorer";
+@use "settings";
+@use "search";
+@use "modals-and-popovers";
+@use "menus-and-suggestions";
+@use "notices";
+@use "status-bar";
+@use "title-bar";
+@use "properties";
+@use "bases";
+@use "canvas";
+@use "graph";
+@use "callouts";
+@use "community";
+@use "sync-and-publish";
+@use "webviewer";
+@use "mobile";
+@use "splash-and-startup";
+@use "shared-ui-elements";
+@use "platform";
+@use "other";

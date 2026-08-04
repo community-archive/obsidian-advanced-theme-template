@@ -1,0 +1,65 @@
+.webviewer-favicon-container {
+  display: flex;
+  align-items: center;
+  > * {
+    height: var(--icon-size);
+    max-width: var(--icon-size);
+  }
+}
+.webviewer-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.webviewer-address {
+  width: 100%;
+  display: flex;
+  margin: 0 2px;
+  input {
+    flex-grow: 1;
+    min-width: 50px;
+  }
+}
+.webviewer-address-container {
+  padding: 0 var(--size-4-2);
+  &::after {
+    /* Remove the gradient normally at the end of the titleContainerEl */
+    background: transparent !important;
+    /* kept !important because Obsidian app.css uses !important here */
+  }
+}
+.view-content.webviewer-content {
+  padding: 0;
+}
+.webviewer-content {
+  border-top: var(--border-width) solid var(--divider-color);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  webview {
+    flex-grow: 1;
+    width: 100%;
+  }
+  .reader-mode-content {
+    overflow-y: auto;
+    &.is-readable-line-width .markdown-preview-sizer {
+      max-width: var(--file-line-width);
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  .error-notice {
+    max-width: var(--file-line-width);
+    margin: 25% auto 0;
+    padding: var(--file-margins);
+  }
+}
+/* History View */
+.webviewer-history-view-item {
+  text-wrap: nowrap;
+  overflow: hidden;
+}
+/* Settings */
+textarea.webviewer-adblock-lists {
+  flex-grow: 1;
+}

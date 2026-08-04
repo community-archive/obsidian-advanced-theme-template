@@ -1,0 +1,74 @@
+.status-bar {
+  position: var(--status-bar-position);
+  width: auto;
+  bottom: 0;
+  right: 0;
+  border-radius: var(--status-bar-radius);
+  border-style: solid;
+  border-width: var(--status-bar-border-width);
+  border-color: var(--status-bar-border-color);
+  background-color: var(--status-bar-background);
+  color: var(--status-bar-text-color);
+  display: flex;
+  font-size: var(--status-bar-font-size);
+  justify-content: flex-end;
+  min-height: 18px;
+  padding: var(--size-4-1);
+  gap: var(--size-4-1);
+  user-select: none;
+  z-index: var(--layer-status-bar);
+  font-variant-numeric: tabular-nums;
+}
+body:not(.is-fullscreen) .status-bar {
+  padding-right: var(--size-4-2);
+}
+.status-bar-item {
+  border-radius: var(--radius-s);
+  corner-shape: var(--corner-shape);
+  display: inline-flex;
+  align-items: center;
+  padding: 3px var(--size-2-2);
+  line-height: 1;
+  &.mod-clickable {
+    cursor: var(--cursor);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--background-modifier-hover);
+        color: var(--text-normal);
+      }
+    }
+  }
+  &:empty {
+    display: none;
+  }
+  @media (hover: hover) {
+    &.plugin-editor-status:hover,
+    &.plugin-sync:hover {
+      background-color: var(--background-modifier-hover);
+    }
+  }
+}
+.status-bar-item.plugin-editor-status,
+.status-bar-item.plugin-sync {
+  padding: 0 var(--size-2-2);
+}
+.status-bar-item-icon {
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+}
+.status-bar-item-segment {
+  margin-inline-end: var(--size-4-2);
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  &:last-child {
+    margin-inline-end: 0;
+  }
+}
+.is-screenshotting .status-bar {
+  display: none;
+}
+.is-mobile .status-bar {
+  display: none;
+}

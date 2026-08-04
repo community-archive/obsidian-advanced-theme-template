@@ -1,0 +1,150 @@
+.mod-macos {
+  --clickable-icon-radius: var(--radius-m);
+  --corner-shape: superellipse(1.33);
+  --input-radius: var(--radius-m);
+  --input-icon-inset: var(--size-4-2);
+  --input-shadow: none;
+  --input-shadow-hover: none;
+  --interactive-normal: var(--background-modifier-border);
+  --interactive-hover: var(--background-modifier-border);
+  --modal-radius: var(--radius-xl);
+  --scrollbar-thumb-bg: gray;
+  --search-input-radius: 100px;
+  --search-input-corner-shape: round;
+  --slider-thumb-border-width: 0;
+  --slider-thumb-width: 30px;
+  --slider-thumb-opacity-active: 0.7;
+  --slider-thumb-height-active: calc(var(--slider-thumb-height) + 4px);
+  --slider-thumb-width-active: calc(var(--slider-thumb-width) + 4px);
+  --slider-thumb-y-active: calc(var(--slider-thumb-y) - 2px);
+  --tab-radius: var(--radius-m);
+  --toggle-width: 44px;
+  --toggle-radius: 24px;
+  --toggle-thumb-radius: 24px;
+  --toggle-thumb-height: 16px;
+  --toggle-thumb-width: 26px;
+  --toggle-thumb-opacity-active: 0.6;
+  --toggle-s-width: 36px;
+  --toggle-s-thumb-height: 12px;
+  --toggle-s-thumb-width: 20px;
+  --vault-profile-radius: var(--radius-m);
+  & {
+    --frame-left-space: calc(80px - var(--ribbon-width));
+    --frame-right-space: 0px;
+    &.is-popout-window {
+      --frame-left-space: 80px;
+    }
+    &.is-hidden-frameless:not(.is-popout-window) .sidebar-toggle-button.mod-right {
+      background-color: var(--tab-container-background);
+      position: fixed;
+      top: 0;
+      right: 0;
+      padding-right: var(--size-4-2);
+      z-index: var(--layer-cover);
+    }
+    &.is-hidden-frameless:not(.is-popout-window) .workspace .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
+      padding-right: 38px;
+    }
+  }
+}
+.mod-windows,
+.mod-linux {
+  --frame-left-space: 0px;
+  --frame-right-space: 126px;
+}
+.is-hidden-frameless:not(.is-fullscreen):not(.mod-macos) .workspace-tabs.mod-top-left-space .workspace-tab-header-container:before {
+  -webkit-app-region: no-drag;
+  content: '';
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: var(--frame-left-space);
+}
+.is-hidden-frameless:not(.is-fullscreen):not(.mod-macos) .workspace-tabs.mod-top-right-space .workspace-tab-header-container:after {
+  -webkit-app-region: no-drag;
+  content: '';
+  height: 100%;
+  right: 0;
+  top: 0;
+  position: absolute;
+  width: var(--frame-right-space);
+}
+.mod-rtl,
+[dir='rtl'] {
+  --direction: -1;
+  --inset-start: right;
+  --inset-end: left;
+}
+.mod-rtl,
+.is-rtl,
+.rtl {
+  --callout-padding: var(--size-4-3) var(--size-4-6) var(--size-4-3) var(--size-4-3);
+  --embed-padding: 0 var(--size-4-6) 0 0;
+  --nav-item-padding: var(--size-4-1) var(--size-4-6) var(--size-4-1) var(--size-4-2);
+  --dropdown-padding: 0 var(--dropdown-padding-start) 0 var(--dropdown-padding-end);
+}
+.mod-rtl input[type='date'],
+.is-rtl input[type='date'],
+.rtl input[type='date'],
+.mod-rtl input[type='datetime-local'],
+.is-rtl input[type='datetime-local'],
+.rtl input[type='datetime-local'] {
+  direction: rtl;
+}
+.mod-rtl input[type='date']::-webkit-calendar-picker-indicator,
+.is-rtl input[type='date']::-webkit-calendar-picker-indicator,
+.rtl input[type='date']::-webkit-calendar-picker-indicator,
+.mod-rtl input[type='datetime-local']::-webkit-calendar-picker-indicator,
+.is-rtl input[type='datetime-local']::-webkit-calendar-picker-indicator,
+.rtl input[type='datetime-local']::-webkit-calendar-picker-indicator {
+  right: var(--size-4-1);
+  left: auto;
+}
+/* When Obsidian interface language is set to RTL language, mirror the UI */
+.mod-rtl {
+  --tab-stacked-text-transform: rotate(180deg);
+  /* Not RTL:
+	   - Code blocks
+	   - Canvas wrapper
+	   - Community directory
+	*/
+  /* Set text direction on interface elements */
+  /* Force right-align on UI elements that respond to content direction
+	   to improve readability and avoid text bouncing between LTR/RTL */
+  /* Since sidebars are not (yet) reversed but the tab header icons are
+	   we need to reverse the position of the sidebar toggles*/
+  /* Stacked tabs */
+  /* Mirror directional UI components, e.g. toggles */
+  /* Mirror icons */
+  .sidebar-toggle-button {
+    order: 2;
+    &.mod-right {
+      order: -1;
+    }
+  }
+  .workspace .mod-root .workspace-tabs.mod-stacked .workspace-tab-container {
+    flex-direction: row-reverse;
+    .workspace-tab-header-inner {
+      flex-direction: row-reverse;
+    }
+  }
+  svg.svg-icon:not(
+		.check-small,
+		.lucide-binary,
+		.lucide-check,
+		.lucide-check-square,
+		.lucide-clock,
+		.lucide-code-2,
+		.lucide-square-function,
+		.lucide-timer,
+		.sidebar-toggle-button-icon
+	) {
+    transform: scale(-1, 1);
+  }
+}
+/* Smoother animation for right sidebar button positioning during close */
+[dir='rtl'],
+.mod-rtl {
+  --bases-table-header-sort-mask: linear-gradient(to right, transparent var(--size-4-6), black var(--size-4-6));
+}
