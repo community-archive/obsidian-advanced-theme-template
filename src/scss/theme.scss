@@ -1,0 +1,38 @@
+/*
+ * Aggregator entry point for the reference partials in this folder,
+ * using Sass's @forward rule so a consumer can `@use "theme"` and get
+ * both the compiled CSS and any members the partials expose. It is NOT
+ * part of any build in this template — nothing here is compiled
+ * automatically, and this file is not consumed by theme.css, lint.yml,
+ * or release.yml.
+ *
+ * If you want to actually compile Sass partials into a real stylesheet,
+ * you'll need to add your own Sass toolchain (e.g. the `sass` CLI) and
+ * wire it into your own build process.
+ */
+
+@forward "variables";
+@forward "workspace";
+@forward "editor";
+@forward "markdown-rendering";
+@forward "file-explorer";
+@forward "settings";
+@forward "search";
+@forward "modals-and-popovers";
+@forward "menus-and-suggestions";
+@forward "notices";
+@forward "status-bar";
+@forward "title-bar";
+@forward "properties";
+@forward "bases";
+@forward "canvas";
+@forward "graph";
+@forward "callouts";
+@forward "community";
+@forward "sync-and-publish";
+@forward "webviewer";
+@forward "mobile";
+@forward "splash-and-startup";
+@forward "shared-ui-elements";
+@forward "platform";
+@forward "other";
