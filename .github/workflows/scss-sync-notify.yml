@@ -1,6 +1,6 @@
 name: Notify SCSS nesting sync
 
-# Mirrors src/app-css/scss-sync-report.md into a standing PR comment; never touches the SCSS itself, since nesting is done by hand.
+# Turns src/app-css/scss-sync-report.md into a standing PR comment. 
 
 on:
   pull_request:
