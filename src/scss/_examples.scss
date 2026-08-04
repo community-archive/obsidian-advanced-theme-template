@@ -1,0 +1,113 @@
+/*
+ * Sketches of Sass features (@mixin, @each) that could DRY up patterns
+ * repeated across the reference partials in this folder. This file is
+ * NOT forwarded by theme.scss and is not part of any build in this
+ * template — it exists purely as a discoverable reference for anyone
+ * extending this template who wants to go beyond plain nested CSS.
+ *
+ * Compiling it standalone (e.g. `sass _examples.scss`) works and
+ * produces real CSS, so you can see exactly what each example expands
+ * to, but nothing here is wired into theme.css, lint.yml, or release.yml.
+ */
+
+@use "sass:map";
+
+// ---------------------------------------------------------------------
+// 1. @mixin — the hover-media pattern
+// ---------------------------------------------------------------------
+// Nearly every partial repeats this shape (e.g. _status-bar.scss,
+// _canvas.scss, _properties.scss...):
+//
+//   .some-selector {
+//     ...
+//     @media (hover: hover) {
+//       &:hover {
+//         ...
+//       }
+//     }
+//   }
+//
+// A small mixin collapses that boilerplate to one line at each call site.
+
+@mixin hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+// Usage example:
+.example-hover-button {
+  color: var(--text-muted);
+  @include hover {
+    color: var(--text-normal);
+  }
+}
+// Expands to the same CSS as writing the full @media/&:hover block by hand.
+
+// ---------------------------------------------------------------------
+// 2. @mixin — the RTL-flag selector group
+// ---------------------------------------------------------------------
+// _platform.scss repeats ".mod-rtl, .is-rtl, .rtl { ... }" (and the same
+// trio prefixed onto descendant selectors) several times over to cover
+// every way Obsidian marks right-to-left content. A mixin can generate
+// that selector list from a single call.
+
+@mixin rtl {
+  .mod-rtl &,
+  .is-rtl &,
+  .rtl & {
+    @content;
+  }
+}
+
+// Usage example:
+.example-icon {
+  transform: scale(1, 1);
+  @include rtl {
+    transform: scale(-1, 1);
+  }
+}
+
+// ---------------------------------------------------------------------
+// 3. @each — generating the callout color/icon variants from a map
+// ---------------------------------------------------------------------
+// _callouts.scss hand-writes one rule per callout type, e.g.:
+//
+//   &[data-callout="info"] {
+//     --callout-color: var(--callout-info);
+//     --callout-icon: lucide-info;
+//   }
+//   .callout[data-callout="warning"],
+//   .callout[data-callout="caution"],
+//   .callout[data-callout="attention"] {
+//     --callout-color: var(--callout-warning);
+//     --callout-icon: lucide-alert-triangle;
+//   }
+//
+// ...repeated for a dozen-plus types, several with multiple aliases.
+// A Sass map plus @each generates the same rules from data instead of
+// hand-copied blocks, and makes adding a new callout type or alias a
+// one-line change.
+
+$example-callout-types: (
+  "info": (color: info, icon: lucide-info, aliases: ()),
+  "todo": (color: todo, icon: lucide-check-circle-2, aliases: ()),
+  "warning": (color: warning, icon: lucide-alert-triangle, aliases: (caution, attention)),
+  "success": (color: success, icon: lucide-check, aliases: (check, done)),
+);
+
+.example-callout {
+  @each $type, $props in $example-callout-types {
+    $aliases: map.get($props, aliases);
+    $selectors: "&[data-callout=\"#{$type}\"]";
+    @each $alias in $aliases {
+      $selectors: "#{$selectors}, &[data-callout=\"#{$alias}\"]";
+    }
+    #{$selectors} {
+      --callout-color: var(--callout-#{map.get($props, color)});
+      --callout-icon: #{map.get($props, icon)};
+    }
+  }
+}
