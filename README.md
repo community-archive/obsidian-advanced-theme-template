@@ -31,7 +31,7 @@ Once you have the repository locally on your computer, there are a couple of pla
 
    - **name** is the name of your theme.
    - **version** is the version of your theme.
-   - **minAppVersion** should only be changed as you add new CSS from Obsidian updates.
+   - **minAppVersion** should only be changed as you add new CSS from Obsidian installer updates.
    - **author** is your name.
    - **fundingUrl** is an optional link where users can support your work, for example a Ko-fi page.
    - **authorUrl** is an optional link to your website or profile.
