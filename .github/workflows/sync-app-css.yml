@@ -1,6 +1,7 @@
 name: Sync app.css changes
 
-# Diffs a newly-added src/app-css/app-x.y.z.css against the previous one and applies the changes to src/css/*.css; src/scss/*.scss is hand-nested, so those get logged to src/app-css/scss-sync-report.md instead (see the "Notify SCSS nesting sync" workflow).
+# Diffs a newly-added src/app-css/app-x.y.z.css against the previous one and applies the changes to src/css/*.css.
+# src/scss/*.scss is hand-nested, so those get logged to src/app-css/scss-sync-report.md instead.
 
 on:
   pull_request:
