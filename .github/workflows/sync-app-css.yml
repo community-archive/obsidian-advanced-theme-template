@@ -1,0 +1,102 @@
+name: Sync app.css changes
+
+# Diffs a newly-added src/app-css/app-x.y.z.css against the previous one and applies the changes to src/css/*.css.
+# src/scss/*.scss is hand-nested, so those get logged to src/app-css/scss-sync-report.md instead.
+
+on:
+  pull_request:
+    branches: ['**']
+    paths:
+      - 'src/app-css/app-*.css'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'maintenance'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.x'
+
+      - name: Find newly added app-*.css snapshots
+        id: added
+        run: |
+          FILES=$(git diff --name-only --diff-filter=A "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" -- 'src/app-css/app-*.css')
+          if [ -z "$FILES" ]; then
+            echo "No new app-*.css snapshot added in this PR — nothing to sync."
+            echo "found=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "files<<EOF" >> "$GITHUB_OUTPUT"
+            echo "$FILES" >> "$GITHUB_OUTPUT"
+            echo "EOF" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run sync for each new snapshot
+        if: steps.added.outputs.found == 'true'
+        run: |
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            echo "::group::sync-app-css.mjs --new $file"
+            node sync-app-css.mjs --new "$file"
+            echo "::endgroup::"
+          done <<< "${{ steps.added.outputs.files }}"
+
+      - name: Commit and push updates
+        if: steps.added.outputs.found == 'true'
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git status --porcelain -- src/css src/app-css | grep -q .; then
+            git add src/css src/app-css
+            git commit -m "Sync src/css with $(basename "$(echo "${{ steps.added.outputs.files }}" | head -n1)")"
+            git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
+            echo "committed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "committed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Comment on PR
+        if: steps.added.outputs.found == 'true'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require('fs');
+            let summary;
+            try {
+              summary = JSON.parse(fs.readFileSync('sync-summary.json', 'utf8'));
+            } catch {
+              return;
+            }
+            const lines = [
+              `**app.css sync**: \`${summary.oldVersion}\` → \`${summary.newVersion}\``,
+              '',
+              `- Changed selectors applied to \`src/css/*.css\`: ${summary.changed}`,
+              `- Removed selectors applied to \`src/css/*.css\`: ${summary.removed}`,
+              `- New selectors staged in \`src/app-css/_new-selectors.css\`: ${summary.added}`,
+            ];
+            if (summary.notFoundLocally > 0) {
+              lines.push(`- ${summary.notFoundLocally} changed/removed selector(s) from the old baseline were not found in any \`src/css/*.css\` file (already customized or removed by hand) — check the workflow log.`);
+            }
+            if (summary.scssReportUpdated) {
+              lines.push('', '`src/app-css/scss-sync-report.md` was updated with a checklist for porting these changes into the hand-nested `src/scss/*.scss` partials.');
+            }
+            if (summary.added > 0) {
+              lines.push('', 'New selectors need a manual home in `src/css/` before they can be ported to SCSS — see `src/app-css/_new-selectors.css`.');
+            }
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: lines.join('\n'),
+            });
