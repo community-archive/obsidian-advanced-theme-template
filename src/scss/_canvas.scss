@@ -184,6 +184,17 @@
       svg {
         transition: 90ms transform ease-out;
       }
+      @media (hover: hover) {
+        &:hover svg {
+          transform: translateY(-6px) scale(var(--direction), 1);
+          filter: drop-shadow(0px 6px 2px rgba(0, 0, 0, 0.1));
+        }
+      }
+    }
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-accent);
+      }
     }
   }
 }
@@ -194,19 +205,8 @@
 .theme-dark .canvas-card-menu {
   background-color: var(--background-secondary);
 }
-@media (hover: hover) {
-  .canvas-card-menu .canvas-card-menu-button:hover {
-    color: var(--color-accent);
-  }
-}
 .theme-dark .canvas-card-menu .canvas-card-menu-button svg {
   fill: var(--background-secondary);
-}
-@media (hover: hover) {
-  .canvas-card-menu .canvas-card-menu-button.mod-draggable:hover svg {
-    transform: translateY(-6px) scale(var(--direction), 1);
-    filter: drop-shadow(0px 6px 2px rgba(0, 0, 0, 0.1));
-  }
 }
 .canvas-controls {
   inset-inline-end: var(--size-4-2);
@@ -258,16 +258,16 @@
   svg {
     pointer-events: none;
   }
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-normal);
+      background-color: var(--interactive-hover);
+    }
+  }
 }
 .is-mobile .canvas-control-item {
   border: none;
   background-color: transparent;
-}
-@media (hover: hover) {
-  .canvas-control-item:hover {
-    color: var(--text-normal);
-    background-color: var(--interactive-hover);
-  }
 }
 .canvas-node-container {
   background-color: var(--background-primary);
@@ -304,22 +304,14 @@
   &.mod-hover-label {
     opacity: 0;
   }
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-muted);
+    }
+  }
 }
 body:not(.is-ios) .canvas-wrapper.mod-animating .canvas-node-label {
   transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-@media (hover: hover) {
-  .canvas-node-label:hover {
-    color: var(--text-muted);
-  }
-  .canvas-node:hover .canvas-node-label.mod-hover-label {
-    opacity: 1;
-  }
-}
-@media (hover: none) {
-  .canvas-node.is-focused .canvas-node-label.mod-hover-label {
-    opacity: 1;
-  }
 }
 .canvas-node-placeholder {
   display: flex;
@@ -381,6 +373,16 @@ body:not(.is-ios) .canvas-wrapper.mod-animating .canvas-node-label {
   }
   &.is-focused:not(.is-dragging) .canvas-node-content-blocker {
     display: none;
+  }
+  @media (hover: hover) {
+    &:hover .canvas-node-label.mod-hover-label {
+      opacity: 1;
+    }
+  }
+  @media (hover: none) {
+    &.is-focused .canvas-node-label.mod-hover-label {
+      opacity: 1;
+    }
   }
 }
 .canvas-node.is-selected,
@@ -780,16 +782,16 @@ body.is-mobile .canvas-node-resizer {
   }
   &.canvas-color-picker-custom:not(.is-active) {
     background: conic-gradient(var(--color-red), var(--color-yellow), var(--color-green), var(--color-blue), var(--color-purple), var(--color-red));
+    @media (hover: hover) {
+      &:hover {
+        box-shadow: 0 0 0 2px var(--background-modifier-border-hover);
+      }
+    }
   }
-}
-@media (hover: hover) {
-  .canvas-color-picker-item:hover {
-    box-shadow: 0 0 0 2px var(--canvas-color);
-  }
-}
-@media (hover: hover) {
-  .canvas-color-picker-item.canvas-color-picker-custom:not(.is-active):hover {
-    box-shadow: 0 0 0 2px var(--background-modifier-border-hover);
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: 0 0 0 2px var(--canvas-color);
+    }
   }
 }
 .canvas-empty-embed-container {

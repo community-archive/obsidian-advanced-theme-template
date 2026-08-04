@@ -31,26 +31,26 @@ body:not(.is-fullscreen) .status-bar {
   line-height: 1;
   &.mod-clickable {
     cursor: var(--cursor);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--background-modifier-hover);
+        color: var(--text-normal);
+      }
+    }
   }
   &:empty {
     display: none;
   }
-}
-@media (hover: hover) {
-  .status-bar-item.mod-clickable:hover {
-    background-color: var(--background-modifier-hover);
-    color: var(--text-normal);
+  @media (hover: hover) {
+    &.plugin-editor-status:hover,
+    &.plugin-sync:hover {
+      background-color: var(--background-modifier-hover);
+    }
   }
 }
 .status-bar-item.plugin-editor-status,
 .status-bar-item.plugin-sync {
   padding: 0 var(--size-2-2);
-}
-@media (hover: hover) {
-  .status-bar-item.plugin-editor-status:hover,
-  .status-bar-item.plugin-sync:hover {
-    background-color: var(--background-modifier-hover);
-  }
 }
 .status-bar-item-icon {
   vertical-align: middle;

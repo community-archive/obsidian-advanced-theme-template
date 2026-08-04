@@ -24,11 +24,11 @@
     padding: var(--size-2-1);
     --icon-size: var(--icon-xs);
     --icon-stroke: var(--icon-xs-stroke-width);
-  }
-}
-@media (hover: hover) {
-  .search-input-container.mod-hotkey .input-right-decorator.mod-active-hotkey-filter .hotkey-filter-clear:hover {
-    background-color: var(--background-modifier-hover);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--background-modifier-hover);
+      }
+    }
   }
 }
 .search-input-container {

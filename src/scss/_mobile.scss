@@ -79,6 +79,15 @@ body:not(.is-mobile) .workspace-split.mod-left-split .workspace-sidedock-vault-p
         color: var(--text-muted);
       }
     }
+    @media (hover: hover) {
+      &:hover {
+        color: var(--vault-profile-color-hover);
+        background-color: var(--background-modifier-hover);
+        .workspace-drawer-vault-switcher-icon {
+          color: var(--text-muted);
+        }
+      }
+    }
   }
   .workspace-drawer-vault-name {
     font-size: var(--vault-profile-font-size);
@@ -97,15 +106,6 @@ body:not(.is-mobile) .workspace-split.mod-left-split .workspace-sidedock-vault-p
   .workspace-drawer-vault-actions {
     display: var(--vault-profile-actions-display);
     align-items: center;
-  }
-}
-@media (hover: hover) {
-  body:not(.is-mobile) .workspace-split.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-switcher:hover {
-    color: var(--vault-profile-color-hover);
-    background-color: var(--background-modifier-hover);
-    .workspace-drawer-vault-switcher-icon {
-      color: var(--text-muted);
-    }
   }
 }
 .workspace-leaf-resize-handle.mobile-tap {
@@ -402,19 +402,17 @@ body.is-mobile {
       display: none;
     }
   }
-}
-@media (min-resolution: 2dppx), (min-resolution: 192dpi) {
-  .is-phone {
+  @media (min-resolution: 2dppx), (min-resolution: 192dpi) {
     --border-width: 0.5px;
     --divider-width: 0.5px;
     --tab-outline-width: 0.5px;
   }
-}
-@media (max-width: 380px) {
-  .is-phone.is-mobile {
-    --mobile-sidebar-min-width: 200px;
-    --mobile-sidebar-width: 100vw;
-    --mobile-sidebar-radius: 0;
+  @media (max-width: 380px) {
+    &.is-mobile {
+      --mobile-sidebar-min-width: 200px;
+      --mobile-sidebar-width: 100vw;
+      --mobile-sidebar-radius: 0;
+    }
   }
 }
 .is-tablet {
@@ -898,10 +896,10 @@ body.is-tablet .mobile-navbar {
     bottom: 0;
     margin: auto;
   }
-}
-@media (hover: hover) {
-  .mobile-navbar-action-tabs:hover .mobile-navbar-tabs-number {
-    opacity: var(--icon-opacity-hover);
+  @media (hover: hover) {
+    &:hover .mobile-navbar-tabs-number {
+      opacity: var(--icon-opacity-hover);
+    }
   }
 }
 .is-tablet {

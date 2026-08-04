@@ -105,9 +105,7 @@
   --color-blue-rgb: 2, 122, 255;
   --color-purple-rgb: 168, 130, 255;
   --color-pink-rgb: 250, 153, 205;
-}
-@media print {
-  .theme-dark {
+  @media print {
     --highlight-mix-blend-mode: darken;
   }
 }

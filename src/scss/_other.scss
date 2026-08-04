@@ -16,10 +16,8 @@
     --preferred-text-scale: env(preferred-text-scale);
     --keyboard-height: 0px;
   }
-}
-/* Variable font weights */
-@supports (font-variation-settings: normal) {
-  :root {
+  /* Variable font weights */
+  @supports (font-variation-settings: normal) {
     --h1-weight: 700;
     --h2-weight: 680;
     --h3-weight: 660;
@@ -1299,10 +1297,20 @@ button {
     &:focus-visible {
       box-shadow: 0 0 0 3px var(--background-modifier-border-focus);
     }
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--interactive-accent-hover);
+      }
+    }
   }
   &.mod-warning {
     background-color: var(--background-modifier-error);
     --text-color: var(--text-on-accent);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--background-modifier-error-hover);
+      }
+    }
   }
   &.mod-destructive {
     --text-color: var(--text-error);
@@ -1310,13 +1318,21 @@ button {
     &.mod-cta {
       background-color: var(--background-modifier-error);
       --text-color: var(--text-on-accent);
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--background-modifier-error-hover);
+        }
+      }
     }
   }
-}
-@media (hover: hover) {
-  button:hover {
-    background-color: var(--interactive-hover);
-    box-shadow: var(--input-shadow-hover);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--interactive-hover);
+      box-shadow: var(--input-shadow-hover);
+    }
+  }
+  @media (forced-colors: active) {
+    border: 1px ButtonBorder solid;
   }
 }
 button[disabled],
@@ -1324,26 +1340,6 @@ button[aria-disabled="true"],
 button[disabled="true"] {
   cursor: not-allowed;
   opacity: 0.7;
-}
-@media (forced-colors: active) {
-  button {
-    border: 1px ButtonBorder solid;
-  }
-}
-@media (hover: hover) {
-  button.mod-cta:hover {
-    background-color: var(--interactive-accent-hover);
-  }
-}
-@media (hover: hover) {
-  button.mod-warning:hover {
-    background-color: var(--background-modifier-error-hover);
-  }
-}
-@media (hover: hover) {
-  button.mod-destructive.mod-cta:hover {
-    background-color: var(--background-modifier-error-hover);
-  }
 }
 [contenteditable] {
   outline: none;
@@ -1361,10 +1357,10 @@ svg.svg-icon {
   font-size: var(--font-ui-medium);
   position: relative;
   top: -1px;
-}
-@media (hover: hover) {
-  .input-button:hover {
-    color: var(--text-normal);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-normal);
+    }
   }
 }
 input[type='text'],
@@ -1497,11 +1493,11 @@ input[type="color"] {
     height: var(--swatch-height);
     width: var(--swatch-width);
     align-self: center;
-  }
-}
-@media (hover: hover) {
-  input[type="color"]::-webkit-color-swatch:hover {
-    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--mono-100) 25%, transparent), 0 0 0 var(--input-border-width-focus) var(--background-modifier-border-hover);
+    @media (hover: hover) {
+      &:hover {
+        box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--mono-100) 25%, transparent), 0 0 0 var(--input-border-width-focus) var(--background-modifier-border-hover);
+      }
+    }
   }
 }
 input[type="color"]:focus-visible::-webkit-color-swatch,
@@ -1647,9 +1643,7 @@ code[class*="language-"] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
-}
-@media print {
-  code[class*="language-"] {
+  @media print {
     text-shadow: none;
   }
 }
@@ -1720,12 +1714,20 @@ a {
       padding: var(--tag-padding-y) var(--tag-padding-x);
       line-height: 1;
     }
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--tag-background-hover);
+        border: var(--tag-border-width) solid var(--tag-border-color-hover);
+        color: var(--tag-color-hover);
+        text-decoration: var(--tag-decoration-hover);
+      }
+    }
   }
-}
-@media (hover: hover) {
-  a:hover {
-    color: var(--link-color-hover);
-    text-decoration-line: var(--link-decoration-hover);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--link-color-hover);
+      text-decoration-line: var(--link-decoration-hover);
+    }
   }
 }
 @keyframes hmd-file-uploading-ani {
@@ -1739,22 +1741,6 @@ a {
 }
 mjx-container {
   outline: none;
-}
-@media (hover: hover) {
-  a.tag:hover {
-    background-color: var(--tag-background-hover);
-    border: var(--tag-border-width) solid var(--tag-border-color-hover);
-    color: var(--tag-color-hover);
-    text-decoration: var(--tag-decoration-hover);
-  }
-}
-@media (hover: hover) {
-  a.tag:hover {
-    background-color: var(--tag-background-hover);
-    border: var(--tag-border-width) solid var(--tag-border-color-hover);
-    color: var(--tag-color-hover);
-    text-decoration: var(--tag-decoration-hover);
-  }
 }
 input[type="radio"],
 input[type=checkbox] {

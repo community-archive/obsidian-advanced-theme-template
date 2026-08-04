@@ -50,10 +50,10 @@
   &.mobile-tap {
     color: var(--text-accent-hover);
   }
-}
-@media (hover: hover) {
-  .community-modal-search-results-cta:hover {
-    color: var(--text-accent-hover);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-accent-hover);
+    }
   }
 }
 .community-modal-empty-state {
@@ -105,10 +105,10 @@ body .community-item.is-selected .community-item-updated {
   &.mobile-tap {
     background-color: var(--background-modifier-hover);
   }
-}
-@media (hover: hover) {
-  .community-item:hover {
-    border-color: var(--background-modifier-border-hover);
+  @media (hover: hover) {
+    &:hover {
+      border-color: var(--background-modifier-border-hover);
+    }
   }
 }
 .is-mobile .community-item {
@@ -287,9 +287,7 @@ body .community-item.is-selected .community-item-updated {
   grid-template-columns: 1fr 1fr;
   gap: var(--size-4-4) var(--size-4-5);
   margin-top: var(--setting-items-padding-y);
-}
-@container (max-width: 400px) {
-  .community-plugins-features {
+  @container (max-width: 400px) {
     grid-template-columns: 1fr;
   }
 }

@@ -37,13 +37,6 @@
 .publish-section-header-action {
   cursor: var(--cursor);
 }
-@media (hover: hover) {
-  .publish-section-header-text:hover,
-  .publish-section-header-toggle-collapsed-button:hover,
-  .publish-section-header-action:hover {
-    color: var(--text-accent-hover);
-  }
-}
 .publish-section-header {
   border-bottom: 1px solid var(--background-modifier-border);
   font-size: var(--font-ui-small);
@@ -59,6 +52,11 @@
   color: var(--text-normal);
   line-height: var(--line-height-tight);
   font-weight: var(--font-medium);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-accent-hover);
+    }
+  }
 }
 .publish-changes-switch-site {
   margin-inline-start: var(--size-4-2);
@@ -93,10 +91,20 @@
   color: var(--text-faint);
   width: 9px;
   height: 9px;
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-accent-hover);
+    }
+  }
 }
 .publish-section-header-action {
   color: var(--text-faint);
   margin-inline-start: var(--size-4-3);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-accent-hover);
+    }
+  }
 }
 .publish-upload-item-title {
   word-break: break-word;
@@ -173,15 +181,13 @@
   .sync-history-list-item-avatar {
     border: 1px solid rgba(255, 255, 255, 0.25);
   }
-}
-@media (hover: hover) {
-  .sync-history-list-item-header.is-active:hover {
-    --nav-collapse-icon-color: var(--text-on-accent);
-  }
-}
-@media (hover: hover) {
-  .sync-history-list-item-header.is-active .tree-item-flair:hover {
-    --nav-collapse-icon-color: var(--text-on-accent);
+  @media (hover: hover) {
+    &:hover {
+      --nav-collapse-icon-color: var(--text-on-accent);
+    }
+    .tree-item-flair:hover {
+      --nav-collapse-icon-color: var(--text-on-accent);
+    }
   }
 }
 .sync-history-list-item-header .mod-avatar-current-user {
@@ -229,12 +235,12 @@
 }
 .sync-history-list-item-header .tree-item-flair {
   padding: var(--size-4-1);
-}
-@media (hover: hover) {
-  .sync-history-list-item-header .tree-item-flair:hover {
-    opacity: 1;
-    background-color: var(--background-modifier-hover);
-    --nav-collapse-icon-color: var(--text-normal);
+  @media (hover: hover) {
+    &:hover {
+      opacity: 1;
+      background-color: var(--background-modifier-hover);
+      --nav-collapse-icon-color: var(--text-normal);
+    }
   }
 }
 .sync-history-list-item .version-group-container {
@@ -259,6 +265,9 @@
     &:hover {
       background-color: var(--nav-item-background-hover);
       color: var(--nav-item-color-hover);
+      @media (hover: hover) {
+        background-color: var(--background-modifier-hover);
+      }
     }
   }
 }
@@ -271,11 +280,6 @@
 .sync-history-list-item .version-group-container .version-group-item.is-active:hover .u-muted {
   color: var(--text-on-accent);
   opacity: 0.8;
-}
-@media (hover: hover) {
-  .sync-history-list-item .version-group-container .version-group-item:hover {
-    background-color: var(--background-modifier-hover);
-  }
 }
 .sync-history-content-container {
   background-color: var(--background-primary);
@@ -354,11 +358,11 @@ button.sync-history-button {
   box-shadow: none;
   margin: var(--size-4-1) 0 var(--size-4-2);
   min-height: var(--input-height);
-}
-@media (hover: hover) {
-  button.sync-history-button:hover {
-    background-color: var(--background-modifier-hover);
-    box-shadow: none;
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--background-modifier-hover);
+      box-shadow: none;
+    }
   }
 }
 .sync-file-tree-container {

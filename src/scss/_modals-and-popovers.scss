@@ -494,6 +494,14 @@ body.is-popout-modal > .modal.mod-settings .modal-close-button {
   &:focus-visible {
     box-shadow: 0 0 0 var(--input-border-width-focus) var(--background-modifier-border-focus);
     outline: none;
+    @media (forced-colors: active) {
+      box-shadow: inset 0 0 0 2px Highlight;
+    }
+  }
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--background-modifier-hover);
+    }
   }
 }
 .modal-sidebar-list-item.is-active,
@@ -505,16 +513,6 @@ body.is-popout-modal > .modal.mod-settings .modal-close-button {
 .modal-sidebar-list-item.is-active:hover .u-muted {
   color: var(--text-on-accent);
   opacity: 0.8;
-}
-@media (hover: hover) {
-  .modal-sidebar-list-item:hover {
-    background-color: var(--background-modifier-hover);
-  }
-}
-@media (forced-colors: active) {
-  .modal-sidebar-list-item:focus-visible {
-    box-shadow: inset 0 0 0 2px Highlight;
-  }
 }
 .modal-sidebar-list-item-details {
   flex-grow: 1;
@@ -645,10 +643,10 @@ body:not(.is-mobile) .modal-button-container .mod-secondary {
     border-top: 5px solid rgba(0, 0, 0, 0.9);
     border-bottom: 5px solid transparent;
   }
-}
-@media (hover: hover) {
-  .follow-link-popover:hover {
-    background-color: #000000;
+  @media (hover: hover) {
+    &:hover {
+      background-color: #000000;
+    }
   }
 }
 .prompt {

@@ -82,6 +82,18 @@
       opacity: 1;
     }
   }
+  @media (hover: hover) {
+    .internal-link:hover {
+      color: var(--link-color-hover);
+      text-decoration-line: var(--link-decoration-hover);
+    }
+    .internal-link.is-unresolved:hover {
+      opacity: 1;
+      color: var(--link-color-hover);
+      text-decoration-color: var(--link-color-hover);
+      text-decoration-line: var(--link-decoration-hover);
+    }
+  }
 }
 .markdown-rendered > .markdown-preview-section > .markdown-preview-pusher + div:not(.mod-ui) > :first-child,
 .markdown-rendered > .markdown-preview-section > .mod-ui + div:not(.mod-ui) > :first-child {
@@ -244,10 +256,10 @@
   position: absolute;
   top: 0;
   inset-inline-end: 0;
-}
-@media (hover: hover) {
-  .markdown-rendered button.copy-code-button:hover {
-    background-color: var(--background-modifier-hover);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--background-modifier-hover);
+    }
   }
 }
 .theme-dark .mermaid > svg {
@@ -260,6 +272,12 @@
     overflow: hidden;
     border: var(--border-width) solid var(--background-modifier-border);
     border-radius: var(--radius-m);
+    @supports (anchor-name: --x) {
+      ~ .embed-actions {
+        position-anchor: --mermaid-guard-source;
+        top: calc(anchor(top) + var(--size-2-2));
+      }
+    }
   }
 }
 .mermaid-guard-header {
@@ -297,14 +315,8 @@
     border-radius: 0;
     background-color: var(--code-background);
   }
-}
-@supports (anchor-name: --x) {
-  .mermaid-guard-source {
+  @supports (anchor-name: --x) {
     anchor-name: --mermaid-guard-source;
-  }
-  .mermaid-wrapper.is-guarded ~ .embed-actions {
-    position-anchor: --mermaid-guard-source;
-    top: calc(anchor(top) + var(--size-2-2));
   }
 }
 .markdown-preview-view .markdown-embed .markdown-preview-view .markdown-preview-pusher h1,
@@ -371,6 +383,13 @@
     text-align: center;
     font-size: var(--font-smaller);
   }
+  @media (hover: hover) {
+    &.mod-generic:hover,
+    &.mod-empty:hover {
+      color: var(--text-normal);
+      background-color: var(--background-secondary);
+    }
+  }
 }
 .file-embed.mod-generic,
 .file-embed.mod-empty {
@@ -379,13 +398,6 @@
   color: var(--text-muted);
   text-align: center;
   font-size: var(--font-smaller);
-}
-@media (hover: hover) {
-  .file-embed.mod-generic:hover,
-  .file-embed.mod-empty:hover {
-    color: var(--text-normal);
-    background-color: var(--background-secondary);
-  }
 }
 .markdown-embed-content {
   height: 100%;
@@ -453,11 +465,11 @@
   margin-inline-start: var(--size-4-1);
   color: var(--text-faint);
   text-decoration: none;
-}
-@media (hover: hover) {
-  .footnote-backref:hover {
-    color: var(--text-accent);
-    text-decoration: none;
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-accent);
+      text-decoration: none;
+    }
   }
 }
 .markdown-rendered .frontmatter.mod-failed {
@@ -744,11 +756,11 @@ h6 a,
   &.mobile-tap {
     opacity: 0.5;
   }
-}
-@media (hover: hover) {
-  .external-link:hover {
-    color: var(--link-external-color-hover);
-    text-decoration-line: var(--link-external-decoration-hover);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--link-external-color-hover);
+      text-decoration-line: var(--link-external-decoration-hover);
+    }
   }
 }
 @supports selector(:dir(rtl)) {
@@ -767,8 +779,7 @@ h6 a,
   transition: opacity var(--anim-duration-fast) ease-in-out;
 }
 @media (hover: hover) {
-  .metadata-property-value .internal-link:hover,
-  .markdown-rendered .internal-link:hover {
+  .metadata-property-value .internal-link:hover {
     color: var(--link-color-hover);
     text-decoration-line: var(--link-decoration-hover);
   }
@@ -786,8 +797,7 @@ h6 a,
   text-decoration-color: var(--link-unresolved-decoration-color);
 }
 @media (hover: hover) {
-  .metadata-property-value .internal-link.is-unresolved:hover,
-  .markdown-rendered .internal-link.is-unresolved:hover {
+  .metadata-property-value .internal-link.is-unresolved:hover {
     opacity: 1;
     color: var(--link-color-hover);
     text-decoration-color: var(--link-color-hover);

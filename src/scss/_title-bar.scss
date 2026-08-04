@@ -86,6 +86,9 @@ body.is-popout-modal.is-frameless .titlebar {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  @media screen and (max-width: 300px) {
+    display: none;
+  }
 }
 .titlebar-button-container {
   display: flex;
@@ -96,6 +99,12 @@ body.is-popout-modal.is-frameless .titlebar {
   }
   &.mod-right {
     right: 0;
+  }
+  @media (hover: hover) {
+    .mod-back:hover,
+    .mod-forward:hover {
+      color: var(--icon-color-hover);
+    }
   }
 }
 .mod-macos .titlebar-button-container {
@@ -114,26 +123,20 @@ body.is-popout-modal.is-frameless .titlebar {
   height: 14px;
   stroke-width: 2.25px;
 }
-@media (hover: hover) {
-  .titlebar-button-container .mod-back:hover,
-  .titlebar-button-container .mod-forward:hover {
-    color: var(--icon-color-hover);
-  }
-}
 .titlebar-button {
   -webkit-app-region: no-drag;
   padding: var(--size-2-2) var(--size-2-3);
   cursor: var(--cursor);
   display: inline-flex;
   align-items: center;
-}
-@media (hover: hover) {
-  .titlebar-button:hover {
-    opacity: 1;
-    background-color: var(--background-modifier-hover);
-  }
-  .titlebar-button.mod-close:hover {
-    background-color: var(--background-modifier-error);
+  @media (hover: hover) {
+    &:hover {
+      opacity: 1;
+      background-color: var(--background-modifier-hover);
+    }
+    &.mod-close:hover {
+      background-color: var(--background-modifier-error);
+    }
   }
 }
 .mod-macos .titlebar-button {

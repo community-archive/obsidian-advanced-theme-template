@@ -222,16 +222,16 @@ body.is-frameless > .app-container ~ * {
       background-color: var(--background-modifier-hover);
       color: var(--text-normal);
     }
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--background-modifier-hover);
+        color: var(--text-normal);
+      }
+    }
   }
   .view-header-breadcrumb-separator {
     padding: 2px 1px;
     color: var(--text-faint);
-  }
-}
-@media (hover: hover) {
-  .view-header-title-parent .view-header-breadcrumb:hover {
-    background-color: var(--background-modifier-hover);
-    color: var(--text-normal);
   }
 }
 .view-header-title {
@@ -558,12 +558,14 @@ body:not(.show-ribbon) .side-dock-ribbon {
     background-color: var(--color-accent);
     border-color: var(--color-accent);
   }
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--divider-color-hover);
+      border-color: var(--divider-color-hover);
+    }
+  }
 }
 @media (hover: hover) {
-  .workspace-leaf-resize-handle:hover {
-    background-color: var(--divider-color-hover);
-    border-color: var(--divider-color-hover);
-  }
   .is-translucent .workspace-leaf-resize-handle:hover {
     background-color: var(--divider-color-hover);
     border-color: var(--divider-color-hover);
@@ -745,6 +747,11 @@ body:not(.show-ribbon) .side-dock-ribbon {
         opacity: 0;
       }
     }
+    @media (hover: hover) {
+      &:not(.is-active):hover .workspace-tab-header-inner {
+        background-color: var(--background-modifier-hover);
+      }
+    }
   }
 }
 .workspace-tab-header-container-inner {
@@ -792,11 +799,6 @@ body.is-focused .workspace-tab-header-container .workspace-tab-header.is-highlig
 body.is-focused .workspace-tab-header-container .workspace-tab-header.is-highlighted .workspace-tab-header-inner-title {
   color: var(--tab-text-color-focused-highlighted);
 }
-@media (hover: hover) {
-  .workspace-tab-header-container .workspace-tab-header:not(.is-active):hover .workspace-tab-header-inner {
-    background-color: var(--background-modifier-hover);
-  }
-}
 .workspace-tab-header-container .workspace-tab-header::before,
 .workspace-tab-header-container .workspace-tab-header::after {
   position: absolute;
@@ -832,11 +834,11 @@ body.is-focused .workspace-tab-header-container .workspace-tab-header.is-highlig
     color: var(--icon-color);
     opacity: var(--icon-opacity);
   }
-}
-@media (hover: hover) {
-  .workspace-tab-header-inner:hover .workspace-tab-header-inner-icon {
-    color: var(--icon-color-hover);
-    opacity: var(--icon-opacity-hover);
+  @media (hover: hover) {
+    &:hover .workspace-tab-header-inner-icon {
+      color: var(--icon-color-hover);
+      opacity: var(--icon-opacity-hover);
+    }
   }
 }
 .mod-root .workspace-tab-header-inner {
@@ -876,8 +878,12 @@ body.is-focused .workspace-tab-header-container .workspace-tab-header.is-highlig
   --icon-stroke: var(--icon-xs-stroke-width);
 }
 @media (hover: hover) {
-  .workspace-tab-header.is-active .workspace-tab-header-status-icon:hover,
-  .workspace-tab-header.is-active .workspace-tab-header-inner-close-button:hover {
+  .workspace-tab-header-inner-close-button:hover {
+    color: var(--tab-text-color-focused-active-current);
+  }
+}
+@media (hover: hover) {
+  .workspace-tab-header.is-active .workspace-tab-header-status-icon:hover {
     background-color: var(--background-modifier-hover);
   }
   .mod-root .workspace-tab-header.is-active .workspace-tab-header-status-icon.mod-linked:hover,
@@ -891,25 +897,21 @@ body.is-focused .workspace-tab-header-container .workspace-tab-header.is-highlig
 .workspace-tab-header.is-active .workspace-tab-header-inner-close-button::after {
   background-color: transparent;
 }
-@media (hover: hover) {
-  .workspace-tab-header-inner-close-button:hover {
-    color: var(--tab-text-color-focused-active-current);
-  }
-}
 .workspace-tab-header:hover .workspace-tab-header-inner-close-button {
   color: var(--tab-text-color-focused);
-}
-@media (hover: hover) {
-  .workspace-tab-header:hover .workspace-tab-header-inner-close-button:hover {
-    color: var(--tab-text-color-focused-active-current);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--tab-text-color-focused-active-current);
+    }
   }
 }
 .workspace-tab-header.is-active .workspace-tab-header-inner-close-button {
   color: var(--tab-text-color-focused-active);
-}
-@media (hover: hover) {
-  .workspace-tab-header.is-active .workspace-tab-header-inner-close-button:hover {
-    color: var(--tab-text-color-focused-active-current);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--background-modifier-hover);
+      color: var(--tab-text-color-focused-active-current);
+    }
   }
 }
 .workspace-sidedock-empty-state {

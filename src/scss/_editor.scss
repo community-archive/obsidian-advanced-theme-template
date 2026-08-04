@@ -755,10 +755,10 @@ body:not(.show-inline-title) .inline-title:not([data-level]) {
   cursor: pointer;
   font-size: var(--font-ui-small);
   margin: var(--size-4-2) 0;
-}
-@media (hover: hover) {
-  .diff-collapsed:hover {
-    color: var(--text-accent);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-accent);
+    }
   }
 }
 /* Document search and replace */
@@ -871,11 +871,11 @@ Moves search to the top
   .cm-tooltip {
     font-family: var(--font-interface);
   }
-}
-@media (hover: hover) {
-  .formula-editor:hover {
-    border-color: var(--background-modifier-border-hover);
-    transition: box-shadow var(--anim-duration-fast) ease-in-out, border var(--anim-duration-fast) ease-in-out;
+  @media (hover: hover) {
+    &:hover {
+      border-color: var(--background-modifier-border-hover);
+      transition: box-shadow var(--anim-duration-fast) ease-in-out, border var(--anim-duration-fast) ease-in-out;
+    }
   }
 }
 .formula-editor:active,
@@ -1281,6 +1281,19 @@ Moves search to the top
 }
 .cm-content .image-embed {
   vertical-align: bottom;
+  @media (hover: hover) {
+    .embed-action:hover {
+      background-color: var(--background-modifier-hover);
+    }
+    &:hover {
+      .embed-actions {
+        opacity: 1;
+      }
+      .image-resize-corner::after {
+        opacity: 1;
+      }
+    }
+  }
 }
 .cm-content .image-embed,
 .cm-image-reveal-tooltip .image-embed {
@@ -1352,7 +1365,6 @@ Moves search to the top
   z-index: 2;
 }
 @media (hover: hover) {
-  .cm-content .image-embed .embed-action:hover,
   .cm-image-reveal-tooltip .image-embed .embed-action:hover {
     background-color: var(--background-modifier-hover);
   }
@@ -1363,11 +1375,9 @@ Moves search to the top
   padding: var(--size-4-2);
 }
 @media (hover: hover) {
-  .cm-content .image-embed:hover .embed-actions,
   .cm-image-reveal-tooltip .image-embed:hover .embed-actions {
     opacity: 1;
   }
-  .cm-content .image-embed:hover .image-resize-corner::after,
   .cm-image-reveal-tooltip .image-embed:hover .image-resize-corner::after {
     opacity: 1;
   }
@@ -1481,21 +1491,19 @@ Moves search to the top
       color: var(--text-muted);
       text-decoration: none;
     }
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: none;
+      }
+      .cm-underline:hover {
+        cursor: text;
+        color: var(--text-muted);
+        text-decoration: none;
+      }
+    }
   }
   .cm-hmd-footnote-url-title {
     color: var(--text-muted);
-  }
-}
-@media (hover: hover) {
-  .cm-s-obsidian .cm-line.HyperMD-footnote span.cm-hmd-footnote:hover {
-    text-decoration: none;
-  }
-}
-@media (hover: hover) {
-  .cm-s-obsidian .cm-line.HyperMD-footnote span.cm-hmd-footnote .cm-underline:hover {
-    cursor: text;
-    color: var(--text-muted);
-    text-decoration: none;
   }
 }
 .markdown-source-view .metadata-container,
@@ -1711,10 +1719,10 @@ Moves search to the top
   a > img {
     border: 0;
   }
-}
-@media (hover: hover) {
-  .cm-s-obsidian .hmd-fold-html:hover {
-    border: 1px dashed #999;
+  @media (hover: hover) {
+    &:hover {
+      border: 1px dashed #999;
+    }
   }
 }
 .cm-s-obsidian .hmd-fold-html:hover .hmd-fold-html-stub.omittable,
@@ -1803,11 +1811,11 @@ li.is-collapsed .list-bullet:after,
 .cm-s-obsidian span.cm-hmd-internal-link {
   color: var(--link-color);
   font-weight: var(--link-weight);
-}
-@media (hover: hover) {
-  .cm-s-obsidian span.cm-hmd-internal-link:hover {
-    text-decoration-line: var(--link-decoration-hover);
-    color: var(--link-color-hover);
+  @media (hover: hover) {
+    &:hover {
+      text-decoration-line: var(--link-decoration-hover);
+      color: var(--link-color-hover);
+    }
   }
 }
 .cm-s-obsidian span.cm-link {
@@ -1816,11 +1824,11 @@ li.is-collapsed .list-bullet:after,
   a {
     color: var(--link-external-color);
   }
-}
-@media (hover: hover) {
-  .cm-s-obsidian span.cm-link:hover {
-    color: var(--link-external-color-hover);
-    text-decoration-line: var(--link-external-decoration-hover);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--link-external-color-hover);
+      text-decoration-line: var(--link-external-decoration-hover);
+    }
   }
 }
 .cm-s-obsidian span.cm-formatting-link.cm-url,
@@ -1854,10 +1862,10 @@ li.is-collapsed .list-bullet:after,
   &:after {
     content: "";
   }
-}
-@media (hover: hover) {
-  .cm-s-obsidian span.hmd-link-icon:hover {
-    opacity: 1;
+  @media (hover: hover) {
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 @media (hover: hover) {

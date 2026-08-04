@@ -96,10 +96,10 @@
   cursor: var(--cursor);
   line-height: 36px;
   color: var(--text-accent);
-}
-@media (hover: hover) {
-  .empty-state-action:hover {
-    color: var(--text-accent-hover);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-accent-hover);
+    }
   }
 }
 .collapse-icon {
@@ -238,6 +238,14 @@
   &.is-being-dragged .nav-file-tag {
     color: var(--text-normal);
   }
+  @media (hover: hover) {
+    &:hover .tree-item-flair {
+      color: var(--text-muted);
+    }
+    &:hover .nav-file-tag {
+      color: var(--nav-tag-color-hover);
+    }
+  }
 }
 .tree-item-self.is-being-renamed [contenteditable="true"],
 .tree-item-self.is-being-renamed .tree-item-inner {
@@ -282,11 +290,6 @@
   line-height: 1;
   border-radius: var(--radius-s);
 }
-@media (hover: hover) {
-  .tree-item-self:hover .tree-item-flair {
-    color: var(--text-muted);
-  }
-}
 .tree-item-inner {
   overflow: hidden;
   white-space: pre-wrap;
@@ -306,9 +309,27 @@
 }
 .outgoing-link-pane {
   padding-top: var(--size-4-3);
+  @media (hover: hover) {
+    > .tree-item-self.is-clickable.is-collapsed:hover {
+      color: var(--nav-heading-color-collapsed-hover);
+    }
+    > .tree-item-self:hover {
+      color: var(--nav-heading-color-hover);
+      font-weight: var(--nav-heading-weight-hover);
+    }
+  }
 }
 .backlink-pane {
   padding-top: var(--size-4-1);
+  @media (hover: hover) {
+    > .tree-item-self.is-clickable.is-collapsed:hover {
+      color: var(--nav-heading-color-collapsed-hover);
+    }
+    > .tree-item-self:hover {
+      color: var(--nav-heading-color-hover);
+      font-weight: var(--nav-heading-weight-hover);
+    }
+  }
 }
 .backlink-pane,
 .outgoing-link-pane {
@@ -334,22 +355,9 @@
 .outgoing-link-pane > .tree-item-self.is-clickable.is-collapsed {
   color: var(--nav-heading-color-collapsed);
 }
-@media (hover: hover) {
-  .backlink-pane > .tree-item-self.is-clickable.is-collapsed:hover,
-  .outgoing-link-pane > .tree-item-self.is-clickable.is-collapsed:hover {
-    color: var(--nav-heading-color-collapsed-hover);
-  }
-}
 .backlink-pane > .tree-item-self .collapse-icon,
 .outgoing-link-pane > .tree-item-self .collapse-icon {
   display: none;
-}
-@media (hover: hover) {
-  .backlink-pane > .tree-item-self:hover,
-  .outgoing-link-pane > .tree-item-self:hover {
-    color: var(--nav-heading-color-hover);
-    font-weight: var(--nav-heading-weight-hover);
-  }
 }
 /* Backlinks in Preview */
 .embedded-backlinks {
@@ -409,11 +417,6 @@
   padding: 0 var(--size-4-1);
   text-transform: uppercase;
   align-self: center;
-}
-@media (hover: hover) {
-  .tree-item-self:hover .nav-file-tag {
-    color: var(--nav-tag-color-hover);
-  }
 }
 .nav-file-title-content,
 .nav-folder-title-content {
@@ -546,6 +549,11 @@
   }
   .tree-item.nav-folder.is-collapsed .nav-folder-title {
     color: var(--nav-heading-color-collapsed);
+    @media (hover: hover) {
+      &:hover {
+        color: var(--nav-heading-color-collapsed-hover);
+      }
+    }
   }
   .nav-folder-children {
     margin-bottom: var(--size-4-4);
@@ -560,11 +568,6 @@
     color: var(--text-faint);
   }
 }
-@media (hover: hover) {
-  .recent-changes-container .tree-item.nav-folder.is-collapsed .nav-folder-title:hover {
-    color: var(--nav-heading-color-collapsed-hover);
-  }
-}
 .recent-changes-container .nav-file-title,
 .recent-changes-container .nav-folder-title {
   padding-inline-start: var(--size-4-2);
@@ -576,11 +579,11 @@
     background-color: var(--background-modifier-hover);
     color: var(--text-normal);
   }
-}
-@media (hover: hover) {
-  .tag-pane-tag.is-active:hover {
-    background-color: var(--interactive-accent);
-    color: var(--text-on-accent);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--interactive-accent);
+      color: var(--text-on-accent);
+    }
   }
 }
 .tree-item-children .tag-pane-tag .tag-pane-tag-parent {

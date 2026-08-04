@@ -221,10 +221,10 @@ input[type='number']::placeholder {
   &.mobile-tap {
     color: var(--text-accent-hover);
   }
-}
-@media (hover: hover) {
-  .metadata-error-cta:hover {
-    color: var(--text-accent-hover);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-accent-hover);
+    }
   }
 }
 input[type=checkbox].metadata-input-checkbox {
@@ -263,14 +263,25 @@ input[type=checkbox].metadata-input-checkbox {
   overflow: hidden;
   background-color: var(--metadata-property-background);
   box-shadow: var(--metadata-property-box-shadow);
-}
-@media (hover: hover) {
-  .metadata-property:hover {
-    --metadata-divider-color: var(--metadata-divider-color-hover);
-    background-color: var(--metadata-property-background-hover);
-    box-shadow: var(--metadata-property-box-shadow-hover);
-    border-radius: var(--metadata-property-radius-hover);
-    corner-shape: var(--metadata-property-corner-shape-hover);
+  @media (hover: hover) {
+    &:hover {
+      --metadata-divider-color: var(--metadata-divider-color-hover);
+      background-color: var(--metadata-property-background-hover);
+      box-shadow: var(--metadata-property-box-shadow-hover);
+      border-radius: var(--metadata-property-radius-hover);
+      corner-shape: var(--metadata-property-corner-shape-hover);
+    }
+  }
+  @container (width < 250px) {
+    flex-wrap: wrap;
+    .metadata-property-key {
+      width: 100%;
+      border-bottom: 0;
+    }
+    .metadata-property-value {
+      margin-top: -2px;
+      padding-inline-start: calc(var(--icon-size) + var(--size-4-1));
+    }
   }
 }
 .metadata-property.has-focus,
@@ -297,10 +308,10 @@ input[type=checkbox].metadata-input-checkbox {
     color: var(--text-muted);
     opacity: 0.4;
   }
-}
-@media (hover: hover) {
-  .metadata-property-icon:hover .svg-icon {
-    color: var(--icon-color-focused);
+  @media (hover: hover) {
+    &:hover .svg-icon {
+      color: var(--icon-color-focused);
+    }
   }
 }
 .metadata-input-number {
@@ -322,10 +333,10 @@ input[type=checkbox].metadata-input-checkbox {
   &:focus-within {
     background-color: var(--metadata-label-background-active);
   }
-}
-@media (hover: hover) {
-  .metadata-property-key:hover {
-    background-color: var(--metadata-label-background-hover);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--metadata-label-background-hover);
+    }
   }
 }
 input.metadata-property-key-input {
@@ -343,10 +354,10 @@ input.metadata-property-key-input {
   overflow: hidden;
   width: 100%;
   text-align: left;
-}
-@media (hover: hover) {
-  input.metadata-property-key-input:hover {
-    background-color: transparent;
+  @media (hover: hover) {
+    &:hover {
+      background-color: transparent;
+    }
   }
 }
 input.metadata-property-key-input:active,
@@ -362,11 +373,11 @@ input.metadata-property-key-input:focus {
   align-items: center;
   display: flex;
   color: var(--text-warning);
-}
-@media (hover: hover) {
-  .metadata-property-warning-icon:hover {
-    color: var(--text-warning);
-    background-color: color-mix(in oklch, var(--color-orange) 15%, transparent);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-warning);
+      background-color: color-mix(in oklch, var(--color-orange) 15%, transparent);
+    }
   }
 }
 .metadata-property-value {
@@ -410,6 +421,11 @@ input.metadata-property-key-input:focus {
     text-decoration-line: var(--link-decoration);
     text-decoration-thickness: var(--link-decoration-thickness);
     text-decoration-color: var(--text-faint);
+    @media (hover: hover) {
+      .metadata-link-inner:hover {
+        text-decoration-line: var(--link-decoration-hover);
+      }
+    }
   }
   .mod-unknown {
     color: var(--text-warning);
@@ -443,6 +459,13 @@ input.metadata-property-key-input:focus {
     margin-inline-end: 2px;
     margin-inline-start: -4px;
     padding: 4px;
+    @media (hover: hover) {
+      &:hover {
+        background: transparent;
+        color: var(--text-normal);
+        cursor: var(--cursor-link);
+      }
+    }
   }
   &:focus-within {
     background-color: var(--metadata-input-background-active);
@@ -469,18 +492,21 @@ input.metadata-property-key-input:focus {
     cursor: var(--cursor-link);
     line-height: 1;
   }
+  @media (hover: hover) {
+    .metadata-input-text:hover,
+    .metadata-input-number:hover,
+    .multi-select-container:hover {
+      background-color: transparent;
+    }
+    &:hover {
+      background-color: var(--metadata-input-background-hover);
+    }
+  }
 }
 .metadata-property-value .metadata-input-text,
 .metadata-property-value .metadata-input-number,
 .metadata-property-value .multi-select-container {
   background-color: transparent;
-}
-@media (hover: hover) {
-  .metadata-property-value .metadata-input-text:hover,
-  .metadata-property-value .metadata-input-number:hover,
-  .metadata-property-value .multi-select-container:hover {
-    background-color: transparent;
-  }
 }
 .metadata-property-value .metadata-input-text:active,
 .metadata-property-value .metadata-input-number:active,
@@ -493,27 +519,10 @@ input.metadata-property-key-input:focus {
 .metadata-property-value .multi-select-container:focus-within {
   background-color: transparent;
 }
-@media (hover: hover) {
-  .metadata-property-value.mod-external-link:not(:placeholder-shown) .metadata-link-inner:hover {
-    text-decoration-line: var(--link-decoration-hover);
-  }
-}
 .metadata-property-value .multi-select-container,
 .metadata-property-value .metadata-link-inner,
 .metadata-property-value input {
   font-size: var(--metadata-input-font-size);
-}
-@media (hover: hover) {
-  .metadata-property-value .clickable-icon:hover {
-    background: transparent;
-    color: var(--text-normal);
-    cursor: var(--cursor-link);
-  }
-}
-@media (hover: hover) {
-  .metadata-property-value:hover {
-    background-color: var(--metadata-input-background-hover);
-  }
 }
 .metadata-input-longtext {
   flex-grow: 1;
@@ -538,11 +547,11 @@ input.metadata-property-key-input:focus {
   display: flex;
   flex: 1 1 auto;
   gap: var(--size-4-2);
-}
-@media (hover: hover) {
-  .metadata-link:hover .metadata-link-flair {
-    opacity: var(--icon-opacity);
-    transition: 0.1s opacity 0.25s ease-in-out;
+  @media (hover: hover) {
+    &:hover .metadata-link-flair {
+      opacity: var(--icon-opacity);
+      transition: 0.1s opacity 0.25s ease-in-out;
+    }
   }
 }
 .metadata-link-inner {
@@ -553,13 +562,13 @@ input.metadata-property-key-input:focus {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-}
-@media (hover: hover) {
-  .metadata-link-inner:hover {
-    text-decoration-line: var(--link-decoration-hover);
-    color: var(--link-color-hover);
-    ~ .metadata-link-flair {
-      opacity: 0;
+  @media (hover: hover) {
+    &:hover {
+      text-decoration-line: var(--link-decoration-hover);
+      color: var(--link-color-hover);
+      ~ .metadata-link-flair {
+        opacity: 0;
+      }
     }
   }
 }
@@ -612,27 +621,14 @@ input.metadata-property-key-input:focus {
     --icon-size: var(--icon-xs);
     --icon-stroke: var(--icon-xs-stroke-width);
   }
-}
-@media (hover: hover) {
-  .workspace > .workspace-split:not(.mod-root) .metadata-container .metadata-property:hover:not(:focus-within) {
-    box-shadow: none;
+  @media (hover: hover) {
+    .metadata-property:hover:not(:focus-within) {
+      box-shadow: none;
+    }
   }
 }
 .workspace-leaf-content[data-type=file-properties] .metadata-properties-heading {
   display: none;
-}
-@container (width < 250px) {
-  .metadata-property {
-    flex-wrap: wrap;
-    .metadata-property-key {
-      width: 100%;
-      border-bottom: 0;
-    }
-    .metadata-property-value {
-      margin-top: -2px;
-      padding-inline-start: calc(var(--icon-size) + var(--size-4-1));
-    }
-  }
 }
 .is-mobile .metadata-content {
   transform: translateX(-12px);

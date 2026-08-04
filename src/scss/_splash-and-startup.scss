@@ -128,10 +128,10 @@ body.is-frameless.is-hidden-frameless:not(.in-progress, .starter, .is-popout-mod
   border-radius: var(--radius-s);
   padding: var(--size-4-2) var(--size-4-4);
   margin: var(--size-4-1) 0;
-}
-@media (hover: hover) {
-  .password-item:hover {
-    background-color: var(--background-primary);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--background-primary);
+    }
   }
 }
 .slides-container {
@@ -159,10 +159,10 @@ body.is-frameless.is-hidden-frameless:not(.in-progress, .starter, .is-popout-mod
   color: var(--text-faint);
   cursor: var(--cursor);
   z-index: 1;
-}
-@media (hover: hover) {
-  .slides-close-btn:hover {
-    color: var(--text-muted);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-muted);
+    }
   }
 }
 .vault-list-item-desc {
@@ -275,6 +275,11 @@ body.is-frameless.is-hidden-frameless:not(.in-progress, .starter, .is-popout-mod
     corner-shape: var(--corner-shape);
     padding: 0 var(--size-4-3) var(--size-4-2);
     font-size: var(--font-ui-small);
+    @media (hover: hover) {
+      &:hover {
+        color: var(--text-normal);
+      }
+    }
   }
   &.mod-login {
     justify-content: flex-start;
@@ -285,11 +290,6 @@ body.is-frameless.is-hidden-frameless:not(.in-progress, .starter, .is-popout-mod
   .button-container {
     margin-top: var(--size-4-3);
     text-align: center;
-  }
-}
-@media (hover: hover) {
-  .open-vault-options .back-button:hover {
-    color: var(--text-normal);
   }
 }
 .quick-start-container {
@@ -331,11 +331,11 @@ body.is-frameless.is-hidden-frameless:not(.in-progress, .starter, .is-popout-mod
   padding: var(--size-4-2) var(--size-4-6) var(--size-4-2) var(--size-4-3);
   cursor: var(--cursor);
   position: relative;
-}
-@media (hover: hover) {
-  .recent-vaults-list-item:hover {
-    background-color: var(--background-modifier-hover);
-    color: var(--text-on-accent);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--background-modifier-hover);
+      color: var(--text-on-accent);
+    }
   }
 }
 .recent-vaults-list-item-name,

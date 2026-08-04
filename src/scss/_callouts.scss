@@ -3,17 +3,14 @@
    change within a nested set of callouts
 */
 @supports selector(:has(*)) {
-  .cm-callout:has(.callout .callout-title .callout-title-inner:dir(rtl)),
-  .callout:has( > .callout-title .callout-title-inner:dir(rtl)) {
+  .cm-callout:has(.callout .callout-title .callout-title-inner:dir(rtl)) {
     direction: rtl;
   }
-  .cm-callout:has(.callout .callout-title .callout-title-inner:dir(rtl)) > .callout-title,
-  .callout:has( > .callout-title .callout-title-inner:dir(rtl)) > .callout-title {
+  .cm-callout:has(.callout .callout-title .callout-title-inner:dir(rtl)) > .callout-title {
     direction: rtl;
     --direction: -1;
   }
-  .cm-callout:has(.callout .callout-title .callout-title-inner:dir(rtl)) > .callout-title .callout-icon svg.svg-icon,
-  .callout:has( > .callout-title .callout-title-inner:dir(rtl)) > .callout-title .callout-icon svg.svg-icon {
+  .cm-callout:has(.callout .callout-title .callout-title-inner:dir(rtl)) > .callout-title .callout-icon svg.svg-icon {
     transform: scale(-1, 1);
   }
 }
@@ -57,6 +54,18 @@
     padding: var(--callout-padding);
     &.is-collapsible .callout-title {
       cursor: var(--cursor);
+    }
+  }
+  @supports selector(:has(*)) {
+    &:has( > .callout-title .callout-title-inner:dir(rtl)) {
+      direction: rtl;
+      > .callout-title {
+        direction: rtl;
+        --direction: -1;
+        .callout-icon svg.svg-icon {
+          transform: scale(-1, 1);
+        }
+      }
     }
   }
 }

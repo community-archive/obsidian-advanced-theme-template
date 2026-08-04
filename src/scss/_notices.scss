@@ -91,10 +91,10 @@ body.is-phone .feedback-banner-container {
   &.mobile-tap {
     color: var(--text-accent-hover);
   }
-}
-@media (hover: hover) {
-  .notice-cta:hover {
-    color: var(--text-accent-hover);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-accent-hover);
+    }
   }
 }
 .starter .notice {

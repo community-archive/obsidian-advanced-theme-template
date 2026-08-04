@@ -185,11 +185,11 @@ button:not(.clickable-icon) {
 }
 .card.u-clickable {
   cursor: var(--cursor);
-}
-@media (hover: hover) {
-  .card.u-clickable:hover {
-    border: var(--border-width) solid var(--interactive-accent);
-    background-color: color-mix(in oklch, var(--interactive-accent) 10%, transparent);
+  @media (hover: hover) {
+    &:hover {
+      border: var(--border-width) solid var(--interactive-accent);
+      background-color: color-mix(in oklch, var(--interactive-accent) 10%, transparent);
+    }
   }
 }
 .card.is-selected {
@@ -234,6 +234,11 @@ button:not(.clickable-icon) {
   align-items: center;
   &.mod-selectable {
     cursor: var(--cursor);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--background-modifier-hover);
+      }
+    }
   }
   &.mod-empty {
     color: var(--text-faint);
@@ -241,11 +246,6 @@ button:not(.clickable-icon) {
     padding: var(--size-4-4);
     text-align: center;
     margin: 0 auto;
-  }
-}
-@media (hover: hover) {
-  .list-item.mod-selectable:hover {
-    background-color: var(--background-modifier-hover);
   }
 }
 .list-item-separator {
@@ -309,8 +309,7 @@ button:not(.clickable-icon) {
   font-variant-numeric: tabular-nums;
 }
 @media (forced-colors: active) {
-  select,
-  .dropdown {
+  select {
     border: 1px ButtonBorder solid;
   }
 }
@@ -328,6 +327,9 @@ button:not(.clickable-icon) {
     /* kept !important because Obsidian app.css uses !important here */
     max-width: none !important;
     /* kept !important because Obsidian app.css uses !important here */
+  }
+  @media (forced-colors: active) {
+    border: 1px ButtonBorder solid;
   }
 }
 .theme-dark .dropdown {

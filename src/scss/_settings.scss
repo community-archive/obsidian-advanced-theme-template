@@ -184,6 +184,10 @@
       pointer-events: none;
       z-index: 1;
     }
+    @media (forced-colors: active) {
+      outline-color: Highlight;
+      background-color: unset;
+    }
   }
   > *:first-child {
     margin-inline-end: var(--size-4-4);
@@ -218,6 +222,11 @@
     &.mobile-tap {
       background-color: var(--background-modifier-hover);
     }
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--background-modifier-hover);
+      }
+    }
   }
   &.mod-empty-state {
     --setting-items-padding-y: var(--size-4-4);
@@ -235,13 +244,36 @@
     display: inline-flex;
     align-items: center;
   }
+  @container (max-width: 400px) {
+    &:not(:is(.mod-toggle, .mod-navigable, .mod-action, .setting-item-heading)) {
+      flex-direction: column;
+      .setting-item-info {
+        margin-inline-end: 0;
+        align-self: flex-start;
+      }
+      .setting-item-control {
+        width: 100%;
+        justify-content: flex-start;
+      }
+      &.is-invalid .setting-item-control {
+        max-width: unset;
+      }
+    }
+    &:not(:is(.mod-toggle, .mod-navigable, .mod-action, .setting-item-heading)) .setting-item-control {
+      button:not(.clickable-icon),
+      input,
+      select {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
 }
 .setting-item + div > .setting-item-heading,
 .setting-item + .setting-item-heading {
   margin-top: 0.75em;
 }
 @media (forced-colors: active) {
-  .setting-item:focus-visible,
   .setting-group-search:focus-visible {
     outline-color: Highlight;
     background-color: unset;
@@ -259,28 +291,6 @@
   }
   &:last-child {
     padding-bottom: 0;
-  }
-}
-@container (max-width: 400px) {
-  .setting-item:not(:is(.mod-toggle, .mod-navigable, .mod-action, .setting-item-heading)) {
-    flex-direction: column;
-    .setting-item-info {
-      margin-inline-end: 0;
-      align-self: flex-start;
-    }
-    .setting-item-control {
-      width: 100%;
-      justify-content: flex-start;
-    }
-    &.is-invalid .setting-item-control {
-      max-width: unset;
-    }
-  }
-  .setting-item:not(:is(.mod-toggle, .mod-navigable, .mod-action, .setting-item-heading)) .setting-item-control button:not(.clickable-icon),
-  .setting-item:not(:is(.mod-toggle, .mod-navigable, .mod-action, .setting-item-heading)) .setting-item-control input,
-  .setting-item:not(:is(.mod-toggle, .mod-navigable, .mod-action, .setting-item-heading)) .setting-item-control select {
-    width: 100%;
-    max-width: 100%;
   }
 }
 .setting-item-heading {
@@ -320,11 +330,6 @@
 }
 .vertical-tab-content .setting-item ~ :is(h1, h2, h3, h4, .setting-item-heading) {
   margin-top: var(--size-4-6);
-}
-@media (hover: hover) {
-  .setting-item.mod-action:hover {
-    background-color: var(--background-modifier-hover);
-  }
 }
 .setting-item-chevron {
   display: flex;
@@ -491,6 +496,11 @@
   &.has-conflict {
     background-color: var(--background-modifier-error);
     color: var(--text-on-accent);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--background-modifier-error-hover);
+      }
+    }
   }
   &.mod-active {
     background-color: var(--interactive-accent);
@@ -498,11 +508,6 @@
   }
   &.mod-empty {
     padding-inline-end: var(--size-4-2);
-  }
-}
-@media (hover: hover) {
-  .setting-hotkey.has-conflict:hover {
-    background-color: var(--background-modifier-error-hover);
   }
 }
 .setting-password {
@@ -524,10 +529,10 @@
     stroke-width: 2px;
     opacity: 0.6;
   }
-}
-@media (hover: hover) {
-  .setting-hotkey-icon:hover .svg-icon {
-    opacity: 1;
+  @media (hover: hover) {
+    &:hover .svg-icon {
+      opacity: 1;
+    }
   }
 }
 @media (hover: hover) {
@@ -605,6 +610,13 @@
     background-color: var(--interactive-accent);
     border-color: var(--interactive-accent);
     color: var(--text-on-accent);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--interactive-accent);
+        border-color: var(--interactive-accent);
+        color: var(--text-on-accent);
+      }
+    }
   }
   &.mod-error {
     border-color: color-mix(in oklch, var(--background-modifier-error) 15%, transparent);
@@ -614,33 +626,26 @@
       background-color: var(--background-modifier-error);
       border-color: var(--background-modifier-error);
       color: var(--text-on-accent);
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--background-modifier-error-hover);
+          border-color: var(--background-modifier-error-hover);
+          color: var(--text-on-accent);
+        }
+      }
+    }
+    @media (hover: hover) {
+      &:hover {
+        border-color: color-mix(in oklch, var(--background-modifier-error) 25%, transparent);
+        color: var(--text-error);
+      }
     }
   }
-}
-@media (hover: hover) {
-  .setting-group-filter:hover {
-    border-color: var(--background-modifier-border-hover);
-    color: var(--text-normal);
-  }
-}
-@media (hover: hover) {
-  .setting-group-filter.is-active:hover {
-    background-color: var(--interactive-accent);
-    border-color: var(--interactive-accent);
-    color: var(--text-on-accent);
-  }
-}
-@media (hover: hover) {
-  .setting-group-filter.mod-error:hover {
-    border-color: color-mix(in oklch, var(--background-modifier-error) 25%, transparent);
-    color: var(--text-error);
-  }
-}
-@media (hover: hover) {
-  .setting-group-filter.mod-error.is-active:hover {
-    background-color: var(--background-modifier-error-hover);
-    border-color: var(--background-modifier-error-hover);
-    color: var(--text-on-accent);
+  @media (hover: hover) {
+    &:hover {
+      border-color: var(--background-modifier-border-hover);
+      color: var(--text-normal);
+    }
   }
 }
 .setting-group-filter-badge {
@@ -672,10 +677,10 @@
   cursor: var(--cursor);
   color: var(--text-muted);
   margin-inline-end: 10px;
-}
-@media (hover: hover) {
-  .spellchecker-dictionary-remove-button:hover {
-    color: var(--text-normal);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-normal);
+    }
   }
 }
 .setting-progress-bar {
@@ -738,6 +743,12 @@ body:not(.is-phone) .vertical-tab-nav-item.is-active {
   &:focus-visible {
     box-shadow: 0 0 0 var(--input-border-width-focus) var(--background-modifier-border-focus);
     outline: none;
+    @media (forced-colors: active) {
+      box-shadow: inset 0 0 0 2px Highlight;
+    }
+  }
+  @media (forced-colors: active) {
+    --interactive-accent: SelectedItem;
   }
 }
 .vertical-tab-nav-item-chevron {
@@ -845,12 +856,8 @@ body:not(.is-phone) .vertical-tab-header-group-items {
   }
 }
 @media (forced-colors: active) {
-  .horizontal-tab-nav-item,
-  .vertical-tab-nav-item {
+  .horizontal-tab-nav-item {
     --interactive-accent: SelectedItem;
-  }
-  .vertical-tab-nav-item:focus-visible {
-    box-shadow: inset 0 0 0 2px Highlight;
   }
 }
 body:not(.is-mobile) .setting-group.mod-list .checkbox-container {
@@ -983,11 +990,11 @@ body:not(.is-mobile) .setting-group.mod-list .checkbox-container {
     position: relative;
     top: 3px;
     cursor: var(--cursor);
-  }
-}
-@media (hover: hover) {
-  .setting-item.mod-change-language .setting-item-name:hover {
-    color: var(--text-muted);
+    @media (hover: hover) {
+      &:hover {
+        color: var(--text-muted);
+      }
+    }
   }
 }
 .setting-icon {
