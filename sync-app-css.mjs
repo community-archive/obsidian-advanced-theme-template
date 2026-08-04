@@ -1,20 +1,4 @@
-/**
- * When Obsidian ships a new version, its app.css changes. This repo keeps a
- * copy of every raw app.css it has seen (as src/app-css/app-x.y.z.css) and
- * the same content split by topic into src/css/*.css (a plain mirror) and
- * src/scss/_*.scss (a hand-nested, human-maintained mirror).
- *
- * This script diffs the newest src/app-css/app-x.y.z.css against the
- * previous one and applies the same additions/removals/changes to the flat
- * src/css/*.css files. It cannot safely do the same for src/scss/*.scss,
- * since those have been manually restructured with nesting/variables/mixins,
- * so instead it writes src/app-css/scss-sync-report.md: a checklist of what
- * changed, for a human (or a separate workflow) to port over by hand.
- *
- * Usage: `node sync-app-css.mjs --new src/app-css/app-1.13.5.css [--old src/app-css/app-1.13.4.css]`
- * If --old is omitted, the highest-versioned app-*.css file in src/app-css/
- * other than --new is used.
- */
+// Diffs a new src/app-css/app-x.y.z.css against the previous one and applies the changes to src/css/*.css; src/scss/*.scss is hand-nested, so those get logged to scss-sync-report.md instead. Usage: node sync-app-css.mjs --new <file> [--old <file>].
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "fs";
 import { join, basename } from "path";
@@ -58,13 +42,7 @@ function resolveOldFile(newFile) {
   return candidates.length ? candidates[0].file : null;
 }
 
-// --- CSS block tokenizer -----------------------------------------------
-//
-// Parses top-level blocks only. At-rules with nested rule sets (@media,
-// @supports, @container, @keyframes, ...) are captured as a single opaque
-// block rather than recursed into — this repo's src/css/*.css files store
-// them the same way, and diffing inside them isn't needed for this script
-// to do its job.
+// --- CSS block tokenizer: top-level blocks only, @media/@supports/@keyframes etc. captured as one opaque block rather than recursed into ---
 
 function skipString(text, i) {
   const quote = text[i];
@@ -214,10 +192,7 @@ function diffRules(oldRules, newRules) {
       removed.push({ key, oldRule: oldList[i] });
     }
     for (let i = pairCount; i < newList.length; i++) {
-      // Only a genuinely new selector if the key didn't exist in the old
-      // baseline at all. A count increase on an existing key (a duplicated
-      // selector block) is treated the same way, since there's no existing
-      // src/css home for the extra occurrence either.
+      // Treated as "added" whether the key is brand new or just has more occurrences than before — neither has an existing src/css home.
       added.push({ key, newRule: newList[i] });
     }
   }

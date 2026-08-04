@@ -1,12 +1,6 @@
 name: Notify SCSS nesting sync
 
-# src/app-css/scss-sync-report.md is a checklist of changes that were
-# applied to the flat src/css/*.css files and still need to be hand-ported
-# into the nested src/scss/*.scss partials (the "Sync app.css changes"
-# workflow writes to it, but a human may also edit it directly, e.g. to
-# check items off). This workflow doesn't touch the SCSS itself — nesting
-# decisions are made by hand — it just keeps a standing PR comment in sync
-# with the current checklist so it isn't easy to lose track of.
+# Mirrors src/app-css/scss-sync-report.md into a standing PR comment; never touches the SCSS itself, since nesting is done by hand.
 
 on:
   pull_request:

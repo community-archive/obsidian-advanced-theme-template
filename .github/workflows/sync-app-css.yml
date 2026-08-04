@@ -1,11 +1,6 @@
 name: Sync app.css changes
 
-# When a PR adds a new src/app-css/app-x.y.z.css snapshot, diff it against
-# the previous snapshot and apply the same additions/removals/changes to
-# the flat src/css/*.css files. src/scss/*.scss is hand-nested and not
-# safe to auto-edit, so instead this appends a checklist to
-# src/app-css/scss-sync-report.md for a human to port by hand (see the
-# separate "Notify SCSS nesting sync" workflow).
+# Diffs a newly-added src/app-css/app-x.y.z.css against the previous one and applies the changes to src/css/*.css; src/scss/*.scss is hand-nested, so those get logged to src/app-css/scss-sync-report.md instead (see the "Notify SCSS nesting sync" workflow).
 
 on:
   pull_request:
