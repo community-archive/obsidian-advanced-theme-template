@@ -1,4 +1,4 @@
-// Diffs a new src/app-css/app-x.y.z.css against the previous one and applies the changes to src/css/*.css; src/scss/*.scss is hand-nested, so those get logged to scss-sync-report.md instead. Usage: node sync-app-css.mjs --new <file> [--old <file>].
+// Diffs the app.css against the prior one. Usage: node sync-app-css.mjs --new <file> [--old <file>].
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "fs";
 import { join, basename } from "path";
