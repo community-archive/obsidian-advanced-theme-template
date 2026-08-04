@@ -3,7 +3,8 @@
     "version": "1.0.0",
 	"scripts": {
 		"version": "node version-bump.mjs && git add manifest.json versions.json",
-		"lint": "stylelint \"**/*.css\""
+		"lint": "stylelint \"**/*.css\"",
+		"sync-app-css": "node sync-app-css.mjs"
 	},
 	"devDependencies": {
 		"stylelint": "^17.0.0",
